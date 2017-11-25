@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html>
+<title>TedBungalow</title>
+<!--Font Awesome Stylesheet for icons-->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="../css/style.css">
+<link rel="stylesheet" href="../css/index.css">
+<link rel="stylesheet" href="../css/profile.css">
+<script src="../js/script.js" type="text/javascript"></script>
+<script src="../js/profile.js" type="text/javascript"></script>
+</head>
+<body>
+  <!-- Start of Toolbar -->
+  <div id="toolbar">
+    <div id="logo">
+      <a href="index.html"><img src="../images/logo_full.png" height="30px"></a>
+    </div>
+
+    <div id="searchBar">
+      <form action="index.html" method="GET">
+        <input id="searchTerm" type="text" placeholder="Search"/>
+        <button id="searchButton" type="submit">
+          <i class="fa fa-search"></i>
+        </button>
+      </form>
+    </div>
+
+    <ul id="toolbarButtons">
+      <li><button id="notificationButton" class="toolbarButton" onclick="openNotifications()"><i id="notificationCount">99</i><i class="fa fa-bell"></i></button></li>
+      <li><button id="userName" class="toolbarButton" onclick="location.href='profile.html';">Juan dela Cruz</button></li>
+  		<li><button class="toolbarButton">Login</button></li>
+    </ul>
+  </div>
+
+  <!-- End of Toolbar; start of Content -->
+
+  <div id="wrap">
+    <div id="pageHead">
+      <button id="optionsButton" onclick="openOptions()"><i class="fa fa-cog fa-2x"></i></button>
+      <!-- MODULE: Option (To keep the position relative to parent div) -->
+      <div id="options">
+        <button>Terminate Account</button>
+      </div>
+      <!-- End of MODULE -->
+      <img src="../images/loginavatar.png">
+      <h1>Juan dela Cruz</h1>
+      <hr>
+      <p class="pageLegend">
+        Student at De La Salle University
+      </p>
+    </div>
+    <div id="tabButtons">
+      <button id="defaultOpen" class="tabButton" onclick="openTab(event, 'details')">Details & Credentials</button>
+      <button class="tabButton" onclick="openTab(event, 'projects')">Projects</button>
+      <button class="tabButton" onclick="openTab(event, 'colleagues')">Colleagues</button>
+    </div>
+
+    <div id="details" class="tabContent">
+      <table>
+        <tr>
+          <th>Full Name:</th>
+          <td>Juan T. dela Cruz</td>
+          <th>Gender:</th>
+          <td>Male</td>
+        </tr>
+        <tr>
+          <th>Birthdate:</th>
+          <td>January 01, 1990</td>
+          <th>Age:</th>
+          <td>27</td>
+        </tr>
+        <tr>
+          <th>Occupation:</th>
+          <td>Student</td>
+          <th>School/Company:</th>
+          <td>De La Salle University</td>
+        </tr>
+      </table>
+
+      <ul>
+        <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</li>
+        <li>Donec et ex fringilla, laoreet elit sed, fringilla nisl.</li>
+        <li>Vestibulum laoreet justo consectetur sem maximus, ac vestibulum dui sagittis.</li>
+        <li>Suspendisse at nibh eget turpis interdum vestibulum.</li>
+        <li>Duis aliquet felis et nisi tempor mollis.</li>
+        <li>Suspendisse ut eros imperdiet, ultrices nisi at, fermentum neque.</li>
+        <li>Sed finibus leo eget mauris convallis pulvinar.</li>
+        <li>Praesent non sem vel enim mattis pulvinar.</li>
+        <li>Duis ac lacus ac elit sollicitudin egestas.</li>
+        <li>Suspendisse maximus mi non leo rhoncus, vitae egestas lectus egestas.</li>
+        <li>In in nulla facilisis, tristique elit in, molestie massa.</li>
+        <li>Phasellus sit amet nulla sed orci blandit lobortis at vel tellus.</li>
+        <li>Curabitur viverra nisl id justo sollicitudin mattis.</li>
+        <li>Suspendisse dictum ante a felis efficitur dignissim.</li>
+        <li>Phasellus feugiat justo eget consectetur rutrum.</li>
+        <li>Sed et sapien sed nibh gravida sodales sit amet id tortor.</li>
+        <li>Sed vitae nisi aliquet, cursus mauris rutrum, ultricies libero.</li>
+        <li>Nunc euismod justo placerat quam ultricies venenatis.</li>
+        <li>Phasellus a est nec risus faucibus dictum ac in leo.</li>
+        <li>Vivamus eget arcu sollicitudin, consequat eros nec, ornare elit.</li>
+        <li>Sed sit amet mi hendrerit, facilisis urna et, pellentesque nisl.</li>
+        <li>Donec feugiat ipsum a nulla bibendum, nec semper ex cursus.</li>
+        <li>Phasellus mattis velit vitae maximus semper.</li>
+        <li>Etiam ultricies arcu a metus volutpat, in gravida ante semper.</li>
+        <li>Etiam facilisis dolor sed faucibus facilisis.</li>
+        <li>In accumsan risus nec rutrum imperdiet.</li>
+        <li>Vestibulum a mi luctus, porttitor odio accumsan, pharetra nulla.</li>
+        <li>Nullam auctor diam ut nisi dapibus, quis facilisis massa congue.</li>
+        <li>Morbi bibendum nisi sit amet enim gravida placerat.</li>
+        <li>Ut et urna faucibus felis tincidunt volutpat vel at sem.</li>
+        <li>Curabitur nec velit accumsan, tincidunt diam eget, ullamcorper neque.</li>
+      </ul>
+    </div>
+
+    <div id="projects" class="tabContent">
+      <div class="projectDisplay">
+        <i class="projectStatus fa fa-hourglass-end"></i>
+        <p class="projectTitle">Project Title That Is Really Long That WIll Overlap With The Date
+        <p class="projectHead">Project Head
+        <p class="projectStart">January 1, 1990
+        <p class="projectEnd">December 31, 2050
+        <p class="projectAbstract">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas vel nisi id neque interdum ultrices sed nec lorem. Mauris et est orci. Vestibulum sagittis risus quis dolor luctus eleifend. Fusce gravida enim in ex congue, vel pulvinar quam molestie. Fusce vel rhoncus enim. Vivamus accumsan libero quis eros pellentesque tempor. Suspendisse sit amet volutpat nunc. Nam aliquam tellus quis purus dignissim convallis ac ac dolor. Praesent tristique non sem nec fringilla. Fusce nec diam et urna euismod faucibus vel et dolor. Fusce semper iaculis diam faucibus convallis.
+        <div class="cornerFold">
+        </div>
+      </div>
+
+      <div class="projectDisplay">
+        <i class="projectStatus fa fa-hourglass"></i>
+        <p class="projectTitle">Project Title
+        <p class="projectHead">Project Head
+        <p class="projectStart">January 1, 1990
+        <p class="projectEnd">December 31, 2050
+        <p class="projectAbstract">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas vel nisi id neque interdum ultrices sed nec lorem. Mauris et est orci. Vestibulum sagittis risus quis dolor luctus eleifend. Fusce gravida enim in ex congue, vel pulvinar quam molestie. Fusce vel rhoncus enim. Vivamus accumsan libero quis eros pellentesque tempor. Suspendisse sit amet volutpat nunc. Nam aliquam tellus quis purus dignissim convallis ac ac dolor. Praesent tristique non sem nec fringilla. Fusce nec diam et urna euismod faucibus vel et dolor. Fusce semper iaculis diam faucibus convallis.
+        <div class="cornerFold">
+        </div>
+      </div>
+    </div>
+
+    <div id="colleagues" class="tabContent">
+      <div class="member">
+        <img class="memberImage" src="../images/loginavatar.png">
+        <p class="memberName">John Smith
+        <p class="memberTitle">Professor
+      </div>
+
+      <div class="member">
+        <img class="memberImage" src="../images/loginavatar.png">
+        <p class="memberName">John Smith
+        <p class="memberTitle">Professor
+      </div>
+
+      <div class="member">
+        <img class="memberImage" src="../images/loginavatar.png">
+        <p class="memberName">John Smith
+        <p class="memberTitle">Professor
+      </div>
+
+      <div class="member">
+        <img class="memberImage" src="../images/loginavatar.png">
+        <p class="memberName">John Smith
+        <p class="memberTitle">Professor
+      </div>
+
+      <div class="member">
+        <img class="memberImage" src="../images/loginavatar.png">
+        <p class="memberName">John Smith
+        <p class="memberTitle">Professor
+      </div>
+    </div>
+
+  <div id="wrapbg">
+    <!--LEAVE THIS DIV BLANK. THIS IS JUST THE WHITE BACKGROUND THAT FILLS THE
+    HEIGHT OF THE BROWSER WITHOUT ENABLING THE SCROLL BAR-->
+  </div>
+
+  <!-- End of Content; start of Modules -->
+
+  <div id="notifications">
+    <p class="notificationsTitle">Notifications
+    <hr>
+    <div id="notificationsContainer">
+      <div class="notification">
+        <img class="notificationImage" src="../images/loginavatar.png">
+        <p class="notificationMessage"><b>MemberName</b> deleted a file in the project <b>ProjectTitle</b>
+      </div>
+
+      <div class="notification">
+        <img class="notificationImage" src="../images/loginavatar.png">
+        <p class="notificationMessage"><b>MemberName</b> deleted a file in the project <b>ProjectTitle</b>
+      </div>
+
+      <div class="notification">
+        <img class="notificationImage" src="../images/loginavatar.png">
+        <p class="notificationMessage"><b>MemberName</b> deleted a file in the project <b>ProjectTitle</b>
+      </div>
+
+      <div class="notification">
+        <img class="notificationImage" src="../images/loginavatar.png">
+        <p class="notificationMessage"><b>MemberName</b> deleted a file in the project <b>ProjectTitle</b>
+      </div>
+
+      <div class="notification">
+        <img class="notificationImage" src="../images/loginavatar.png">
+        <p class="notificationMessage"><b>MemberName</b> deleted a file in the project <b>ProjectTitle</b>
+      </div>
+
+      <div class="notification">
+        <img class="notificationImage" src="../images/loginavatar.png">
+        <p class="notificationMessage"><b>MemberName</b> deleted a file in the project <b>ProjectTitle</b>
+      </div>
+    </div>
+  </div>
+  <!-- These are transparent 100% x 100% box behind the module, that closes the module when clicked -->
+  <div id="notificationsBackground" onclick="closeNotifications()"></div>
+  <div id="optionsBackground" onclick="closeOptions()"></div>
+</body>
+</html>

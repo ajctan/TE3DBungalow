@@ -1,0 +1,286 @@
+html, body{
+  background: #eeeeee;
+	font-family: Arial, Helvetica, sans-serif;
+  height: 100%;
+  margin: 0;
+  overflow-y: overlay;
+}
+
+body::-webkit-scrollbar{
+  background: #eee;
+  width: 10px;
+}
+
+body::-webkit-scrollbar-thumb{
+  background: #eee;
+  border-radius: 10px;
+}
+
+body:hover::-webkit-scrollbar-thumb{
+  background: #1d9b72;
+}
+
+h1{
+  display: block;
+  font-size: 3.0em;
+  font-weight: bold;
+  margin: 40px 0 0 0;
+  overflow: hidden;
+  padding: 0;
+  position: relative;
+  width: 60%;
+  white-space: nowrap;
+}
+
+#toolbar{
+  background: #1d9b72;
+  box-shadow: 0 0 10px 1px #555;
+  height: 40px;
+  line-height: 40px;
+  top: 0;
+  padding: 0;
+  position: fixed;
+  width: 100%;
+  z-index: 2;
+}
+
+#logo{
+  display: inline-block;
+  float: left;
+  margin: 0 50px 0 40px;
+  padding: 0;
+  transform: translateY(10%);
+}
+
+#searchBar{
+  background: #fff;
+  display: inline-block;
+  height: 25px;
+  margin: 0;
+  padding: 0;
+  position: relative;
+  transform: translateY(25%);
+  width: 250px;
+}
+
+#searchTerm{
+  border: none;
+  float: left;
+  height: 21px;
+  margin: 0;
+  outline: none;
+  padding: 2px;
+  width: 221px;
+}
+
+#searchButton{
+  background: #1d9b72;
+  border: none;
+  color: #fff;
+  float: right;
+  height: 25px;
+  margin: 0;
+  outline: none;
+  width: 25px;
+}
+
+#toolbarButtons{
+  list-style-type: none;
+  float: right;
+  margin: 0;
+  padding: 0;
+}
+
+#toolbarButtons li{
+  float: left;
+  margin: 0;
+  padding: 0;
+}
+
+#notificationButton{
+  position: relative;
+}
+
+#notificationCount{
+  background: red;
+  border-radius: 30px;
+  display: block;
+  font-size: .7em;
+  height: 15px;
+  left: 10px;
+  line-height: 15px;
+  text-align: center;
+  top: 0px;
+  width: 15px;
+  padding: 1px;
+  position: absolute;
+  z-index: 10;
+}
+
+#notifications:before {
+  border:10px solid #000;
+  border-color:transparent transparent #fff;
+  color:#000;
+  content: '';
+  display: block;
+  height:0;
+  margin:-20px 0 0 221px;
+  width:0;
+}
+
+#notifications{
+  background: #fff;
+  box-shadow: 0 0 10px 1px #555;
+  display: none;
+  height: 425px;
+  padding: 0;
+  position: absolute;
+  right: 120px;
+  top: 41px;
+  width: 400px;
+  z-index: 3;
+}
+
+#notificationsContainer{
+  height: 375px;
+  overflow-y: scroll;
+}
+
+#notificationsContainer::-webkit-scrollbar{
+  background: #eee;
+  width: 3px;
+}
+
+#notificationsContainer::-webkit-scrollbar-thumb{
+  background: #1d9b72;
+}
+
+#notifications hr{
+  margin: 0;
+}
+
+#notificationsBackground{
+  background: none;
+  display: none;
+  height: 100%;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 100%;
+  z-index: 2;
+}
+
+#wrap{
+  background: #fff;
+  margin: 0 auto;
+  padding: 50px;
+  width: 65%;
+  z-index: 1;
+}
+
+#wrapbg{
+  background: #fff;
+  height: 100%;
+  left: 0;
+  margin: 0 auto;
+  padding: 50px;
+  position: fixed;
+  right: 0;
+  width: 65%;
+  z-index: 0;
+}
+
+#pageHead{
+  display: block;
+  height: 150px;
+  margin: 0 auto 65px auto;
+  padding: 20px;
+  position: relative;
+  width: 80%;
+}
+
+#pageHead img{
+  float: left;
+  height: 200px;
+  margin: 0 50px 0 0;
+}
+
+.toolbarButton{
+  background: #1d9b72;
+  border: none;
+  cursor: pointer;
+  height: 35px;
+  margin: 0 20px 0 0;
+  outline: none;
+  padding: 0 20px 0 20px;
+  color: #b0ddce;
+}
+
+.toolbarButton:hover{
+  color: #fff;
+}
+
+.notificationsTitle{
+  font-weight: bold;
+  margin: 0;
+  padding: 10px;
+}
+
+.notification{
+  border-bottom: 2px solid #eee;
+  display: block;
+  font-size: .8em;
+  height: 75px;
+  position: relative;
+}
+
+.notification:last-child{
+  border: none;
+}
+
+.notificationImage{
+  height: 60px;
+  left: 10px;
+  top: 7px;
+  position: absolute;
+}
+
+.notificationMessage{
+  position: absolute;
+  right: 15px;
+  top: 5px;
+  width: 75%;
+}
+
+.pageLegend{
+  color: #aaa;
+  float: right;
+  margin: 0;
+}
+
+.pageLegend i{
+  margin: 0 0 0 20px;
+}
+
+.member{
+  display: inline-block;
+  height: 175px;
+  margin: 0 auto 0 auto;
+  padding: 20px;
+  text-align: center;
+  width: 150px;
+}
+
+.memberImage{
+  height: 150px;
+}
+
+.memberName{
+  font-weight: bold;
+  margin: 0;
+}
+
+.memberTitle{
+  font-style: italic;
+  margin: 0;
+}
