@@ -41,7 +41,7 @@
       </div>
       <!-- End of MODULE -->
       <img src="../images/loginavatar.png">
-      <p id="projectTitle">Sample Active Project
+      <p id="projectTitle"><marquee direction="left" onmouseover="this.stop();" onmouseout="this.start();">Sample Active Project (With A Long TItle)</marquee>
       <hr>
       <p class="pageLegend">
         <p id="projectHead">Project Head
@@ -68,12 +68,44 @@
     <div id="files" class="tabContent">
       <table id="projectFiles">
         <tr>
-          <th>Name</th>
-          <th>Size</th>
-          <th>Extension</th>
-          <th>Last Modified</th>
+          <th class="name">Name</th>
+          <th class="size">Size</th>
+          <th class="extension">Extension</th>
+          <th class="lastModified">Last Modified</th>
+        </tr>
+        <tr>
+          <td>File_1</td>
+          <td>123kb</td>
+          <td>.ext</td>
+          <td>January 1, 1990</td>
+        </tr>
+        <tr>
+          <td>File_2</td>
+          <td>123kb</td>
+          <td>.ext</td>
+          <td>January 1, 1990</td>
+        </tr>
+        <tr>
+          <td>File_3</td>
+          <td>123kb</td>
+          <td>.ext</td>
+          <td>January 1, 1990</td>
+        </tr>
+        <tr>
+          <td>File_4</td>
+          <td>123kb</td>
+          <td>.ext</td>
+          <td>January 1, 1990</td>
+        </tr>
+        <tr>
+          <td>File_5</td>
+          <td>123kb</td>
+          <td>.ext</td>
+          <td>January 1, 1990</td>
         </tr>
       </table>
+
+      <button id="downloadAll"><i class="fa fa-download"></i> Download (.zip)</button>
     </div>
 
     <div id="contributors" class="tabContent">

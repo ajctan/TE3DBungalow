@@ -3,8 +3,16 @@
   font-size: 3.0em;
   font-weight: bold;
   margin: 40px 0 0 0;
+  overflow: hidden;
   padding: 0;
   position: relative;
+  white-space: nowrap;
+}
+
+#projectTitle marquee{
+  margin: 0;
+  padding: 0;
+  width: 100%;
 }
 
 #projectHead{
@@ -14,8 +22,51 @@
   text-align: right;
 }
 
+#files{
+  text-align: right;
+}
+
 #projectFiles{
+  border-collapse: collapse;
   margin: 0;
   padding: 0;
+  text-align: left;
   width: 100%;
+}
+
+#projectFiles tr:nth-child(even){
+  background: #56e39f;
+}
+
+#projectFiles th, td{
+  border: 2px solid #fff;
+  padding: 10px;
+}
+
+#projectFiles th.name{
+  width: 50%;
+}
+
+#projectFiles th.size, th.extension{
+  width: 15%;
+}
+
+#projectFiles td:not(:first-child){
+  text-align: center;
+}
+
+#downloadAll{
+  background: #1d9b72;
+  border: none;
+  bottom: 0;
+  color: #b0ddce;
+  cursor: pointer;
+  display: inline-block;
+  margin: 20px 0 5px 0;
+  outline: none;
+  padding: 10px;
+}
+
+#downloadAll:hover{
+  color: #fff;
 }
