@@ -63,8 +63,25 @@
       <p>Etiam posuere imperdiet tempor. Praesent aliquet, dui vel facilisis vehicula, tortor leo tempus nisi, id ornare odio elit vel sem. Phasellus sagittis aliquet aliquam. Cras erat tortor, tincidunt et quam eu, scelerisque ultricies tellus. Duis velit ante, tempus quis nulla eu, tristique interdum leo. Pellentesque vel consequat mauris. Fusce augue arcu, laoreet ac fermentum id, rutrum non neque. Morbi et ultricies dolor. Sed at mattis nisl, sed varius velit. In sagittis commodo mauris eu elementum. Proin eu nisl non tortor pellentesque auctor vel a diam. Curabitur quis sapien vel dolor faucibus tempus. Suspendisse gravida ultrices iaculis. Donec at ipsum scelerisque turpis fringilla vestibulum sed vel diam.
 
       <p>Sed sed vulputate dolor, et dictum nibh. Nam id enim eu orci porttitor mattis non non erat. Praesent varius turpis volutpat lacus volutpat, sit amet eleifend tellus tempor. Aliquam at laoreet nisl. Nunc vulputate nulla risus, in faucibus massa vulputate id. Nunc pellentesque sollicitudin enim. Etiam nec imperdiet purus. Cras est neque, viverra vitae arcu nec, tempor elementum felis.
+      <script type="text/javascript">
+      	$(function () {
+        $('form').bind('contactProjectHead', function () {
+          $.ajax({
+            type: 'post',
+            url: '../php/contact_phead.php',
+            data: $('form').serialize(),
+            success: function () {
+              alert('form was submitted');
+            }
+          });
+          return false;
+        });
+      });
+      </script>
 
+      <form>
       <button id="contactProjectHead"><i class="fa fa-envelope-o"></i> Contact Project Head</button>
+      </form>
     </div>
 
     <div id="files" class="tabContent">
