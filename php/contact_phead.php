@@ -12,8 +12,8 @@
 	$mail -> Host = "smtp.gmail.com";
 	$mail -> Port = 465;
 	$mail -> IsHTML(true);
-	$mail -> Username = "ADMIN GMAIL";
-	$mail -> Password = "ADMIN PASSWORD";
+	$mail -> Username = "aron_tan@dlsu.edu.ph";
+	$mail -> Password = "Pandas1*";
 	$mail -> SentFrom("TE3DBungalow");
 	$mail -> Subject = "[TE3DBungalow] ".$mailTo." has requested contact with you";
 	$mail -> Body = $mailMsg;
