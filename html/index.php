@@ -1,3 +1,7 @@
+<?php
+    include '../php/dbh.php';
+?>
+
 <!DOCTYPE html>
 <html>
 <title>TedBungalow</title>
@@ -15,7 +19,7 @@
     </div>
 
     <div id="searchBar">
-      <form action="search.html" method="GET">
+      <form action="search.php" method="POST">
         <input id="searchTerm" type="text" placeholder="Search"/>
         <button id="searchButton" type="submit">
           <i class="fa fa-search"></i>
