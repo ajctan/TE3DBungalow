@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.7.4
+-- version 4.7.0
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 25, 2017 at 03:59 PM
--- Server version: 10.1.28-MariaDB
--- PHP Version: 7.1.11
+-- Generation Time: Nov 28, 2017 at 06:35 PM
+-- Server version: 10.1.25-MariaDB
+-- PHP Version: 7.1.7
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -45,6 +45,18 @@ INSERT INTO `files` (`tpID`, `tpFile`, `tpFileName`, `tpModified`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `requests`
+--
+
+CREATE TABLE `requests` (
+  `tpID` int(2) NOT NULL,
+  `phEMail` varchar(45) NOT NULL,
+  `rMessage` varchar(500) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `tptable`
 --
 
@@ -53,19 +65,18 @@ CREATE TABLE `tptable` (
   `tpTitle` varchar(99) NOT NULL,
   `tpDesc` varchar(500) NOT NULL,
   `tpMemberID` varchar(500) DEFAULT NULL,
-  `tpSDate` varchar(20) NOT NULL,
-  `tpStatus` varchar(45) NOT NULL,
+  `tpSDate` date NOT NULL,
+  `tpEDate` date DEFAULT NULL,
   `tpAccessLVL` int(11) NOT NULL,
-  `pHead` varchar(50) DEFAULT NULL,
-  `tpTags` varchar(500) NOT NULL
+  `pHead` varchar(50) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `tptable`
 --
 
-INSERT INTO `tptable` (`tpID`, `tpTitle`, `tpDesc`, `tpMemberID`, `tpSDate`, `tpStatus`, `tpAccessLVL`, `pHead`, `tpTags`) VALUES
-(1, 'Example TP', 'This is a sample TP', NULL, '11/11/2017', 'Finished on 11/11/2017', 1, 'SOFENGG X22', 'SOFENGG,sample,example,sprint,srs,firsttp');
+INSERT INTO `tptable` (`tpID`, `tpTitle`, `tpDesc`, `tpMemberID`, `tpSDate`, `tpEDate`, `tpAccessLVL`, `pHead`) VALUES
+(1, 'Project Title', 'Abstract', NULL, '2017-01-01', NULL, 1, 'Project Head');
 
 -- --------------------------------------------------------
 
@@ -115,13 +126,11 @@ ALTER TABLE `users`
 --
 ALTER TABLE `tptable`
   MODIFY `tpID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
-
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `uID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
-COMMIT;
+  MODIFY `uID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
