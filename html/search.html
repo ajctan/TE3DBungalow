@@ -34,80 +34,16 @@
 
   <div id="wrap">
     <div id="pageHead">
-      <button id="optionsButton" onclick="openOptions()"><i class="fa fa-cog fa-2x"></i></button>
-      <!-- MODULE: Option (To keep the position relative to parent div) -->
-      <div id="options">
-        <button>Terminate Account</button>
-      </div>
-      <!-- End of MODULE -->
-      <img src="../images/loginavatar.png">
-      <h1>Juan dela Cruz</h1>
+      <img src="../images/searchlogo.png">
+      <h1>Search results for:</h1>
       <hr>
       <p class="pageLegend">
-        Student at De La Salle University
+        'search query here'
       </p>
     </div>
     <div id="tabButtons">
-      <button id="defaultOpen" class="tabButton" onclick="openTab(event, 'details')">Details & Credentials</button>
-      <button class="tabButton" onclick="openTab(event, 'projects')">Projects</button>
-      <button class="tabButton" onclick="openTab(event, 'colleagues')">Colleagues</button>
-    </div>
-
-    <div id="details" class="tabContent">
-      <table>
-        <tr>
-          <th>Full Name:</th>
-          <td>Juan T. dela Cruz</td>
-          <th>Gender:</th>
-          <td>Male</td>
-        </tr>
-        <tr>
-          <th>Birthdate:</th>
-          <td>January 01, 1990</td>
-          <th>Age:</th>
-          <td>27</td>
-        </tr>
-        <tr>
-          <th>Occupation:</th>
-          <td>Student</td>
-          <th>School/Company:</th>
-          <td>De La Salle University</td>
-        </tr>
-      </table>
-
-      <ul>
-        <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</li>
-        <li>Donec et ex fringilla, laoreet elit sed, fringilla nisl.</li>
-        <li>Vestibulum laoreet justo consectetur sem maximus, ac vestibulum dui sagittis.</li>
-        <li>Suspendisse at nibh eget turpis interdum vestibulum.</li>
-        <li>Duis aliquet felis et nisi tempor mollis.</li>
-        <li>Suspendisse ut eros imperdiet, ultrices nisi at, fermentum neque.</li>
-        <li>Sed finibus leo eget mauris convallis pulvinar.</li>
-        <li>Praesent non sem vel enim mattis pulvinar.</li>
-        <li>Duis ac lacus ac elit sollicitudin egestas.</li>
-        <li>Suspendisse maximus mi non leo rhoncus, vitae egestas lectus egestas.</li>
-        <li>In in nulla facilisis, tristique elit in, molestie massa.</li>
-        <li>Phasellus sit amet nulla sed orci blandit lobortis at vel tellus.</li>
-        <li>Curabitur viverra nisl id justo sollicitudin mattis.</li>
-        <li>Suspendisse dictum ante a felis efficitur dignissim.</li>
-        <li>Phasellus feugiat justo eget consectetur rutrum.</li>
-        <li>Sed et sapien sed nibh gravida sodales sit amet id tortor.</li>
-        <li>Sed vitae nisi aliquet, cursus mauris rutrum, ultricies libero.</li>
-        <li>Nunc euismod justo placerat quam ultricies venenatis.</li>
-        <li>Phasellus a est nec risus faucibus dictum ac in leo.</li>
-        <li>Vivamus eget arcu sollicitudin, consequat eros nec, ornare elit.</li>
-        <li>Sed sit amet mi hendrerit, facilisis urna et, pellentesque nisl.</li>
-        <li>Donec feugiat ipsum a nulla bibendum, nec semper ex cursus.</li>
-        <li>Phasellus mattis velit vitae maximus semper.</li>
-        <li>Etiam ultricies arcu a metus volutpat, in gravida ante semper.</li>
-        <li>Etiam facilisis dolor sed faucibus facilisis.</li>
-        <li>In accumsan risus nec rutrum imperdiet.</li>
-        <li>Vestibulum a mi luctus, porttitor odio accumsan, pharetra nulla.</li>
-        <li>Nullam auctor diam ut nisi dapibus, quis facilisis massa congue.</li>
-        <li>Morbi bibendum nisi sit amet enim gravida placerat.</li>
-        <li>Ut et urna faucibus felis tincidunt volutpat vel at sem.</li>
-        <li>Curabitur nec velit accumsan, tincidunt diam eget, ullamcorper neque.</li>
-      </ul>
+      <button id="defaultOpen" class="tabButton half" onclick="openTab(event, 'projects')">Projects</button>
+      <button class="tabButton half" onclick="openTab(event, 'members')">Members</button>
     </div>
 
     <div id="projects" class="tabContent">
@@ -134,7 +70,7 @@
       </div>
     </div>
 
-    <div id="colleagues" class="tabContent">
+    <div id="members" class="tabContent">
       <div class="member">
         <img class="memberImage" src="../images/loginavatar.png">
         <p class="memberName">John Smith

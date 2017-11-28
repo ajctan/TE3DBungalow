@@ -362,6 +362,10 @@ h1{
   width: 33.33%;
 }
 
+.half{
+  width: 50%;
+}
+
 .tabButton[disabled]{
   cursor: not-allowed;
   text-decoration: line-through;
