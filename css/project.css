@@ -45,6 +45,106 @@
   color: #fff;
 }
 
+#contactHead{
+  background: #eee;
+  bottom: 0;
+  box-shadow: 0 0 10px 1px #555;
+  display: none;
+  height: 400px;
+  position: absolute;
+  text-align: center;
+  right: 5%;
+  width: 400px;
+  z-index: 2;
+}
+
+.contectHeadHeader{
+  background: #1d9b72;
+  display: block;
+  height: 25px;
+  width: 100%;
+}
+
+#closeContactHead{
+  background: none;
+  border: none;
+  border-radius: 0;
+  cursor: pointer;
+  color: red;
+  height: 25px;
+  margin: 0;
+  outline: none;
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 25px;
+}
+
+#contactHead input{
+  box-sizing: border-box;
+  margin: 5px;
+  outline: none;
+  padding: 5px;
+  width: 95%;
+}
+
+#contactHead textarea{
+  box-sizing: border-box;
+  display: inline-block;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 1.0em;
+  height: 82%;
+  outline: none;
+  padding: 5px;
+  resize: none;
+  width: 95%;
+}
+
+#contactHead textarea::-webkit-scrollbar{
+  background: none;
+  width: 10px;
+}
+
+#contactHead textarea::-webkit-scrollbar-thumb{
+  background: none;
+  border-radius: 10px;
+}
+
+#contactHead textarea:hover::-webkit-scrollbar-thumb{
+  background: #1d9b72;
+}
+
+#sendMessage{
+  background: #1d9b72;
+  border: none;
+  border-radius: 500px;
+  bottom: 15px;
+  color: #b0ddce;
+  cursor: pointer;
+  height: 50px;
+  outline: none;
+  padding: 5px;
+  position: absolute;
+  right: 25px;
+  text-align: center;
+  width: 50px;
+}
+
+#sendMessage:hover{
+  color: #fff;
+}
+
+#contactHeadBackground{
+  background: none;
+  display: none;
+  height: 100%;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 100%;
+  z-index: 1;
+}
+
 #files{
   text-align: right;
 }

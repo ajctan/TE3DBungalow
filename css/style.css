@@ -375,6 +375,7 @@ h1{
   display: none;
   height: 100%;
   padding: 10px 12px;
+  position: relative;
 }
 
 .member{

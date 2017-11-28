@@ -5,7 +5,23 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <link rel="stylesheet" href="../css/style.css">
 <link rel="stylesheet" href="../css/project.css">
+<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
 <script src="../js/script.js" type="text/javascript"></script>
+<script src="../js/project.js" type="text/javascript"></script>
+
+<script>
+        	function cph(){
+        		var eml = document.getElementById('email').value;
+        		var msg = document.getElementById('message').value;
+        		$.ajax({
+        			type:"post",
+        			url:"../php/cphead.php",
+        			data: {email:eml, message:msg},
+        			cache:false
+        		});
+        		return false;
+        	}
+</script>
 </head>
 <body>
   <!-- Start of Toolbar -->
@@ -35,11 +51,11 @@
   <div id="wrap">
     <div id="pageHead">
       <button id="optionsButton" onclick="openOptions()"><i class="fa fa-cog fa-2x"></i></button>
-      <!-- MODULE: Option (To keep the position relative to parent div) -->
+      <!-- MODALS: (To keep the position relative to parent div) -->
       <div id="options">
         <button>Delete Project</button>
       </div>
-      <!-- End of MODULE -->
+      <!-- End of MODALS -->
       <img src="../images/projectlogo.png">
       <p id="projectTitle"><marquee direction="left" onmouseover="this.stop();" onmouseout="this.start();">Sample Active Project (With A Long TItle)</marquee>
       <hr>
@@ -63,25 +79,19 @@
       <p>Etiam posuere imperdiet tempor. Praesent aliquet, dui vel facilisis vehicula, tortor leo tempus nisi, id ornare odio elit vel sem. Phasellus sagittis aliquet aliquam. Cras erat tortor, tincidunt et quam eu, scelerisque ultricies tellus. Duis velit ante, tempus quis nulla eu, tristique interdum leo. Pellentesque vel consequat mauris. Fusce augue arcu, laoreet ac fermentum id, rutrum non neque. Morbi et ultricies dolor. Sed at mattis nisl, sed varius velit. In sagittis commodo mauris eu elementum. Proin eu nisl non tortor pellentesque auctor vel a diam. Curabitur quis sapien vel dolor faucibus tempus. Suspendisse gravida ultrices iaculis. Donec at ipsum scelerisque turpis fringilla vestibulum sed vel diam.
 
       <p>Sed sed vulputate dolor, et dictum nibh. Nam id enim eu orci porttitor mattis non non erat. Praesent varius turpis volutpat lacus volutpat, sit amet eleifend tellus tempor. Aliquam at laoreet nisl. Nunc vulputate nulla risus, in faucibus massa vulputate id. Nunc pellentesque sollicitudin enim. Etiam nec imperdiet purus. Cras est neque, viverra vitae arcu nec, tempor elementum felis.
-      <script type="text/javascript">
-      	$(function () {
-        $('form').bind('contactProjectHead', function () {
-          $.ajax({
-            type: 'post',
-            url: '../php/contact_phead.php',
-            data: $('form').serialize(),
-            success: function () {
-              alert('form was submitted');
-            }
-          });
-          return false;
-        });
-      });
-      </script>
 
-      <form>
-      <button id="contactProjectHead"><i class="fa fa-envelope-o"></i> Contact Project Head</button>
-      </form>
+      <button id="contactProjectHead" onclick="openContactHead()"><i class="fa fa-envelope-o"></i> Contact Project Head</button>
+      <!-- MODALS: (To keep the position relative to parent div) -->
+      <div id="contactHead">
+        <div class="contectHeadHeader">
+          <button id="closeContactHead" onclick="closeContactHead()">X</button>
+        </div>
+        <form>
+          <input type="text" id="email" placeholder="Your Email" required/>
+          <textarea id="message" rows="17" required></textarea>
+          <button id="sendMessage" type="submit" onclick="return cph()"><i class="fa fa-send fa-2x"></i></button>
+        </form>
+      </div>
     </div>
 
     <div id="files" class="tabContent">
@@ -214,5 +224,6 @@
   <!-- These are transparent 100% x 100% box behind the module, that closes the module when clicked -->
   <div id="notificationsBackground" onclick="closeNotifications()"></div>
   <div id="optionsBackground" onclick="closeOptions()"></div>
+  <div id="contactHeadBackground" onclick="closeContactHead()"></div>
 </body>
 </html>
