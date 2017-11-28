@@ -1,3 +1,38 @@
+<?php
+if(isset($_POST['file_name'])){
+    $file = $_POST['file_name'];
+	$file_extension = explode(".", $file);
+
+	if($file_extension[1] === 'pdf'){
+		header('Content-type: application/pdf');
+		header('Content-Disposition: attachment; filename="'.$file.'"');
+		readfile('uploads/'.$file);
+		exit();
+	}
+	
+	if($file_extension[1] === 'docx'){
+		header('Content-type: application/vnd.openxmlformats-officedocument.wordprocessingml.document');
+		header('Content-Disposition: attachment; filename="'.$file.'"');
+		readfile('uploads/'.$file);
+		exit();
+	}
+	
+	if($file_extension[1] === 'html'){
+		header('Content-type: text/html');
+		header('Content-Disposition: attachment; filename="'.$file.'"');
+		readfile('uploads/'.$file);
+		exit();
+	}
+	
+	if($file_extension[1] === 'css'){
+		header('Content-type: text/css');
+		header('Content-Disposition: attachment; filename="'.$file.'"');
+		readfile('uploads/'.$file);
+		exit();
+	}
+}
+?>
+
 <!DOCTYPE html>
 <html>
 <title>TedBungalow</title>
@@ -106,37 +141,67 @@
         <tr>
           <td>File_1</td>
           <td>123kb</td>
-          <td>.ext</td>
+          <td>.docx</td>
           <td>January 1, 1990</td>
-          <td><i class="fa fa-download"></i></td>
+          <td>
+			<form action="project.php" method="post" name="downloadform">
+				<input name="file_name" value="File_1.docx" type="hidden">
+				<i class="fa fa-download"></i>
+				<input type="submit" value="Download">
+			</form>
+		  </td>
         </tr>
         <tr>
           <td>File_2</td>
           <td>123kb</td>
-          <td>.ext</td>
+          <td>.pdf</td>
           <td>January 1, 1990</td>
-          <td><i class="fa fa-download"></i></td>
+          <td>
+			<form action="project.php" method="post" name="downloadform">
+				<input name="file_name" value="File_2.pdf" type="hidden">
+				<i class="fa fa-download"></i>
+				<input type="submit" value="Download">
+			</form>	
+		  </td>
         </tr>
         <tr>
           <td>File_3</td>
           <td>123kb</td>
-          <td>.ext</td>
+          <td>.pdf</td>
           <td>January 1, 1990</td>
-          <td><i class="fa fa-download"></i></td>
+          <td>
+			<form action="project.php" method="post" name="downloadform">
+			<input name="file_name" value="File_2.pdf" type="hidden">
+			<i class="fa fa-download"></i>
+			<input type="submit" value="Download">
+			</form>	
+		  </td>
         </tr>
         <tr>
           <td>File_4</td>
           <td>123kb</td>
-          <td>.ext</td>
+          <td>.html</td>
           <td>January 1, 1990</td>
-          <td><i class="fa fa-download"></i></td>
+          <td>
+			<form action="project.php" method="post" name="downloadform">
+			<input name="file_name" value="File_4.html" type="hidden">
+			<i class="fa fa-download"></i>
+			<input type="submit" value="Download">	
+			</form>	
+		  </td>
         </tr>
         <tr>
           <td>File_5</td>
           <td>123kb</td>
-          <td>.ext</td>
+          <td>.css</td>
           <td>January 1, 1990</td>
-          <td><i class="fa fa-download"></i></td>
+          <td>
+			<form action="project.php" method="post" name="downloadform">
+			<input name="file_name" value="File_5.css" type="hidden">
+			<i class="fa fa-download"></i>
+			<input type="submit" value="Download">
+			</form>	
+		  </td>
         </tr>
       </table>
     </div>
