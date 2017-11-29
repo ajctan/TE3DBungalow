@@ -77,7 +77,7 @@ if(isset($_POST['file_name'])){
     <ul id="toolbarButtons">
       <li><button id="notificationButton" class="toolbarButton" onclick="openNotifications()"><i id="notificationCount">99</i><i class="fa fa-bell"></i></button></li>
       <li><button id="userName" class="toolbarButton" onclick="location.href='profile.html';">Juan dela Cruz</button></li>
-  		<li><button class="toolbarButton">Login</button></li>
+  		<li><button class="toolbarButton" onclick="openLogin();">Login</button></li>
     </ul>
   </div>
 
@@ -255,40 +255,23 @@ if(isset($_POST['file_name'])){
     <p class="notificationsTitle">Notifications
     <hr>
     <div id="notificationsContainer">
-      <div class="notification">
-        <img class="notificationImage" src="../images/loginavatar.png">
-        <p class="notificationMessage"><b>MemberName</b> deleted a file in the project <b>ProjectTitle</b>
-      </div>
-
-      <div class="notification">
-        <img class="notificationImage" src="../images/loginavatar.png">
-        <p class="notificationMessage"><b>MemberName</b> deleted a file in the project <b>ProjectTitle</b>
-      </div>
-
-      <div class="notification">
-        <img class="notificationImage" src="../images/loginavatar.png">
-        <p class="notificationMessage"><b>MemberName</b> deleted a file in the project <b>ProjectTitle</b>
-      </div>
-
-      <div class="notification">
-        <img class="notificationImage" src="../images/loginavatar.png">
-        <p class="notificationMessage"><b>MemberName</b> deleted a file in the project <b>ProjectTitle</b>
-      </div>
-
-      <div class="notification">
-        <img class="notificationImage" src="../images/loginavatar.png">
-        <p class="notificationMessage"><b>MemberName</b> deleted a file in the project <b>ProjectTitle</b>
-      </div>
-
-      <div class="notification">
-        <img class="notificationImage" src="../images/loginavatar.png">
-        <p class="notificationMessage"><b>MemberName</b> deleted a file in the project <b>ProjectTitle</b>
-      </div>
+      
     </div>
+  </div>
+
+  <div id="login">
+    <img src="../images/loginavatar.png">
+    <form action="index.html" method="post">
+      <input id="username" name="uname" type="text" placeholder="Email" required/>
+      <input id="password" name="pword" type="password" placeholder="Password" required/>
+      <button type="submit">Log In</button>
+      <a href="">Forgot Password?</a>
+    </form>
   </div>
   <!-- These are transparent 100% x 100% box behind the module, that closes the module when clicked -->
   <div id="notificationsBackground" onclick="closeNotifications()"></div>
   <div id="optionsBackground" onclick="closeOptions()"></div>
   <div id="contactHeadBackground" onclick="closeContactHead()"></div>
+  <div id="loginbackground" onclick="closeLogin()"></div>
 </body>
 </html>

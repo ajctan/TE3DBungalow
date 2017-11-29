@@ -35,8 +35,66 @@
   </div>
 
   <!-- End of Toolbar; start of Content -->
+  <div id="wrap">
+    <div id="pageHead">
+      <img src="../images/projectlogo.png">
+      <h1>Projects</h1>
+      <hr>
+      <p class="pageLegend">
+        <i class="fa fa-hourglass-2"></i>: Ongoing
+        <i class="fa fa-hourglass-end"></i>: Finished
+        <i class="fa fa-hourglass"></i>: Cancelled
+      </p>
+    </div>
 
   <div id="wrap">
+      <?php
+          $sql = "SELECT * FROM tptable ORDER BY tpSDate DESC";
+          $result = mysqli_query($conn,$sql);
+          $queryResults = mysqli_num_rows($result);
+
+          if ($queryResults > 0){
+            while ($row = mysqli_fetch_assoc($result)){
+                  $iClass = "";
+                  $projStart = "";
+                  $projEnd = "";
+                  if($row['tpEDate'] != null && $row['tpEDate'] == $row['tpSDate']){
+                    $iClass = "projectStatus fa fa-hourglass";
+                    $date = date_create($row['tpSDate']);
+                    $projStart = date_format($date, 'jS F Y');
+                    $date = date_create($row['tpEDate']);
+                    $projEnd = date_format($date, 'jS F Y');
+                  }
+                  else if($row['tpEDate'] != null && $row['tpEDate'] != $row['tpSDate']){
+                    $iClass = "projectStatus fa fa-hourglass-end";
+                    $date = date_create($row['tpSDate']);
+                    $projStart = date_format($date, 'jS F Y');
+                    $date = date_create($row['tpEDate']);
+                    $projEnd = date_format($date, 'jS F Y');
+                  }
+                  else if($row['tpEDate'] == null){
+                    $iClass = "projectStatus fa fa-hourglass-2";
+                    $date = date_create($row['tpSDate']);
+                    $projStart = date_format($date, 'jS F Y');
+                  }
+
+                  echo "<div class=\"projectDisplay\">
+                  <i class=\"".$iClass."\"></i>
+                  <p class=\"projectTitle\">".$row['tpTitle']."
+                  <p class=\"projectHead\">".$row['pHead']."
+                  <p class=\"projectStart\">".$projStart."
+                 <p class=\"projectEnd\">".$projEnd."
+                 <p class=\"projectAbstract\">".$row['tpDesc']."
+                  <div class=\"cornerFold\">
+                  </div>
+                  </div>";
+            }
+          }
+            
+      ?>
+  </div>
+
+  <!--<div id="wrap">
     <div id="pageHead">
       <img src="../images/projectlogo.png">
       <h1>Projects</h1>
@@ -91,7 +149,7 @@
       <div class="cornerFold">
       </div>
     </div>
-  </div>
+  </div>-->
 
   <div id="wrapbg">
     <!--LEAVE THIS DIV BLANK. THIS IS JUST THE WHITE BACKGROUND THAT FILLS THE
@@ -104,35 +162,7 @@
     <p class="notificationsTitle">Notifications
     <hr>
     <div id="notificationsContainer">
-      <div class="notification">
-        <img class="notificationImage" src="../images/loginavatar.png">
-        <p class="notificationMessage"><b>MemberName</b> deleted a file in the project <b>ProjectTitle</b>
-      </div>
-
-      <div class="notification">
-        <img class="notificationImage" src="../images/loginavatar.png">
-        <p class="notificationMessage"><b>MemberName</b> deleted a file in the project <b>ProjectTitle</b>
-      </div>
-
-      <div class="notification">
-        <img class="notificationImage" src="../images/loginavatar.png">
-        <p class="notificationMessage"><b>MemberName</b> deleted a file in the project <b>ProjectTitle</b>
-      </div>
-
-      <div class="notification">
-        <img class="notificationImage" src="../images/loginavatar.png">
-        <p class="notificationMessage"><b>MemberName</b> deleted a file in the project <b>ProjectTitle</b>
-      </div>
-
-      <div class="notification">
-        <img class="notificationImage" src="../images/loginavatar.png">
-        <p class="notificationMessage"><b>MemberName</b> deleted a file in the project <b>ProjectTitle</b>
-      </div>
-
-      <div class="notification">
-        <img class="notificationImage" src="../images/loginavatar.png">
-        <p class="notificationMessage"><b>MemberName</b> deleted a file in the project <b>ProjectTitle</b>
-      </div>
+      
     </div>
   </div>
 
