@@ -62,11 +62,11 @@ if(isset($_POST['file_name'])){
   <!-- Start of Toolbar -->
   <div id="toolbar">
     <div id="logo">
-      <a href="index.html"><img src="../images/logo_full.png" height="30px"></a>
+      <a href="index.php"><img src="../images/logo_full.png" height="30px"></a>
     </div>
 
     <div id="searchBar">
-      <form action="index.html" method="GET">
+      <form action="index.php" method="GET">
         <input id="searchTerm" type="text" placeholder="Search"/>
         <button id="searchButton" type="submit">
           <i class="fa fa-search"></i>
