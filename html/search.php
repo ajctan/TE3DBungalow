@@ -69,26 +69,26 @@
                     $projEnd = date_format($date, 'jS F Y');
                   }
                   else if($row['tpEDate'] != null && $row['tpEDate'] != $row['tpSDate']){
-                    $iClass = "fa fa-hourglass-end"
+                    $iClass = "fa fa-hourglass-end";
                     $date = date_create($row['tpSDate']);
                     $projStart = date_format($date, 'jS F Y');
                     $date = date_create($row['tpEDate']);
                     $projEnd = date_format($date, 'jS F Y');
                   }
                   else if($row['tpEDate'] == null){
-                    $iClass = "fa fa-hourglass-2"
+                    $iClass = "fa fa-hourglass-2";
                     $date = date_create($row['tpSDate']);
                     $projStart = date_format($date, 'jS F Y');
                   }
 
-                  echo "<div class="projectDisplay">
+                  echo "<div class=\"projectDisplay\">
                   <i class=".$iClass."></i>
-                  <p class="projectTitle">".$row['tpTitle']."
-                  <p class="projectHead">".$row['pHead']."
-                  <p class="projectStart">".$projStart."
-                 <p class="projectEnd">".$projEnd."
-                 <p class="projectAbstract">".$row['tpDesc']."
-                  <div class="cornerFold">
+                  <p class=\"projectTitle\">".$row['tpTitle']."
+                  <p class=\"projectHead\">".$row['pHead']."
+                  <p class=\"projectStart\">".$projStart."
+                 <p class=\"projectEnd\">".$projEnd."
+                 <p class=\"projectAbstract\">".$row['tpDesc']."
+                  <div class=\"cornerFold\">
                   </div>
                   </div>";
             }
