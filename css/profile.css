@@ -1,57 +1,140 @@
-#optionsButton{
-  background: none;
-  border: none;
-  color: #999;
-  cursor: pointer;
-  outline: none;
-  position: absolute;
-  right: 20px;
-  top: 30px;
-}
-
-#optionsButton:hover{
-  color: #000;
-}
-
-#options:before {
-  border:10px solid #000;
-  border-color:transparent transparent #eee;
-  color:#000;
-  content: '';
+#projectTitle{
   display: block;
-  height:0;
-  margin:-20px 0 0 153px;
-  width:0;
-}
-
-#options{
-  background: #fff;
-  box-shadow: 0 0 10px 1px #555;
-  display: none;
-  height: 35px;
-  position: absolute;
-  right: 0;
-  top: 65px;
-  width: 200px;
-  z-index: 3;
-}
-
-#options button{
-  background: #eee;
-  border: none;
-  cursor: pointer;
-  color: red;
+  font-size: 3.0em;
   font-weight: bold;
-  height: 100%;
-  outline: none;
+  margin: 40px 0 0 0;
+  overflow: hidden;
+  padding: 0;
+  position: relative;
+  white-space: nowrap;
+}
+
+#projectTitle marquee{
+  margin: 0;
+  padding: 0;
   width: 100%;
 }
 
-#options button:hover{
-  text-decoration: underline;
+#projectHead{
+  color: #aaa;
+  float: right;
+  margin: 0;
+  text-align: right;
 }
 
-#optionsBackground{
+#abstract{
+  text-align: right;
+}
+
+#abstract p{
+  text-align: left;
+}
+
+#contactProjectHead{
+  background: #1d9b72;
+  border: none;
+  color: #b0ddce;
+  cursor: pointer;
+  float: right;
+  margin: 45px 0 0 0;
+  outline: none;
+  padding: 10px;
+}
+
+#contactProjectHead:hover{
+  color: #fff;
+}
+
+#contactHead{
+  background: #eee;
+  bottom: 0;
+  box-shadow: 0 0 10px 1px #555;
+  display: none;
+  height: 400px;
+  position: absolute;
+  text-align: center;
+  right: 5%;
+  width: 400px;
+  z-index: 2;
+}
+
+.contectHeadHeader{
+  background: #1d9b72;
+  display: block;
+  height: 25px;
+  width: 100%;
+}
+
+#closeContactHead{
+  background: none;
+  border: none;
+  border-radius: 0;
+  cursor: pointer;
+  color: red;
+  height: 25px;
+  margin: 0;
+  outline: none;
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 25px;
+}
+
+#contactHead input{
+  box-sizing: border-box;
+  margin: 5px;
+  outline: none;
+  padding: 5px;
+  width: 95%;
+}
+
+#contactHead textarea{
+  box-sizing: border-box;
+  display: inline-block;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 1.0em;
+  height: 82%;
+  outline: none;
+  padding: 5px;
+  resize: none;
+  width: 95%;
+}
+
+#contactHead textarea::-webkit-scrollbar{
+  background: none;
+  width: 10px;
+}
+
+#contactHead textarea::-webkit-scrollbar-thumb{
+  background: none;
+  border-radius: 10px;
+}
+
+#contactHead textarea:hover::-webkit-scrollbar-thumb{
+  background: #1d9b72;
+}
+
+#sendMessage{
+  background: #1d9b72;
+  border: none;
+  border-radius: 500px;
+  bottom: 15px;
+  color: #b0ddce;
+  cursor: pointer;
+  height: 50px;
+  outline: none;
+  padding: 5px;
+  position: absolute;
+  right: 25px;
+  text-align: center;
+  width: 50px;
+}
+
+#sendMessage:hover{
+  color: #fff;
+}
+
+#contactHeadBackground{
   background: none;
   display: none;
   height: 100%;
@@ -59,60 +142,48 @@
   position: absolute;
   top: 0;
   width: 100%;
-  z-index: 2;
+  z-index: 1;
 }
 
-#tabButtons{
-  display: block;
-  height: 50px;
-  margin: 0 auto 0 auto;
+#files{
+  text-align: right;
+}
+
+#projectFiles{
+  border-collapse: collapse;
+  margin: 0;
+  padding: 0;
+  text-align: left;
   width: 100%;
 }
 
-#tabButtons button.active{
-  border-bottom: 2px solid #1d9b72;
-  color: #000;
+#projectFiles tr:nth-child(even){
+  background: #56e39f;
 }
 
-#details table{
-  margin: 0 0 0 20px;
-  border-color: collapse;
-  text-align: left;
-}
-
-#details th, td{
+#projectFiles th, td{
+  border: 2px solid #fff;
   padding: 10px;
 }
 
-#colleagues{
-  padding: 0 60px 0 60px;
+#projectFiles th.name{
+  text-align: center;
+  width: 50%;
 }
 
-.tabButton{
-  background: none;
-  border: none;
-  border-bottom: 2px solid #eee;
-  border-right: 2px solid #eee;
-  color: #999;
-  cursor: pointer;
-  float: left;
-  font-weight: bold;
-  outline: none;
-  padding: 14px 16px;
-  width: 33.33%;
+#projectFiles th.size, th.extension{
+  text-align: center;
+  width: 15%;
 }
 
-.tabButton[disabled]{
-  cursor: not-allowed;
-  text-decoration: line-through;
+#projectFiles th.lastModified{
+  text-align: center;
 }
 
-.tabButton:last-child{
-  border-right: none;
+#projectFiles td:not(:first-child){
+  text-align: center;
 }
 
-.tabContent{
-  display: none;
-  height: 100%;
-  padding: 10px 12px;
+#downloadAll:hover{
+  color: #fff;
 }

@@ -46,16 +46,16 @@ if(isset($_POST['file_name'])){
 
 <script>
         	function cph(){
-        		var eml = document.getElementById('email').value;
-        		var msg = document.getElementById('message').value;
-        		$.ajax({
-        			type:"post",
-        			url:"../php/cphead.php",
-        			data: {email:eml, message:msg},
-        			cache:false
-        		});
-        		return false;
-        	}
+            var eml = document.getElementById('email').value;
+            var msg = document.getElementById('message').value;
+            $.ajax({
+              type:"post",
+              url:"../php/cphead.php",
+              data: {email:eml, message:msg},
+              cache:false
+            });
+            return false;
+          }
 </script>
 </head>
 <body>
