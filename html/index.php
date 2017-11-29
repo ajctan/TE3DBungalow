@@ -30,7 +30,7 @@
     <ul id="toolbarButtons">
       <li><button id="notificationButton" class="toolbarButton" onclick="openNotifications()"><i id="notificationCount">99</i><i class="fa fa-bell"></i></button></li>
       <li><button id="userName" class="toolbarButton" onclick="location.href='profile.html';">Juan dela Cruz</button></li>
-  		<li><button class="toolbarButton">Login</button></li>
+  		<li><button class="toolbarButton" onclick="openLogin();">Login</button></li>
     </ul>
   </div>
 
@@ -135,6 +135,7 @@
       </div>
     </div>
   </div>
+
   <div id="login">
     <img src="../images/loginavatar.png">
     <form action="index.html" method="post">
@@ -144,6 +145,7 @@
       <a href="">Forgot Password?</a>
     </form>
   </div>
+
   <div id="notificationsBackground" onclick="closeNotifications()"></div>
   <div id="loginbackground" onclick="closeLogin()"></div>
 </body>
