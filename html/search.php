@@ -82,7 +82,7 @@
                   }
 
                   echo "<div class=\"projectDisplay\">
-                  <i class=".$iClass."></i>
+                  <i class=\"".$iClass."\"></i>
                   <p class=\"projectTitle\" id=\"pName\">".$row['tpTitle']."
                   <p class=\"projectHead\">".$row['pHead']."
                   <p class=\"projectStart\">".$projStart."

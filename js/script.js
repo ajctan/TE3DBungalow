@@ -8,6 +8,16 @@ function closeNotifications(){
   document.getElementById('notificationsBackground').style.display="none";
 }
 
+function openLogin(){
+  document.getElementById('login').style.display="block";
+  document.getElementById('loginbackground').style.display="block";
+}
+
+function closeLogin(){
+  document.getElementById('login').style.display="none";
+  document.getElementById('loginbackground').style.display="none";
+}
+
 function afterLoad(){
   document.getElementById("defaultOpen").click();
 }

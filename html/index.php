@@ -135,6 +135,16 @@
       </div>
     </div>
   </div>
+  <div id="login">
+    <img src="../images/loginavatar.png">
+    <form action="index.html" method="post">
+      <input id="username" name="uname" type="text" placeholder="Email" required/>
+      <input id="password" name="pword" type="password" placeholder="Password" required/>
+      <button type="submit">Log In</button>
+      <a href="">Forgot Password?</a>
+    </form>
+  </div>
   <div id="notificationsBackground" onclick="closeNotifications()"></div>
+  <div id="loginbackground" onclick="closeLogin()"></div>
 </body>
 </html>
