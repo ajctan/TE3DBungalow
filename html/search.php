@@ -1,5 +1,5 @@
 <?php
-    include '.../php/dbh.php';
+    include '../php/dbh.php';
 ?>
 
 <!DOCTYPE html>
