@@ -123,7 +123,7 @@ if(isset($_POST['file_name'])){
         </div>
         <form>
           <input type="text" id="email" placeholder="Your Email" required/>
-          <textarea id="message" rows="17" required></textarea>
+          <textarea id="message" rows="15" required></textarea>
           <button id="sendMessage" type="submit" onclick="return cph()"><i class="fa fa-send fa-2x"></i></button>
         </form>
       </div>
