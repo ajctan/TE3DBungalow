@@ -55,7 +55,7 @@
     <div id="projects" class="tabContent">
       <?php
           $term = $_POST['search-field'];
-          $sql = "SELECT * FROM tptable WHERE tpTitle LIKE '%$term%' OR tpDesc LIKE '%term%'";
+          $sql = "SELECT * FROM tptable WHERE tpTitle LIKE '%$term%' OR tpDesc LIKE '%$term%'";
           $result = mysqli_query($conn,$sql);
           $queryResults = mysqli_num_rows($result);
 

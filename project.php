@@ -91,7 +91,24 @@ if(isset($_POST['file_name'])){
         <button>Delete Project</button>
       </div>
       <!-- End of MODALS -->
-      <img src="../images/projectlogo.png">
+
+      <!--<?php
+        $title = mysqli_real_escape_string($conn, $_GET['title']);
+
+        $sql = "SELECT * FROM tptable WHERE tpTitle LIKE '".$title."'";
+        $result = mysqli_query($conn,$sql);
+        $queryResults = mysqli_num_rows($result);
+
+        if ($queryResults > 0){
+          echo "<img src=\"../images/projectlogo.png\">
+                <p id=\"projectTitle\"><marquee direction=\"left\" onmouseover=\"this.stop();\" onmouseout=\"this.start();\">".$title."</marquee>
+                <hr>";
+        }
+      ?>-->
+
+
+
+      <<img src="../images/projectlogo.png">
       <p id="projectTitle"><marquee direction="left" onmouseover="this.stop();" onmouseout="this.start();">Sample Active Project (With A Long TItle)</marquee>
       <hr>
       <p class="pageLegend">
