@@ -78,7 +78,7 @@
                     $projStart = date_format($date, 'jS F Y');
                   }
 
-                  echo "<div class=\"projectDisplay\">
+                  echo "<a href='project.php?title=\"".$row['tpTitle']."'><div class=\"projectDisplay\">
                   <i class=\"".$iClass."\"></i>
                   <p class=\"projectTitle\">".$row['tpTitle']."
                   <p class=\"projectHead\">".$row['pHead']."
@@ -87,7 +87,7 @@
                  <p class=\"projectAbstract\">".$row['tpDesc']."
                   <div class=\"cornerFold\">
                   </div>
-                  </div>";
+                  </div></a>";
             }
           }
             
