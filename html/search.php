@@ -20,8 +20,8 @@
 
     <div id="searchBar">
       <form action="search.php" method="POST">
-        <input id="searchTerm" type="text" placeholder="Search"/>
-        <button id="searchButton" type="submit">
+        <input id="searchTerm" type="text" name="search-field" placeholder="Search"/>
+        <button id="searchButton" type="submit" name ="search-button">
           <i class="fa fa-search"></i>
         </button>
       </form>
@@ -39,7 +39,9 @@
   <div id="wrap">
     <div id="pageHead">
       <img src="../images/searchlogo.png">
-      <h1>Search results for:</h1>
+      <?php
+        echo "<h3>Search results for: '".$_POST['search-field']."'</h3>"
+      ?>
       <hr>
       <p class="pageLegend">
         'search query here'
@@ -52,7 +54,8 @@
 
     <div id="projects" class="tabContent">
       <?php
-          $sql = "SELECT * FROM tptable";
+          $term = $_POST['search-field'];
+          $sql = "SELECT * FROM tptable WHERE tpTitle LIKE '%$term%' OR tpDesc LIKE '%term%'";
           $result = mysqli_query($conn,$sql);
           $queryResults = mysqli_num_rows($result);
 
@@ -62,21 +65,21 @@
                   $projStart = "";
                   $projEnd = "";
                   if($row['tpEDate'] != null && $row['tpEDate'] == $row['tpSDate']){
-                    $iClass = "fa fa-hourglass";
+                    $iClass = "projectStatus fa fa-hourglass";
                     $date = date_create($row['tpSDate']);
                     $projStart = date_format($date, 'jS F Y');
                     $date = date_create($row['tpEDate']);
                     $projEnd = date_format($date, 'jS F Y');
                   }
                   else if($row['tpEDate'] != null && $row['tpEDate'] != $row['tpSDate']){
-                    $iClass = "fa fa-hourglass-end";
+                    $iClass = "projectStatus fa fa-hourglass-end";
                     $date = date_create($row['tpSDate']);
                     $projStart = date_format($date, 'jS F Y');
                     $date = date_create($row['tpEDate']);
                     $projEnd = date_format($date, 'jS F Y');
                   }
                   else if($row['tpEDate'] == null){
-                    $iClass = "fa fa-hourglass-2";
+                    $iClass = "projectStatus fa fa-hourglass-2";
                     $date = date_create($row['tpSDate']);
                     $projStart = date_format($date, 'jS F Y');
                   }
