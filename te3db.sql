@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 30, 2017 at 02:39 AM
+-- Generation Time: Nov 30, 2017 at 07:42 AM
 -- Server version: 10.1.28-MariaDB
 -- PHP Version: 7.1.11
 
@@ -25,7 +25,6 @@ SET time_zone = "+00:00";
 DROP SCHEMA IF EXISTS te3db;
 CREATE SCHEMA te3db;
 USE te3db;
-
 -- --------------------------------------------------------
 
 --
@@ -82,16 +81,19 @@ CREATE TABLE `users` (
   `uID` int(11) NOT NULL,
   `uType` int(11) NOT NULL,
   `uFName` varchar(45) NOT NULL,
-  `uLName` varchar(45) NOT NULL
+  `uLName` varchar(45) NOT NULL,
+  `uGender` varchar(10) NOT NULL,
+  `uOccupation` varchar(30) NOT NULL,
+  `uAffiliation` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`uName`, `uPass`, `uID`, `uType`, `uFName`, `uLName`) VALUES
-('bear@te3dhouse', 'bungalow', 1, 0, 'Teddy', 'Bear'),
-('bictory@dlsu.edu.ph', 'b4bictory', 2, 1, 'SOFENGG', 'X22');
+INSERT INTO `users` (`uName`, `uPass`, `uID`, `uType`, `uFName`, `uLName`, `uGender`, `uOccupation`, `uAffiliation`) VALUES
+('bear@te3dhouse', 'bungalow', 1, 0, 'Teddy', 'Bear', 'Male', 'Admin', 'TE3D Bungalow'),
+('bictory@dlsu.edu.ph', 'b4bictory', 2, 1, 'SOFENGG', 'X22', 'Male', 'Student', 'De La Salle University');
 
 --
 -- Indexes for dumped tables
