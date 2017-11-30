@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 29, 2017 at 03:11 AM
+-- Generation Time: Nov 30, 2017 at 02:39 AM
 -- Server version: 10.1.28-MariaDB
 -- PHP Version: 7.1.11
 
@@ -22,11 +22,11 @@ SET time_zone = "+00:00";
 -- Database: `te3db`
 --
 
--- --------------------------------------------------------
-
 DROP SCHEMA IF EXISTS te3db;
 CREATE SCHEMA te3db;
 USE te3db;
+
+-- --------------------------------------------------------
 
 --
 -- Table structure for table `files`
@@ -55,7 +55,7 @@ INSERT INTO `files` (`tpID`, `tpFile`, `tpFileName`, `tpModified`) VALUES
 CREATE TABLE `tptable` (
   `tpID` int(11) NOT NULL,
   `tpTitle` varchar(99) NOT NULL,
-  `tpDesc` varchar(500) NOT NULL,
+  `tpDesc` varchar(5000) NOT NULL,
   `tpMemberID` varchar(500) DEFAULT NULL,
   `tpSDate` date NOT NULL,
   `tpEDate` date DEFAULT NULL,
@@ -68,7 +68,7 @@ CREATE TABLE `tptable` (
 --
 
 INSERT INTO `tptable` (`tpID`, `tpTitle`, `tpDesc`, `tpMemberID`, `tpSDate`, `tpEDate`, `tpAccessLVL`, `pHead`) VALUES
-(1, 'BICTORY SRS SOFENGG', 'Concrete', NULL, '2017-01-01', '2017-11-29', 1, 'SOFENGG X22');
+(1, 'BICTORY SRS SOFENGG', 'A software requirements specification (SRS) is a description of a software system to be developed. It lays out functional and non-functional requirements, and may include a set of use cases that describe user interactions that the software must provide.\r\n\r\nSoftware requirements specification establishes the basis for an agreement between customers and contractors or suppliers (in market-driven projects, these roles may be played by the marketing and development divisions) on what the software product is to do as well as what it is not expected to do. Software requirements specification permits a rigorous assessment of requirements before design can begin and reduces later redesign. It should also provide a realistic basis for estimating product costs, risks, and schedules. Used appropriately, software requirements specifications can help prevent software project failure.', NULL, '2017-01-01', '2017-11-29', 1, 'SOFENGG X22');
 
 -- --------------------------------------------------------
 
