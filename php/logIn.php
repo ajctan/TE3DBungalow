@@ -9,15 +9,19 @@
 	$queryResults = mysqli_num_rows($result);
 	if($queryResults > 0){
 		while ($row = mysqli_fetch_assoc($result)){
-			setcookie("uFName", row['uFName'], 0, "/");
-			setcookie("uLName", row['uLName'], 0, "/");
+			setcookie("uFName", $row['uFName'], 0, "/");
+			setcookie("uLName", $row['uLName'], 0, "/");
 			if(isset($_COOKIE['accType'])){
-				setcookie("accType", row['uType'], "/");
+				setcookie("accType", $row['uType'], "/");
 			}else{
-				setcookie("accType", row['uType'], 0, "/");
+				setcookie("accType", $row['uType'], 0, "/");
 			}
-			setcookie("eMail", row['uName'], 0, "/");
+			setcookie("eMail", $row['uName'], 0, "/");
 			setcookie("loggedIn", "1", 0, "/");
+			setcookie("gender", $row['uGender'], 0, "/");
+			setcookie("occupation", $row['uOccupation'], 0, "/");
+			setcookie("affiliation", $row['uAffiliation'], 0, "/");
+			setcookie("uID", $row['uID'], 0, "/");
 		}
 	}else{
 		setcookie("loggedIn", "0", 0, "/");

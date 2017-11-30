@@ -1,3 +1,7 @@
+<?php
+    include '../php/dbh.php';
+?>
+
 <!DOCTYPE html>
 <html>
 <title>TedBungalow</title>
@@ -23,15 +27,38 @@
       </form>
     </div>
 
-    <ul id="toolbarButtons">
-      <li><button id="notificationButton" class="toolbarButton" onclick="openNotifications()"><i id="notificationCount">99</i><i class="fa fa-bell"></i></button></li>
-      <li><button id="userName" class="toolbarButton" onclick="location.href='profile.html';">Juan dela Cruz</button></li>
-  		<li><button class="toolbarButton" onclick="openLogin();">Login</button></li>
-    </ul>
+    <?php
+      $uli = '0';
+      if(isset($_COOKIE['loggedIn'])){
+        $uli = $_COOKIE['loggedIn'];
+        if($uli == '1'){
+          echo "<ul id=\"toolbarButtons\">
+                  <li><button id=\"notificationButton\" class=\"toolbarButton\" onclick=\"openNotifications()\"><i id=\"notificationCount\">99</i><i class=\"fa fa-bell\"></i></button></li>
+                  <li><button id=\"userName\" class=\"toolbarButton\" onclick=\"location.href='profile.html';\">".$_COOKIE['uFName']." ".$_COOKIE['uLName']."</button></li>
+                  <li><button class=\"toolbarButton\" onclick=\"location.href='../php/logOut.php'\">Logout</button></li>
+                </ul>";
+        }else{
+          echo "<ul id=\"toolbarButtons\">
+                  <li><button class=\"toolbarButton\" name=\"li1\" onclick=\"openLogin();\">Login</button></li>
+                </ul>";
+        }
+      }else{
+          echo "<ul id=\"toolbarButtons\">
+                  <li><button class=\"toolbarButton\" name=\"".$uli."\" onclick=\"openLogin();\">Login</button></li>
+                </ul>";
+          if(!isset($_COOKIE['accType']))
+            setcookie("accType", "2", 0, "/");
+      }
+
+    ?>
   </div>
 
   <!-- End of Toolbar; start of Content -->
-
+  <?php
+    if(!isset($_COOKIE['loggedIn'])){
+      header("Location: index.php");
+    }
+  ?>
   <div id="wrap">
     <div id="pageHead">
       <button id="optionsButton" onclick="openOptions()"><i class="fa fa-cog fa-2x"></i></button>
@@ -41,10 +68,14 @@
       </div>
       <!-- End of MODULE -->
       <img src="../images/loginavatar.png">
-      <h1>Juan dela Cruz</h1>
+      <?php
+        echo "<h1>".$_COOKIE['uFName']." ".$_COOKIE['uLName']."</h1>";
+      ?>
       <hr>
       <p class="pageLegend">
-        Student at De La Salle University
+        <?php
+          echo $_COOKIE['occupation']." at ".$_COOKIE['affiliation'];
+        ?>
       </p>
     </div>
     <div id="tabButtons">
@@ -57,21 +88,23 @@
       <table>
         <tr>
           <th>Full Name:</th>
-          <td>Juan T. dela Cruz</td>
+          <?php
+            echo "<td>".$_COOKIE['uFName']." ".$_COOKIE['uLName']."</td>";
+          ?>
           <th>Gender:</th>
-          <td>Male</td>
-        </tr>
-        <tr>
-          <th>Birthdate:</th>
-          <td>January 01, 1990</td>
-          <th>Age:</th>
-          <td>27</td>
+          <?php
+            echo "<td>".$_COOKIE['gender']."</td>";
+          ?>
         </tr>
         <tr>
           <th>Occupation:</th>
-          <td>Student</td>
-          <th>School/Company:</th>
-          <td>De La Salle University</td>
+          <?php
+            echo "<td>".$_COOKIE['occupation']."</td>";
+          ?>
+          <th>Affiliation:</th>
+          <?php
+            echo "<td>".$_COOKIE['affiliation']."</td>";
+          ?>
         </tr>
       </table>
 
@@ -111,6 +144,60 @@
     </div>
 
     <div id="projects" class="tabContent">
+      <?php
+          $sql = "SELECT * FROM tptable";
+          $result = mysqli_query($conn,$sql);
+          $queryResults = mysqli_num_rows($result);
+          if ($queryResults > 0){
+            while ($row = mysqli_fetch_assoc($result)){
+              $memberIDs = explode(',', $row['tpMemberID']);
+              $foundID = FALSE;
+              foreach($memberIDs as $thisID){
+                if($_COOKIE['uID'] == $thisID){
+                  $foundID = TRUE;
+                  break;
+                }
+              }
+              if($foundID || $_COOKIE['uFName']." ".$_COOKIE['uLName'] == $row['pHead']){
+                  $iClass = "";
+                  $projStart = "";
+                  $projEnd = "";
+                  if($row['tpEDate'] != null && $row['tpEDate'] == $row['tpSDate']){
+                    $iClass = "projectStatus fa fa-hourglass";
+                    $date = date_create($row['tpSDate']);
+                    $projStart = date_format($date, 'jS F Y');
+                    $date = date_create($row['tpEDate']);
+                    $projEnd = date_format($date, 'jS F Y');
+                  }
+                  else if($row['tpEDate'] != null && $row['tpEDate'] != $row['tpSDate']){
+                    $iClass = "projectStatus fa fa-hourglass-end";
+                    $date = date_create($row['tpSDate']);
+                    $projStart = date_format($date, 'jS F Y');
+                    $date = date_create($row['tpEDate']);
+                    $projEnd = date_format($date, 'jS F Y');
+                  }
+                  else if($row['tpEDate'] == null){
+                    $iClass = "projectStatus fa fa-hourglass-2";
+                    $date = date_create($row['tpSDate']);
+                    $projStart = date_format($date, 'jS F Y');
+                  }
+
+                  echo "<a href='project.php?pid=".$row['tpID']."' style=\"text-decoration:none;\"><div class=\"projectDisplay\">
+                  <i class=\"".$iClass."\"></i>
+                  <p class=\"projectTitle\">".$row['tpTitle']."
+                  <p class=\"projectHead\">".$row['pHead']."
+                  <p class=\"projectStart\">".$projStart."
+                 <p class=\"projectEnd\">".$projEnd."
+                 <p class=\"projectAbstract\">".$row['tpDesc']."
+                  <div class=\"cornerFold\">
+                  </div>";
+                }
+            }
+          }
+            
+      ?>
+      </div>
+    <!--<div id="projects" class="tabContent">
       <div class="projectDisplay">
         <i class="projectStatus fa fa-hourglass-end"></i>
         <p class="projectTitle">Project Title That Is Really Long That WIll Overlap With The Date
@@ -132,7 +219,7 @@
         <div class="cornerFold">
         </div>
       </div>
-    </div>
+    </div>-->
 
     <div id="colleagues" class="tabContent">
       <div class="member">

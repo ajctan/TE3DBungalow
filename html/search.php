@@ -27,11 +27,30 @@
       </form>
     </div>
 
-    <ul id="toolbarButtons">
-      <li><button id="notificationButton" class="toolbarButton" onclick="openNotifications()"><i id="notificationCount">99</i><i class="fa fa-bell"></i></button></li>
-      <li><button id="userName" class="toolbarButton" onclick="location.href='profile.html';">Juan dela Cruz</button></li>
-  		<li><button class="toolbarButton" onclick="openLogin();">Login</button></li>
-    </ul>
+    <?php
+      $uli = '0';
+      if(isset($_COOKIE['loggedIn'])){
+        $uli = $_COOKIE['loggedIn'];
+        if($uli == '1'){
+          echo "<ul id=\"toolbarButtons\">
+                  <li><button id=\"notificationButton\" class=\"toolbarButton\" onclick=\"openNotifications()\"><i id=\"notificationCount\">99</i><i class=\"fa fa-bell\"></i></button></li>
+                  <li><button id=\"userName\" class=\"toolbarButton\" onclick=\"location.href='profile.php';\">".$_COOKIE['uFName']." ".$_COOKIE['uLName']."</button></li>
+                  <li><button class=\"toolbarButton\" onclick=\"location.href='../php/logOut.php'\">Logout</button></li>
+                </ul>";
+        }else{
+          echo "<ul id=\"toolbarButtons\">
+                  <li><button class=\"toolbarButton\" name=\"li1\" onclick=\"openLogin();\">Login</button></li>
+                </ul>";
+        }
+      }else{
+          echo "<ul id=\"toolbarButtons\">
+                  <li><button class=\"toolbarButton\" name=\"".$uli."\" onclick=\"openLogin();\">Login</button></li>
+                </ul>";
+          if(!isset($_COOKIE['accType']))
+            setcookie("accType", "2", 0, "/");
+      }
+
+    ?>
   </div>
 
   <!-- End of Toolbar; start of Content -->
@@ -85,7 +104,7 @@
                     $projStart = date_format($date, 'jS F Y');
                   }
 
-                  echo "<div class=\"projectDisplay\">
+                  echo "<a href='project.php?pid=".$row['tpID']."' style=\"text-decoration:none;\"><div class=\"projectDisplay\">
                   <i class=\"".$iClass."\"></i>
                   <p class=\"projectTitle\">".$row['tpTitle']."
                   <p class=\"projectHead\">".$row['pHead']."
@@ -177,7 +196,7 @@
 
   <div id="login">
     <img src="../images/loginavatar.png">
-    <form action="index.html" method="post">
+    <form action="../php/logIn.php" method="post">
       <input id="username" name="uname" type="text" placeholder="Email" required/>
       <input id="password" name="pword" type="password" placeholder="Password" required/>
       <button type="submit">Log In</button>
