@@ -26,6 +26,7 @@
 	}else{
 		setcookie("loggedIn", "0", 0, "/");
 	}
-	header("Location: {$_SERVER['HTTP_REFERER']}");
+	//header("Location: {$_SERVER['HTTP_REFERER']}");
+	header("Location: ../html/index.php");
     exit;
 ?>
