@@ -19,9 +19,9 @@
     </div>
 
     <div id="searchBar">
-      <form action="search.html" method="GET">
-        <input id="searchTerm" type="text" placeholder="Search"/>
-        <button id="searchButton" type="submit">
+      <form action="search.php" method="POST">
+        <input id="searchTerm" type="text" name="search-field" placeholder="Search"/>
+        <button id="searchButton" type="submit" name="search-button">
           <i class="fa fa-search"></i>
         </button>
       </form>
