@@ -72,7 +72,9 @@ CREATE TABLE `tptable` (
 INSERT INTO `tptable` (`tpID`, `tpTitle`, `tpDesc`, `tpMemberName`, `tpSDate`, `tpEDate`, `tpAccessLVL`, `pHead`) VALUES
 (1, 'BICTORY SRS SOFENGG', 'A software requirements specification (SRS) is a description of a software system to be developed. It lays out functional and non-functional requirements, and may include a set of use cases that describe user interactions that the software must provide.\r\n\r\nSoftware requirements specification establishes the basis for an agreement between customers and contractors or suppliers (in market-driven projects, these roles may be played by the marketing and development divisions) on what the software product is to do as well as what it is not expected to do. Software requirements specification permits a rigorous assessment of requirements before design can begin and reduces later redesign. It should also provide a realistic basis for estimating product costs, risks, and schedules. Used appropriately, software requirements specifications can help prevent software project failure.', NULL, '2017-01-01', '2017-11-29', 1, 'SOFENGG X22'),
 (2, '4 Pics 1 Hung (WEBAPDE)', 'A web application which is a crossover of 4 pics 1 word and hangman. Developed for WEBAPDE X22 under Arturo Caronongan.', 'Yiliang Peng, Jacky Yip', '2017-08-22', '2017-09-15', 1, 'Aron Joshua Tan'),
-(3, 'CSETHIC Intellectual Property Paper', 'A paper on issues that shows unethical practices when it comes to patents, copyrights, and the like', 'Yiliang Peng,', '2017-11-27', '2017-11-28', 1, 'Aron Joshua Tan');
+(3, 'CSETHIC Intellectual Property Paper', 'A paper on issues that shows unethical practices when it comes to patents, copyrights, and the like', 'Yiliang Peng,', '2017-11-27', '2017-11-28', 1, 'Aron Joshua Tan'),
+(4, 'ADVANDB Query Optimization', 'A simple query application that issues queries to the Yelp database. The application displays an interface for selecting the query to be executed and viewing the query results.', 'Bill Smith,Shiela Tablang,Joana Jane Villacorta', '2017-11-28', '2017-11-29', 1, 'Joe Barong');
+
 
 -- --------------------------------------------------------
 
@@ -101,7 +103,14 @@ INSERT INTO `users` (`uName`, `uPass`, `uID`, `uType`, `uFName`, `uLName`, `uGen
 ('bictory@dlsu.edu.ph', 'b4bictory', 2, 1, 'SOFENGG', 'X22', 'Male', 'Student', 'De La Salle University'),
 ('aron_tan@dlsu.edu.ph', 'b4bictory', 3, 1, 'Aron Joshua', 'Tan', 'Male', 'Student', 'De La Salle University'),
 ('yiliang_peng@liquid.com.us', 'rushhour', 4, 1, 'Yiliang', 'Peng', 'Male', 'Professional Gamer', 'Team Liquid'),
-('jacky_yip@cloud9gg.us', 'thrusmoke', 5, 1, 'Jacky', 'Yip', 'Male', 'Professional Gamer', 'Cloud9');
+('jacky_yip@cloud9gg.us', 'thrusmoke', 5, 1, 'Jacky', 'Yip', 'Male', 'Professional Gamer', 'Cloud9'),
+('bill@dlsu.edu.ph', '123', 6, 1, 'Bill', 'Smith', 'Male', 'Student', 'De La Salle University'),
+('br@dlsu.edu.ph', '123', 7, 1, 'Bob Richard', 'Gourdo', 'Male', 'Student', 'De La Salle University'),
+('jb@dlsu.edu.ph', '123', 8, 1, 'Joe', 'Barong', 'Male', 'Student', 'De La Salle University'),
+('bik@dlsu.edu.ph', '123', 9, 1, 'Bonnie Ivory', 'Keegan', 'Female', 'Student', 'De La Salle University'),
+('st@dlsu.edu.ph', '123', 10, 1, 'Shiela', 'Tablang', 'Female', 'Student', 'De La Salle University'),
+('lc@dlsu.edu.ph', '123', 11, 1, 'Lucille', 'Conteza', 'Female', 'Student', 'University of the Philippines'),
+('jjv@dlsu.edu.ph', '123', 12, 1, 'Joana Jane', 'Villacorta', 'Female', 'Student', 'University of the Philippines');
 
 --
 -- Indexes for dumped tables
