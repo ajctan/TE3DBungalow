@@ -1,36 +1,39 @@
 <?php
 include '../php/dbh.php';
 if(isset($_POST['file_name'])){
-    $file = $_POST['file_name'];
+	
+	$file = $_POST['file_name'];
+	$download_file = 'SELECT * , OCTET_LENGTH(tpFile) as file_size FROM files f, tptable tp WHERE f.tpID = tp.tpID AND f.tpFileName = "'.$file.'"';
+	$found_file = mysqli_query($conn, $download_file);
+	$row = mysqli_fetch_assoc($found_file);
+	$file_size= $row['file_size'];
 	$file_extension = explode(".", $file);
+	
+	
+    $file_exist = mysqli_num_rows($found_file);
 
-	if($file_extension[1] === 'pdf'){
-		header('Content-type: application/pdf');
-		header('Content-Disposition: attachment; filename="'.$file.'"');
-		readfile('uploads/'.$file);
-		exit();
-	}
-	
-	if($file_extension[1] === 'docx'){
-		header('Content-type: application/vnd.openxmlformats-officedocument.wordprocessingml.document');
-		header('Content-Disposition: attachment; filename="'.$file.'"');
-		readfile('uploads/'.$file);
-		exit();
-	}
-	
-	if($file_extension[1] === 'html'){
-		header('Content-type: text/html');
-		header('Content-Disposition: attachment; filename="'.$file.'"');
-		readfile('uploads/'.$file);
-		exit();
-	}
-	
-	if($file_extension[1] === 'css'){
-		header('Content-type: text/css');
-		header('Content-Disposition: attachment; filename="'.$file.'"');
-		readfile('uploads/'.$file);
-		exit();
-	}
+	 if ($file_exist > 0){
+		
+		if($file_extension[sizeof($file_extension)-1] === 'docx'){
+			header('Content-type: application/vnd.openxmlformats-officedocument.wordprocessingml.document');
+			header("Content-Length: ". $file_size);
+			header('Content-Disposition: attachment; filename="'.$file.'"');
+			//readfile('uploads/'.$file);
+			echo $row['tpFile'];
+			mysqli_free_result($found_file);
+		}
+
+		if($file_extension[sizeof($file_extension)-1] === 'pdf'){
+			header('Content-type: application/pdf');
+			header("Content-Length: ". $file_size);
+			header('Content-Disposition: attachment; filename="'.$file.'"');
+			//readfile('uploads/'.$file);
+			echo $row['tpFile'];
+			mysqli_free_result($found_file);
+		}	
+		
+		 
+	 }
 }
 ?>
 
@@ -204,7 +207,38 @@ if(isset($_POST['file_name'])){
           <th class="lastModified">Last Modified</th>
           <th></th>
         </tr>
-        <tr>
+		
+		<?php
+			$acquire_files = 'SELECT f.tpID, f.tpFile, OCTET_LENGTH(f.tpFile) as file_size, f.tpFileName, f.tpModified, tp.tpTitle, tp.pHead FROM files f, tptable tp WHERE f.tpID = tp.tpID  AND tp.tpID ='.$pID;
+			$result = mysqli_query($conn,$acquire_files);
+			$num_of_files = mysqli_num_rows($result);
+			
+			if ($num_of_files > 0){
+				while ($row = mysqli_fetch_assoc($result)){
+					$filename = $row['tpFileName'];
+					$file_size = round($row['file_size'] / 1024);
+					$modified_date = $row['tpModified'];
+					$file_extension = explode(".", $filename);
+					
+					echo "<tr>
+							 <td>".$file_extension[0]."</td>
+							 <td>".$file_size." kb</td>
+							 <td>.".$file_extension[sizeof($file_extension)-1]."</td>
+							 <td>".$modified_date."</td>
+							 <td>
+								<form action='project.php' method='post' name='downloadform'>
+									<input name='file_name' value=".$filename." type='hidden'>
+									<i class='fa fa-download'></i>
+									<input type='submit' value='Download'>
+								</form>
+							 </td>
+						   </tr>";
+				}
+			}
+			
+		?>
+		
+ <!--       <tr>
           <td>File_1</td>
           <td>123kb</td>
           <td>.docx</td>
@@ -269,6 +303,7 @@ if(isset($_POST['file_name'])){
 			</form>	
 		  </td>
         </tr>
+		-->
       </table>
     </div>
 
