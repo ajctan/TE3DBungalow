@@ -1,0 +1,1 @@
+mysqldump --max_allowed_packet=512M -u root -p te3db > C:\xampp\htdocs\TE3DBungalow\te3db.sql
