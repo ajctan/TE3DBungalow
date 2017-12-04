@@ -4,6 +4,7 @@ include '../php/dbh.php';
 function findContentType($ext){
 	switch($ext){
 		case 'docx': return 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'; break;
+		case 'xlsx':  return 'application/vnd.ms-excel'; break;
 		case 'ppt':  return 'application/vnd.ms-powerpoint'; break;
 		case 'pdf':  return 'application/pdf'; break;
 		case 'html': return 'text/html'; break;
