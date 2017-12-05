@@ -56,11 +56,19 @@
   <!-- End of Toolbar; start of Content -->
   <div id="wrap">
     <div id="pageHead">
-      <button id="optionsButton" onclick="openOptions()"><i class="fa fa-cog fa-2x"></i></button>
-      <!-- MODULE: Option (To keep the position relative to parent div) -->
+      <?php
+        if(isset($_COOKIE['loggedIn'])){
+          if($_COOKIE['accType'] == 0)
+            echo "<button id=\"optionsButton\" onclick=\"openOptions()\"><i class=\"fa fa-cog fa-2x\"></i></button>
+                  <div id=\"options\">
+                    <button>Terminate Account</button>
+                  </div>";
+        }
+      ?>
+      <!--<button id="optionsButton" onclick="openOptions()"><i class="fa fa-cog fa-2x"></i></button>
       <div id="options">
         <button>Terminate Account</button>
-      </div>
+      </div>-->
       <!-- End of MODULE -->
       <img src="../images/loginavatar.png">
       <?php

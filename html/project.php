@@ -116,22 +116,29 @@ if(isset($_POST['file_name'])){
 
   <div id="wrap">
     <div id="pageHead">
-      <button id="optionsButton" onclick="openOptions()"><i class="fa fa-cog fa-2x"></i></button>
-      <!-- MODALS: (To keep the position relative to parent div) -->
-      <div id="options">
-        <button>Delete Project</button>
-      </div>
-      <!-- End of MODALS -->
-
       <?php
-        $pID = mysqli_real_escape_string($conn, $_GET['pid']);
+      	$pID = mysqli_real_escape_string($conn, $_GET['pid']);
 
         $sql = "SELECT * FROM tptable WHERE tpID LIKE ".$pID;
         $result = mysqli_query($conn,$sql);
-        $queryResults = mysqli_num_rows($result);
+        $row = mysqli_fetch_assoc($result);
 
-        if ($queryResults > 0){
-          $row = mysqli_fetch_assoc($result);
+      	if(isset($_COOKIE['loggedIn'])){
+      		if($_COOKIE['accType'] == 0 || row['pHead'] == $_COOKIE['uFName']." ".$_COOKIE['uLName'])
+      			echo "<button id=\"optionsButton\" onclick=\"openOptions()\"><i class=\"fa fa-cog fa-2x\"></i></button>
+      				  <div id=\"options\">
+        				<button>Delete Project</button>
+      				  </div>";
+      	}
+      ?>
+
+      <!--<button id="optionsButton" onclick="openOptions()"><i class="fa fa-cog fa-2x"></i></button>
+      <div id="options">
+        <button>Delete Project</button>
+      </div>-->
+      <!-- End of MODALS -->
+
+      <?php
           $sanitized = nl2br($row['tpDesc']) . "\n ";;
           echo "<img src=\"../images/projectlogo.png\">
                 <p id=\"projectTitle\"><marquee direction=\"left\" onmouseover=\"this.stop();\" onmouseout=\"this.start();\">".$row['tpTitle']."</marquee>
@@ -160,7 +167,6 @@ if(isset($_POST['file_name'])){
                     </form>
                   </div>
                 </div>"; //ECHOING CODE FOR PARAGRAPHS AND STUFF
-        }
       ?>
 
       <!--<img src="../images/projectlogo.png">
