@@ -312,7 +312,34 @@ if(isset($_POST['file_name'])){
     </div>
 
     <div id="contributors" class="tabContent">
-      <div class="member">
+      <?php
+      	$getMembers = 'SELECT pHead, tpMemberName FROM tpTable WHERE tpID='.$pID;
+      	$result = mysqli_query($conn,$getMembers);
+      	$queryResults = mysqli_num_rows($result);
+
+      	if($queryResults > 0){
+      		$row = mysqli_fetch_assoc($result);
+      		echo "<a href='profile.php?mName=\"".$row['pHead']."\"' style=\"text-decoration:none;\">
+      				<div class=\"member\">
+        				<img class=\"memberImage\" src=\"../images/loginavatar.png\">
+        				<p class=\"memberName\">".$row['pHead']."
+        				<p class=\"memberTitle\">Project Head
+      				</div>
+      			  </a>";
+      		$members = explode(",", $row['tpMemberName']);
+      		foreach($members as $mem){
+      			echo "<a href='profile.php?mName=\"".$mem."\"' style=\"text-decoration:none;\">
+      					<div class=\"member\">
+        					<img class=\"memberImage\" src=\"../images/loginavatar.png\">
+        					<p class=\"memberName\">".$mem."
+        					<p class=\"memberTitle\">Member
+      					</div>
+      				  </a>";
+      		}
+
+      	}
+      ?>
+      <!--<div class="member">
         <img class="memberImage" src="../images/loginavatar.png">
         <p class="memberName">John Smith
         <p class="memberTitle">Professor
@@ -346,7 +373,7 @@ if(isset($_POST['file_name'])){
         <img class="memberImage" src="../images/loginavatar.png">
         <p class="memberName">John Smith
         <p class="memberTitle">Professor
-      </div>
+      </div>-->
     </div>
 
   <div id="wrapbg">
