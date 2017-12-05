@@ -11,6 +11,7 @@ function findContentType($ext){
 		case 'png':  return 'image/png'; break;
 		case 'css':  return 'text/css'; break;
 		case 'zip':  return 'application/zip'; break;
+		case 'rar': return 'application/rar'; break;
 		default: return 'application/octet-stream';
 	}
 }

@@ -69,8 +69,6 @@
         <i class="fa fa-hourglass"></i>: Cancelled
       </p>
     </div>
-
-  <div id="wrap">
       <?php
           $sql = "SELECT * FROM tptable ORDER BY tpSDate DESC";
           $result = mysqli_query($conn,$sql);
