@@ -88,7 +88,7 @@ if(isset($_POST['file_name'])){
         if($uli == '1'){
           echo "<ul id=\"toolbarButtons\">
                   <li><button id=\"notificationButton\" class=\"toolbarButton\" onclick=\"openNotifications()\"><i id=\"notificationCount\">99</i><i class=\"fa fa-bell\"></i></button></li>
-                  <li><button id=\"userName\" class=\"toolbarButton\" onclick=\"location.href='profile.php';\">".$_COOKIE['uFName']." ".$_COOKIE['uLName']."</button></li>
+                  <li><button id=\"userName\" class=\"toolbarButton\" onclick=\"location.href='profile.php?mName=".$_COOKIE['uFName']." ".$_COOKIE['uLName']."&isUser=1';\">".$_COOKIE['uFName']." ".$_COOKIE['uLName']."</button></li>
                   <li><button class=\"toolbarButton\" onclick=\"location.href='../php/logOut.php'\">Logout</button></li>
                 </ul>";
         }else{
@@ -319,7 +319,7 @@ if(isset($_POST['file_name'])){
 
       	if($queryResults > 0){
       		$row = mysqli_fetch_assoc($result);
-      		echo "<a href='profile.php?mName=\"".$row['pHead']."\"' style=\"text-decoration:none;\">
+      		echo "<a href='profile.php?mName=".$row['pHead']."&isUser=0' style=\"text-decoration:none;\">
       				<div class=\"member\">
         				<img class=\"memberImage\" src=\"../images/loginavatar.png\">
         				<p class=\"memberName\">".$row['pHead']."
@@ -328,7 +328,7 @@ if(isset($_POST['file_name'])){
       			  </a>";
       		$members = explode(",", $row['tpMemberName']);
       		foreach($members as $mem){
-      			echo "<a href='profile.php?mName=\"".$mem."\"' style=\"text-decoration:none;\">
+      			echo "<a href='profile.php?mName=".$mem."&isUser=0' style=\"text-decoration:none;\">
       					<div class=\"member\">
         					<img class=\"memberImage\" src=\"../images/loginavatar.png\">
         					<p class=\"memberName\">".$mem."

@@ -34,7 +34,7 @@
         if($uli == '1'){
           echo "<ul id=\"toolbarButtons\">
                   <li><button id=\"notificationButton\" class=\"toolbarButton\" onclick=\"openNotifications()\"><i id=\"notificationCount\">99</i><i class=\"fa fa-bell\"></i></button></li>
-                  <li><button id=\"userName\" class=\"toolbarButton\" onclick=\"location.href='profile.php';\">".$_COOKIE['uFName']." ".$_COOKIE['uLName']."</button></li>
+                  <li><button id=\"userName\" class=\"toolbarButton\" onclick=\"location.href='profile.php?mName=".$_COOKIE['uFName']." ".$_COOKIE['uLName']."&isUser=1';>".$_COOKIE['uFName']." ".$_COOKIE['uLName']."</button></li>
                   <li><button class=\"toolbarButton\" onclick=\"location.href='../php/logOut.php'\">Logout</button></li>
                 </ul>";
         }else{
@@ -54,11 +54,6 @@
   </div>
 
   <!-- End of Toolbar; start of Content -->
-  <?php
-    if(!isset($_COOKIE['loggedIn'])){
-      header("Location: index.php");
-    }
-  ?>
   <div id="wrap">
     <div id="pageHead">
       <button id="optionsButton" onclick="openOptions()"><i class="fa fa-cog fa-2x"></i></button>
@@ -69,12 +64,18 @@
       <!-- End of MODULE -->
       <img src="../images/loginavatar.png">
       <?php
-        echo "<h1>".$_COOKIE['uFName']." ".$_COOKIE['uLName']."</h1>";
+        if($_GET['isUser'] == 1)
+          echo "<h1>".$_COOKIE['uFName']." ".$_COOKIE['uLName']."</h1>";
+        else
+          echo "<h1>".$_GET['mName']."</h1>";
       ?>
       <hr>
       <p class="pageLegend">
         <?php
-          echo $_COOKIE['occupation']." at ".$_COOKIE['affiliation'];
+          if($_GET['isUser'] == 1)
+            echo $_COOKIE['occupation']." at ".$_COOKIE['affiliation'];
+          else
+
         ?>
       </p>
     </div>
@@ -83,27 +84,45 @@
       <button class="tabButton" onclick="openTab(event, 'projects')">Projects</button>
       <button class="tabButton" onclick="openTab(event, 'colleagues')">Colleagues</button>
     </div>
-
+    <?php
+      if($_GET['isUser'] == 0){
+        $getMInfo = "SELECT * FROM users WHERE CONCAT(uFName, \" \", uLName) LIKE '".$_GET['mName']."'";
+        $result = mysqli_query($conn,$getMInfo);
+        $mInfo = mysqli_fetch_assoc($result);
+      }
+    ?>
     <div id="details" class="tabContent">
       <table>
         <tr>
           <th>Full Name:</th>
           <?php
-            echo "<td>".$_COOKIE['uFName']." ".$_COOKIE['uLName']."</td>";
+            if($_GET['isUser'] == 1)
+              echo "<td>".$_COOKIE['uFName']." ".$_COOKIE['uLName']."</td>";
+            else
+              echo "<td>".$_GET['mName']."</td>";
           ?>
           <th>Gender:</th>
           <?php
-            echo "<td>".$_COOKIE['gender']."</td>";
+            if($_GET['isUser'] == 1)
+              echo "<td>".$_COOKIE['gender']."</td>";
+            else
+              echo "<td>".$mInfo['uGender']."</td>";
           ?>
         </tr>
         <tr>
           <th>Occupation:</th>
           <?php
-            echo "<td>".$_COOKIE['occupation']."</td>";
+            if($_GET['isUser'] == 1)
+              echo "<td>".$_COOKIE['occupation']."</td>";
+            else
+              echo "<td>".$mInfo['uOccupation']."</td>";
           ?>
           <th>Affiliation:</th>
           <?php
-            echo "<td>".$_COOKIE['affiliation']."</td>";
+            if($_GET['isUser'] == 1)
+              echo "<td>".$_COOKIE['affiliation']."</td>";
+            else
+              echo "<td>".$mInfo['uAffiliation']."</td>";
           ?>
         </tr>
       </table>
@@ -150,15 +169,21 @@
           $queryResults = mysqli_num_rows($result);
           if ($queryResults > 0){
             while ($row = mysqli_fetch_assoc($result)){
-              $memberIDs = explode(',', $row['tpMemberID']);
+              $memberIDs = explode(',', $row['tpMemberName']);
               $foundID = FALSE;
+              $fllName;
+              if($_GET['isUser'] == 1)
+                  $fllName = $_COOKIE['uFName']." ".$_COOKIE['uLName'];
+              else
+                  $fllName = $_GET['mName'];
+
               foreach($memberIDs as $thisID){
-                if($_COOKIE['uID'] == $thisID){
-                  $foundID = TRUE;
-                  break;
-                }
+                  if($fllName == $thisID){
+                    $foundID = TRUE;
+                    break;
+                  }
               }
-              if($foundID || $_COOKIE['uFName']." ".$_COOKIE['uLName'] == $row['pHead']){
+              if($foundID || $fllName == $row['pHead']){
                   $iClass = "";
                   $projStart = "";
                   $projEnd = "";
