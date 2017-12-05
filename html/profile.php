@@ -171,6 +171,7 @@
     </div>
 
     <div id="projects" class="tabContent">
+      <div id="wrap">
       <?php
           $sql = "SELECT * FROM tptable";
           $result = mysqli_query($conn,$sql);
@@ -223,13 +224,15 @@
                  <p class=\"projectEnd\">".$projEnd."
                  <p class=\"projectAbstract\">".$row['tpDesc']."
                   <div class=\"cornerFold\">
-                  </div>";
+                  </div>
+                  </div></a>";
                 }
             }
           }
             
       ?>
       </div>
+    </div>
     <!--<div id="projects" class="tabContent">
       <div class="projectDisplay">
         <i class="projectStatus fa fa-hourglass-end"></i>

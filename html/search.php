@@ -113,7 +113,7 @@
                  <p class=\"projectAbstract\">".$row['tpDesc']."
                   <div class=\"cornerFold\">
                   </div>
-                  </div>";
+                  </div></a>";
             }
           }
             

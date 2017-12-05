@@ -148,9 +148,13 @@ if(isset($_POST['file_name'])){
                 </p>
                 </div>
                 <div id=\"tabButtons\">
-                  <button id=\"defaultOpen\" class=\"tabButton\" onclick=\"openTab(event, 'abstract')\">Abstract</button>
-                  <button class=\"tabButton\" onclick=\"openTab(event, 'files')\">Files</button>
-                  <button class=\"tabButton\" onclick=\"openTab(event, 'contributors')\">Contributors</button>
+                  <button id=\"defaultOpen\" class=\"tabButton\" onclick=\"openTab(event, 'abstract')\">Abstract</button>";
+          if(isset($_COOKIE['loggedIn']))
+          	echo "<button class=\"tabButton\" onclick=\"openTab(event, 'files')\">Files</button>";
+          else
+          	echo "<button class=\"tabButton\" onclick=\"alert('Please Log in to view/retrieve files')\">Files</button>";
+
+          echo 			"<button class=\"tabButton\" onclick=\"openTab(event, 'contributors')\">Contributors</button>
                 </div>
 
                 <div id=\"abstract\" class=\"tabContent\">
