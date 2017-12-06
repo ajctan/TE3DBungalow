@@ -117,7 +117,11 @@ if(isset($_POST['file_name'])){
   <div id="wrap">
     <div id="pageHead">
       <?php
-      	$pID = mysqli_real_escape_string($conn, $_GET['pid']);
+      	if(isset($_GET['pid'])){
+      		setcookie("PID", $_GET['pid'], 0, "/");
+      		$pID = mysqli_real_escape_string($conn, $_GET['pid']);
+      	}else
+      		$pID = mysqli_real_escape_string($conn, $_COOKIE['PID']);	
 
         $sql = "SELECT * FROM tptable WHERE tpID LIKE ".$pID;
         $result = mysqli_query($conn,$sql);
@@ -173,10 +177,13 @@ if(isset($_POST['file_name'])){
       <div class="contactHeadHeader">
         <button id="closeContactHead" onclick="closeContactHead()">X</button>
       </div>
-      <form>
+      <form action="../php/cphead.php" method="POST">
         <input type="text" name="email" placeholder="Your Email" required/>
+        <?php
+        	echo "<input name='projID' value=".$_COOKIE['PID']." type='hidden'>";
+        ?>
         <textarea name="message" rows="15" required></textarea>
-        <button id="sendMessage" type="submit" onclick="return cph()"><i class="fa fa-send fa-2x"></i></button>
+        <button id="sendMessage" type="submit"><i class="fa fa-send fa-2x"></i></button>
       </form>
     </div>
     
