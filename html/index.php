@@ -10,6 +10,7 @@
 <link rel="stylesheet" href="../css/style.css">
 <link rel="stylesheet" href="../css/index.css">
 <script src="../js/script.js" type="text/javascript"></script>
+<script src="../js/index.js" type="text/javascript"></script>
 </head>
 <body>
   <!-- Start of Toolbar -->
@@ -111,7 +112,7 @@
                   </div></a>";
             }
           }
-            
+
       ?>
   </div>
 
@@ -183,7 +184,7 @@
     <p class="notificationsTitle">Notifications
     <hr>
     <div id="notificationsContainer">
-      
+
     </div>
   </div>
 
@@ -196,9 +197,129 @@
       <a href="">Forgot Password?</a>
     </form>
   </div>
-  
+
+  <div id="createProjectModal">
+    <div id="createProjectContainer">
+      <form action="index.html" method="post">
+        <div style="text-align: center;">
+          <label class="p100" for="nprojectTitle">Project Title</label>
+          <input class="p100" name="nprojectTitle" type="text" />
+          <label class="p100" for="nprojectHead">Project Head</label>
+          <input type="text" name="selectedprojectHead" class="p50 selectedprojectHead" value="Juan dela Cruz" readonly>
+          <button class="p50 modalBtn">Change</button>
+          <label class="p100" for="nprojectAbstract">Abstract</label>
+          <textarea name="nprojectAbstract" rows="17" required></textarea>
+
+          <label class="p100" for="nprojectFiles">Files</label>
+          <table id="nprojectFiles">
+            <tr>
+              <th class="name">Name</th>
+              <th class="size">Size</th>
+              <th class="extension">Extension</th>
+              <th></th>
+            </tr>
+            <tr>
+              <td>File_1</td>
+              <td>123kb</td>
+              <td>.ext</td>
+              <td><i class="fa fa-trash"></i></td>
+            </tr>
+            <tr>
+              <td>File_2</td>
+              <td>123kb</td>
+              <td>.ext</td>
+              <td><i class="fa fa-trash"></i></td>
+            </tr>
+            <tr>
+              <td>File_3</td>
+              <td>123kb</td>
+              <td>.ext</td>
+              <td><i class="fa fa-trash"></i></td>
+            </tr>
+            <tr>
+              <td>File_4</td>
+              <td>123kb</td>
+              <td>.ext</td>
+              <td><i class="fa fa-trash"></i></td>
+            </tr>
+            <tr>
+              <td>File_5</td>
+              <td>123kb</td>
+              <td>.ext</td>
+              <td><i class="fa fa-trash"></i></td>
+            </tr>
+          </table>
+
+          <div class="alignRightContainer">
+            <button class="p50 fRight modalBtn">Select File(s)</button>
+          </div>
+
+          <label for="nprojectMembers" class="p100">Members</label>
+          <select id="nprojectMembers" class="p100" size="5" multiple="multiple">
+            <option>Juana dela Cruz</option>
+            <option>John Smith</option>
+          </select>
+          <button class="p50 modalBtn">Remove User</button>
+          <button class="p50 modalBtn">Add User(s)</button>
+        </div>
+
+        <div class="alignRightContainer">
+          <button class="p50 fRight modalBtn" type="submit">Create Project</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div id="createUserModal">
+    <div id="createUserContainer">
+      <form action="index.html" method="post">
+        <div id="imgcontainer">
+        <img src="../images/loginavatar.png" />
+        <input id="profimgfile" type="file" name="pic" accept="image/*">
+        <label id="profimglbl" for="profimgfile"><i class="fa fa-pencil"></i></label>
+        </div>
+
+        <h3>Login Information</h3>
+        <hr>
+        <label class="p100" for="email">Email Address</label>
+        <input name="email" class="p100" type="text" placeholder="me@domain.com" required/>
+        <label class="p50" for="pwd">Password</label>
+        <label class="p50" for="cpwd">Confirm Password</label>
+        <input name="pwd" class="p50" type="password" required/>
+        <input name="cpwd" class="p50" type="password" required/>
+
+        <h3>Basic Information</h3>
+        <hr>
+        <label class="p45" for="fname">First Name</label>
+        <label class="p10" for="mname">M.I.</label>
+        <label class="p45" for="lname">Last Name</label>
+        <input name="fname" class="p45" type="text" placeholder="First Name" /required>
+        <input name="mname" class="p10" type="text" placeholder="M.I." /required>
+        <input name="lname" class="p45" type="text" placeholder="Last Name" /required>
+        <label class="p50" for="bdate">Birth Date</label>
+        <label class="p50" for="gender">Gender</label>
+        <input name="bdate" class="p50" type="date" required/>
+        <input id="malerbtn" name="gender" class="dnone" type="radio" value="Male" />
+        <label id="malelbl" for="malerbtn"><i class="fa fa-male"></i> Male</label>
+        <input id="femalerbtn" name="gender" class="dnone" type="radio" value="Female" />
+        <label id="femalelbl" for="femalerbtn"><i class="fa fa-female"></i> Female</label>
+
+        <label class="p50"></label>
+        <button class="p50" type="submit">Create User</button>
+      </form>
+    </div>
+  </div>
+
+  <div id="createSBContainer" class="createSBContainer-hidden">
+    <button id="createProject" class="createButtonContainer" onclick="openCreateProjectModal()"><p>Create Project</p> <div class="createSpecificButton"><i class="fa fa-folder-open"></i></div></button>
+    <button id="createUser" class="createButtonContainer" onclick="openCreateUserModal(); showCreateButtons()"><p>Create User</p> <div class="createSpecificButton"><i class="fa fa-user-plus"></i></div></button>
+  </div>
   <button id="createButton" onclick="showCreateButtons()"><i class="fa fa-plus-circle fa-2x"></i></button>
+
   <div id="notificationsBackground" onclick="closeNotifications()"></div>
   <div id="loginbackground" onclick="closeLogin()"></div>
+  <div id="createButtonbackground" class="createButtonbackground" onclick="showCreateButtons()"></div>
+  <div id="createUserbackground" onclick="closeCreateUserModal()"></div>
+  <div id="createProjectbackground" onclick="closeCreateProjectModal()"></div>
 </body>
 </html>

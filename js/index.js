@@ -14,3 +14,13 @@ function closeCreateUserModal(){
   document.getElementById('createUserModal').style.display = "none";
   document.getElementById('createUserbackground').style.display = "none";
 }
+
+function openCreateProjectModal(){
+  document.getElementById('createProjectModal').style.display = "block";
+  document.getElementById('createProjectbackground').style.display = "block";
+}
+
+function closeCreateProjectModal(){
+  document.getElementById('createProjectModal').style.display = "none";
+  document.getElementById('createProjectbackground').style.display = "none";
+}
