@@ -142,41 +142,33 @@
     </div>
 
     <div id="members" class="tabContent">
-      <div class="member">
-        <img class="memberImage" src="../images/loginavatar.png">
-        <p class="memberName">John Smith
-        <p class="memberTitle">Professor
-      </div>
+        <?php
+          $term = $_POST['search-field'];
+          $sql = "SELECT * FROM users WHERE uFName LIKE '%$term%'";
+          $result = mysqli_query($conn,$sql);
+          $queryResults = mysqli_num_rows($result);
 
-      <div class="member">
-        <img class="memberImage" src="../images/loginavatar.png">
-        <p class="memberName">John Smith
-        <p class="memberTitle">Professor
-      </div>
-
-      <div class="member">
-        <img class="memberImage" src="../images/loginavatar.png">
-        <p class="memberName">John Smith
-        <p class="memberTitle">Professor
-      </div>
-
-      <div class="member">
-        <img class="memberImage" src="../images/loginavatar.png">
-        <p class="memberName">John Smith
-        <p class="memberTitle">Professor
-      </div>
-
-      <div class="member">
-        <img class="memberImage" src="../images/loginavatar.png">
-        <p class="memberName">John Smith
-        <p class="memberTitle">Professor
-      </div>
-
-      <div class="member">
-        <img class="memberImage" src="../images/loginavatar.png">
-        <p class="memberName">John Smith
-        <p class="memberTitle">Professor
-      </div>
+          if ($queryResults > 0){
+            while ($row = mysqli_fetch_assoc($result)){
+                  $berTitle = "";
+                  if($row['uType'] == 0){
+                    $berTitle = "Administrator";
+                  }
+                  else if($row['uType'] == 1){
+                    $berTitle = "Member";
+                  }
+                  else if($row['uType'] == 2){
+                    $berTitle = "Guest";
+                  }
+                  echo "<div class=\"member\">
+                  <img class=\"memberImage\" src=\"../images/loginavatar.png\">
+                  <p class=\"memberName\">".$row['uFName']." ".$row['uLName'].
+                  "<p class=\"memberTitle\">".$berTitle."
+                  </div>";
+            }
+          }
+            
+      ?>
     </div>
 
   <div id="wrapbg">
