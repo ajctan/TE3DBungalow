@@ -156,11 +156,12 @@
                   else if($row['uType'] == 1){
                     $berTitle = "Member";
                   }
-                  echo "<div class=\"member\">
+                  echo "<a href='profile.php?mName=".$row['uFName']." ".$row['uLName']."&isUser=0' style=\"text-decoration:none;\">
+                  <div class=\"member\">
                   <img class=\"memberImage\" src=\"../images/loginavatar.png\">
                   <p class=\"memberName\">".$row['uFName']." ".$row['uLName'].
                   "<p class=\"memberTitle\">".$berTitle."
-                  </div>";
+                  </div></a>";
             }
           }
             
