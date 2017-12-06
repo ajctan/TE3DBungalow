@@ -157,9 +157,6 @@
                   else if($row['uType'] == 1){
                     $berTitle = "Member";
                   }
-                  else if($row['uType'] == 2){
-                    $berTitle = "Guest";
-                  }
                   echo "<div class=\"member\">
                   <img class=\"memberImage\" src=\"../images/loginavatar.png\">
                   <p class=\"memberName\">".$row['uFName']." ".$row['uLName'].
