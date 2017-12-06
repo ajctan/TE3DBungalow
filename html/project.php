@@ -139,14 +139,15 @@ if(isset($_POST['file_name'])){
       <!-- End of MODALS -->
 
       <?php
-          $sanitized = nl2br($row['tpDesc']) . "\n ";;
+          $sanitized = nl2br($row['tpDesc']);
+          $pText = explode("<br />", $sanitized);
           echo "<img src=\"../images/projectlogo.png\">
                 <p id=\"projectTitle\"><marquee direction=\"left\" onmouseover=\"this.stop();\" onmouseout=\"this.start();\">".$row['tpTitle']."</marquee>
                 <hr>
                 <p class=\"pageLegend\">
                   <p id=\"projectHead\">".$row['pHead']."
                 </p>
-                </div>
+    </div>
                 <div id=\"tabButtons\">
                   <button id=\"defaultOpen\" class=\"tabButton\" onclick=\"openTab(event, 'abstract')\">Abstract</button>";
           if(isset($_COOKIE['loggedIn']))
@@ -157,21 +158,24 @@ if(isset($_POST['file_name'])){
           echo 			"<button class=\"tabButton\" onclick=\"openTab(event, 'contributors')\">Contributors</button>
                 </div>
 
-                <div id=\"abstract\" class=\"tabContent\">
-                  <p>".$sanitized."
-                  <button id=\"contactProjectHead\" onclick=\"openContactHead()\"><i class=\"fa fa-envelope-o\"></i> Contact Project Head</button>
-                  <div id=\"contactHead\">
-                    <div class=\"contectHeadHeader\">
-                      <button id=\"closeContactHead\" onclick=\"closeContactHead()\">X</button>
-                    </div>
-                    <form>
-                      <input type=\"text\" id=\"email\" placeholder=\"Your Email\" required/>
-                      <textarea id=\"message\" rows=\"15\" required></textarea>
-                      <button id=\"sendMessage\" type=\"submit\" onclick=\"return cph()\"><i class=\"fa fa-send fa-2x\"></i></button>
-                    </form>
-                  </div>
-                </div>"; //ECHOING CODE FOR PARAGRAPHS AND STUFF
+  <div id=\"abstract\" class=\"tabContent\">";
+
+          foreach($pText as $pGraph)
+          	echo "<p>".$pGraph."</p>";
+          echo "\n";
       ?>
+      <button id="contactProjectHead" onclick="openContactHead()"><i class="fa fa-envelope-o"></i> Contact Project Head</button>
+    <div id="contactHead">
+        <div class="contactHeadHeader">
+            <button id="closeContactHead" onclick="closeContactHead()">X</button>
+        </div>
+        <form>
+            <input type="text" id="email" placeholder="Your Email" required/>
+            <textarea id="message" rows="15" required></textarea>
+            <button id="sendMessage" type="submit" onclick="return cph()"><i class="fa fa-send fa-2x"></i></button>
+        </form>
+    </div>
+  </div>
 
       <!--<img src="../images/projectlogo.png">
                 <p id="projectTitle"><marquee direction="left" onmouseover="this.stop();" onmouseout="this.start();">This is the title</marquee>
@@ -386,10 +390,8 @@ if(isset($_POST['file_name'])){
       </div>-->
     </div>
 
-  <div id="wrapbg">
-    <!--LEAVE THIS DIV BLANK. THIS IS JUST THE WHITE BACKGROUND THAT FILLS THE
-    HEIGHT OF THE BROWSER WITHOUT ENABLING THE SCROLL BAR-->
-  </div>
+  <!--<div id="wrapbg">
+  </div>-->
 
   <!-- End of Content; start of Modules -->
 
