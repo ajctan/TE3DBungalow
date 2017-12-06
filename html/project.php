@@ -339,17 +339,20 @@ if(isset($_POST['file_name'])){
         				<p class=\"memberTitle\">Project Head
       				</div>
       			  </a>";
-      		$members = explode(",", $row['tpMemberName']);
-      		foreach($members as $mem){
-      			echo "<a href='profile.php?mName=".$mem."&isUser=0' style=\"text-decoration:none;\">
-      					<div class=\"member\">
-        					<img class=\"memberImage\" src=\"../images/loginavatar.png\">
-        					<p class=\"memberName\">".$mem."
-        					<p class=\"memberTitle\">Member
-      					</div>
-      				  </a>";
+      		if($row['tpMemberName'] != ""){
+      			$members = explode(",", $row['tpMemberName']);
+      			foreach($members as $mem){
+      				if($mem == "")
+      					break;
+      				echo "<a href='profile.php?mName=".$mem."&isUser=0' style=\"text-decoration:none;\">
+      						<div class=\"member\">
+        						<img class=\"memberImage\" src=\"../images/loginavatar.png\">
+        						<p class=\"memberName\">".$mem."
+        						<p class=\"memberTitle\">Member
+      						</div>
+      					  </a>";
+      			}
       		}
-
       	}
       ?>
       <!--<div class="member">
