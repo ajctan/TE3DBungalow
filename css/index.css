@@ -26,6 +26,78 @@
   z-index: 1;
 }
 
+#createProjectModal:before{
+  background: #1d9b72;
+  content: '';
+  display: block;
+  height: 30px;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+}
+
+#createProjectModal{
+  background: #eee;
+  box-shadow: 0 0 10px 1px #555;
+  display: none;
+  height: 82%;
+  left: 50%;
+  margin: auto;
+  overflow: hidden;
+  position: fixed;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 600px;
+  z-index: 3;
+}
+
+#createProjectContainer{
+  height: 93%;
+  overflow-y: scroll;
+  padding: 5px;
+}
+
+#createProjectContainer::-webkit-scrollbar{
+  background: #eee;
+  width: 10px;
+}
+
+#createProjectContainer::-webkit-scrollbar-thumb{
+  background: #eee;
+  border-radius: 10px;
+}
+
+#createProjectContainer:hover::-webkit-scrollbar-thumb{
+  background: #1d9b72;
+}
+
+#nprojectFiles{
+  display: inline-block;
+  margin: 0 auto 0 auto;
+}
+
+#createProjectModal tr:nth-child(even){
+  background: #56e39f;
+}
+
+#createProjectModal th.name{
+  text-align: left;
+  width: 60%;
+}
+
+#createProjectModal th.size, th.extension{
+  text-align: center;
+  width: 15%;
+}
+
+#createProjectModal td:first-child{
+  text-align: left;
+}
+
+#createProjectModal td:not(:first-child){
+  text-align: center;
+}
+
 #createUserModal:before{
   background: #1d9b72;
   content: '';
@@ -69,23 +141,48 @@
   position: relative;
 }
 
+#createProjectModal textarea{
+  box-sizing: border-box;
+  display: inline-block;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 1.0em;
+  height: 82%;
+  margin: 0 auto 0 auto;
+  outline: none;
+  overflow-x: hidden;
+  padding: 5px;
+  resize: none;
+  width: 96%;
+}
+
 #createUserModal img{
   height: 150px;
 }
 
-#createUserModal label{
+#createProjectModal label{
   display: inline-block;
-  margin: 5px 5px 0 5px;
   font-weight: bold;
+  margin: 5px 5px 0 5px;
+  text-align: left;
 }
 
-#createUserModal input[type=file]{
+#createUserModal label{
+  display: inline-block;
+  font-weight: bold;
+  margin: 5px 5px 0 5px;
+}
+
+#createProjectModal input[type=file], #createUserModal input[type=file]{
   display: none;
 }
 
-#createUserModal input{
+#createProjectModal input, #createUserModal input{
   box-sizing: border-box;
   padding: 5px;
+}
+
+#createProjectModal select option{
+  padding: 10px;
 }
 
 #profimglbl{
@@ -135,7 +232,7 @@
   color: #fff;
 }
 
-#createUserbackground{
+#createProjectbackground, #createUserbackground{
   display: none;
   height: 100%;
   left: 0;
@@ -167,6 +264,29 @@
 .p100{
   margin: 5px;
   width: 96%;
+}
+
+.alignRightContainer{
+  width: 100%;
+}
+
+.fRight{
+  float: right;
+  margin: 10px;
+}
+
+.modalBtn{
+  background: #1d9b72;
+  border: none;
+  color: #b0ddce;
+  cursor: pointer;
+  outline: none;
+  padding: 7px;
+  text-align: center;
+}
+
+.modalBtn:hover{
+  color: #fff;
 }
 
 .createSBContainer-hidden{
