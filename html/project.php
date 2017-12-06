@@ -120,6 +120,8 @@ if(isset($_POST['file_name'])){
       	if(isset($_GET['pid'])){
       		setcookie("PID", $_GET['pid'], 0, "/");
       		$pID = mysqli_real_escape_string($conn, $_GET['pid']);
+      		if($_COOKIE['PID'] != $_GET['pid'])
+      			header('Location: ../html/project.php?pid='.$_GET['pid']);
       	}else
       		$pID = mysqli_real_escape_string($conn, $_COOKIE['PID']);	
 
@@ -180,7 +182,12 @@ if(isset($_POST['file_name'])){
       <form action="../php/cphead.php" method="POST">
         <input type="text" name="email" placeholder="Your Email" required/>
         <?php
+        	$sql = "SELECT * FROM tptable WHERE tpID LIKE ".$_COOKIE['PID'];
+    		$result = mysqli_query($conn,$sql);
+    		$row = mysqli_fetch_assoc($result);
+
         	echo "<input name='projID' value=".$_COOKIE['PID']." type='hidden'>";
+        	echo "<input name='projHead' value=".$row['pHead']." type='hidden'>";
         ?>
         <textarea name="message" rows="15" required></textarea>
         <button id="sendMessage" type="submit"><i class="fa fa-send fa-2x"></i></button>
