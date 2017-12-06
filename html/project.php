@@ -130,7 +130,7 @@ if(isset($_POST['file_name'])){
         $row = mysqli_fetch_assoc($result);
 
       	if(isset($_COOKIE['loggedIn'])){
-      		if($_COOKIE['accType'] == 0 || row['pHead'] == $_COOKIE['uFName']." ".$_COOKIE['uLName'])
+      		if($_COOKIE['accType'] == 0 || $row['pHead'] == $_COOKIE['uFName']." ".$_COOKIE['uLName'])
       			echo "<button id=\"optionsButton\" onclick=\"openOptions()\"><i class=\"fa fa-cog fa-2x\"></i></button>
       				  <div id=\"options\">
         				<button>Delete Project</button>
