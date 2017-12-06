@@ -48,9 +48,9 @@ if(isset($_POST['file_name'])){
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <link rel="stylesheet" href="../css/style.css">
 <link rel="stylesheet" href="../css/project.css">
-<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
 <script src="../js/script.js" type="text/javascript"></script>
 <script src="../js/project.js" type="text/javascript"></script>
+<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
 
 <script>
         	function cph(){
@@ -162,9 +162,26 @@ if(isset($_POST['file_name'])){
 
           foreach($pText as $pGraph)
           	echo "<p>".$pGraph."</p>";
+      	  echo "<br>";
       ?>
-      <button id="contactProjectHead" onclick="openContactHead()"><i class="fa fa-envelope-o"></i> Contact Project Head</button>
-    <div id="contactHead">
+      <div id="footbuttonContainer">
+        <button id="downloadAbstract" onclick=""><i class="fa fa-download"></i> Download Abstract (.pdf)</button>
+        <button id="getCitation" onclick=""><i class="fa fa-file-text-o"></i> Get Citation</button>
+        <button id="contactProjectHead" onclick="openContactHead()"><i class="fa fa-envelope-o"></i> Contact Project Head</button>
+      </div>
+      <div id="contactHead">
+      <div class="contactHeadHeader">
+        <button id="closeContactHead" onclick="closeContactHead()">X</button>
+      </div>
+      <form>
+        <input type="text" name="email" placeholder="Your Email" required/>
+        <textarea name="message" rows="15" required></textarea>
+        <button id="sendMessage" type="submit" onclick="return cph()"><i class="fa fa-send fa-2x"></i></button>
+      </form>
+    </div>
+    
+
+    <!--<div id="contactHead">
         <div class="contactHeadHeader">
             <button id="closeContactHead" onclick="closeContactHead()">X</button>
         </div>
@@ -173,7 +190,7 @@ if(isset($_POST['file_name'])){
             <textarea id="message" rows="15" required></textarea>
             <button id="sendMessage" type="submit" onclick="return cph()"><i class="fa fa-send fa-2x"></i></button>
         </form>
-    </div>
+    </div>-->
   </div>
 
       <!--<img src="../images/projectlogo.png">

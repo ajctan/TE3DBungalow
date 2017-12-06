@@ -3,16 +3,18 @@
   font-size: 3.0em;
   font-weight: bold;
   margin: 40px 0 0 0;
-  overflow: hidden;
   padding: 0;
   position: relative;
-  white-space: nowrap;
 }
 
 #projectTitle marquee{
   margin: 0;
   padding: 0;
   width: 100%;
+}
+
+#abstract{
+  position: relative;
 }
 
 #projectHead{
@@ -22,12 +24,33 @@
   text-align: right;
 }
 
-#abstract{
-  text-align: right;
+#footbuttonContainer{
+  position: relative;
+  width: 100%;
 }
 
-#abstract p{
-  text-align: left;
+#downloadAbstract{
+  background: #1d9b72;
+  border: none;
+  color: #b0ddce;
+  cursor: pointer;
+  margin: 20px 0 0 0;
+  outline: none;
+  padding: 10px;
+  position: relative;
+  width: 200px;
+}
+
+#getCitation{
+  background: #1d9b72;
+  border: none;
+  color: #b0ddce;
+  cursor: pointer;
+  margin: 20px 0 0 0;
+  outline: none;
+  padding: 10px;
+  position: relative;
+  width: 180px;
 }
 
 #contactProjectHead{
@@ -35,25 +58,27 @@
   border: none;
   color: #b0ddce;
   cursor: pointer;
-  float: right;
-  margin: 45px 0 0 0;
+  margin: 20px 0 0 0;
   outline: none;
   padding: 10px;
+  position: absolute;
+  right: 0;
+  width: 180px;
 }
 
-#contactProjectHead:hover{
+#downloadAbstract:hover, #getCitation:hover, #contactProjectHead:hover{
   color: #fff;
 }
 
 #contactHead{
   background: #eee;
-  bottom: 0;
+  bottom: 2%;
   box-shadow: 0 0 10px 1px #555;
   display: none;
   height: 400px;
   position: absolute;
   text-align: center;
-  right: 5%;
+  right: 15%;
   width: 400px;
   z-index: 2;
 }
@@ -62,6 +87,7 @@
   background: #1d9b72;
   display: block;
   height: 25px;
+  position: relative;
   width: 100%;
 }
 
@@ -93,7 +119,7 @@
   display: inline-block;
   font-family: Arial, Helvetica, sans-serif;
   font-size: 1.0em;
-  height: 85%;
+  height: 82%;
   outline: none;
   padding: 5px;
   resize: none;
