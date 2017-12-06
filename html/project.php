@@ -162,7 +162,6 @@ if(isset($_POST['file_name'])){
 
           foreach($pText as $pGraph)
           	echo "<p>".$pGraph."</p>";
-          echo "\n";
       ?>
       <button id="contactProjectHead" onclick="openContactHead()"><i class="fa fa-envelope-o"></i> Contact Project Head</button>
     <div id="contactHead">
