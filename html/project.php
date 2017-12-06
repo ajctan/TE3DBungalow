@@ -148,7 +148,7 @@ if(isset($_POST['file_name'])){
           $sanitized = nl2br($row['tpDesc']);
           $pText = explode("<br />", $sanitized);
           echo "<img src=\"../images/projectlogo.png\">
-                <p id=\"projectTitle\"><marquee direction=\"left\" onmouseover=\"this.stop();\" onmouseout=\"this.start();\">".$row['tpTitle']."</marquee>
+                <p id=\"projectTitle\">".$row['tpTitle']."
                 <hr>
                 <p class=\"pageLegend\">
                   <p id=\"projectHead\">".$row['pHead']."
