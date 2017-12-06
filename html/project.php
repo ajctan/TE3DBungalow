@@ -18,25 +18,25 @@ function findContentType($ext){
 }
 
 if(isset($_POST['file_name'])){
-	
+
 	$file = $_POST['file_name'];
 	$download_file = 'SELECT * , OCTET_LENGTH(tpFile) as file_size FROM files f, tptable tp WHERE f.tpID = tp.tpID AND f.tpFileName = "'.$file.'"';
 	$found_file = mysqli_query($conn, $download_file);
 	$row = mysqli_fetch_assoc($found_file);
 	$file_size= $row['file_size'];
 	$file_extension = explode(".", $file);
-		
+
     $file_exist = mysqli_num_rows($found_file);
 
 	if ($file_exist > 0){
-		
+
 			header('Content-type: '. findContentType($file_extension[sizeof($file_extension)-1]));
 			header("Content-Length: ". $file_size);
 			header('Content-Disposition: attachment; filename="'.$file.'"');
 			//readfile('uploads/'.$file);
 			echo $row['tpFile'];
 			mysqli_free_result($found_file);
-		 
+
 	}
 }
 ?>
@@ -146,7 +146,8 @@ if(isset($_POST['file_name'])){
           $sanitized = nl2br($row['tpDesc']);
           $pText = explode("<br />", $sanitized);
           echo "<img src=\"../images/projectlogo.png\">
-                <p id=\"projectTitle\"><marquee direction=\"left\" onmouseover=\"this.stop();\" onmouseout=\"this.start();\">".$row['tpTitle']."</marquee>
+								<p id="projectTitle">Sample Active Project (With A Long TItle [Even Longer Title; Pls Don't Do That])
+                <p id=\"projectTitle\">".$row['tpTitle']."
                 <hr>
                 <p class=\"pageLegend\">
                   <p id=\"projectHead\">".$row['pHead']."
@@ -168,7 +169,7 @@ if(isset($_POST['file_name'])){
           	echo "<p>".$pGraph."</p>";
       	  echo "<br>";
       ?>
-      <div id="footbuttonContainer">
+			<div id="footbuttonContainer">
         <button id="downloadAbstract" onclick=""><i class="fa fa-download"></i> Download Abstract (.pdf)</button>
         <button id="getCitation" onclick=""><i class="fa fa-file-text-o"></i> Get Citation</button>
         <button id="contactProjectHead" onclick="openContactHead()"><i class="fa fa-envelope-o"></i> Contact Project Head</button>
@@ -186,7 +187,7 @@ if(isset($_POST['file_name'])){
         <button id="sendMessage" type="submit"><i class="fa fa-send fa-2x"></i></button>
       </form>
     </div>
-    
+
 
     <!--<div id="contactHead">
         <div class="contactHeadHeader">
@@ -203,7 +204,7 @@ if(isset($_POST['file_name'])){
       <!--<img src="../images/projectlogo.png">
                 <p id="projectTitle"><marquee direction="left" onmouseover="this.stop();" onmouseout="this.start();">This is the title</marquee>
                 <hr>"
-      
+
 
       <p class="pageLegend">
         <p id="projectHead">Project Head
@@ -248,19 +249,19 @@ if(isset($_POST['file_name'])){
           <th class="lastModified">Last Modified</th>
           <th></th>
         </tr>
-		
+
 		<?php
 			$acquire_files = 'SELECT f.tpID, f.tpFile, OCTET_LENGTH(f.tpFile) as file_size, f.tpFileName, f.tpModified, tp.tpTitle, tp.pHead FROM files f, tptable tp WHERE f.tpID = tp.tpID  AND tp.tpID ='.$pID;
 			$result = mysqli_query($conn,$acquire_files);
 			$num_of_files = mysqli_num_rows($result);
-			
+
 			if ($num_of_files > 0){
 				while ($row = mysqli_fetch_assoc($result)){
 					$filename = $row['tpFileName'];
 					$file_size = round($row['file_size'] / 1024);
 					$modified_date = $row['tpModified'];
 					$file_extension = explode(".", $filename);
-					
+
 					echo "<tr>
 							 <td>".$file_extension[0]."</td>
 							 <td>".$file_size." kb</td>
@@ -276,9 +277,9 @@ if(isset($_POST['file_name'])){
 						   </tr>";
 				}
 			}
-			
+
 		?>
-		
+
  <!--       <tr>
           <td>File_1</td>
           <td>123kb</td>
@@ -302,7 +303,7 @@ if(isset($_POST['file_name'])){
 				<input name="file_name" value="File_2.pdf" type="hidden">
 				<i class="fa fa-download"></i>
 				<input type="submit" value="Download">
-			</form>	
+			</form>
 		  </td>
         </tr>
         <tr>
@@ -315,7 +316,7 @@ if(isset($_POST['file_name'])){
 			<input name="file_name" value="File_2.pdf" type="hidden">
 			<i class="fa fa-download"></i>
 			<input type="submit" value="Download">
-			</form>	
+			</form>
 		  </td>
         </tr>
         <tr>
@@ -327,8 +328,8 @@ if(isset($_POST['file_name'])){
 			<form action="project.php" method="post" name="downloadform">
 			<input name="file_name" value="File_4.html" type="hidden">
 			<i class="fa fa-download"></i>
-			<input type="submit" value="Download">	
-			</form>	
+			<input type="submit" value="Download">
+			</form>
 		  </td>
         </tr>
         <tr>
@@ -341,7 +342,7 @@ if(isset($_POST['file_name'])){
 			<input name="file_name" value="File_5.css" type="hidden">
 			<i class="fa fa-download"></i>
 			<input type="submit" value="Download">
-			</form>	
+			</form>
 		  </td>
         </tr>
 		-->
@@ -425,7 +426,7 @@ if(isset($_POST['file_name'])){
     <p class="notificationsTitle">Notifications
     <hr>
     <div id="notificationsContainer">
-      
+
     </div>
   </div>
 
