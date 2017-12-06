@@ -196,7 +196,8 @@
       <a href="">Forgot Password?</a>
     </form>
   </div>
-
+  
+  <button id="createButton" onclick="showCreateButtons()"><i class="fa fa-plus-circle fa-2x"></i></button>
   <div id="notificationsBackground" onclick="closeNotifications()"></div>
   <div id="loginbackground" onclick="closeLogin()"></div>
 </body>

@@ -98,7 +98,7 @@ if(isset($_POST['file_name'])){
         }
       }else{
           echo "<ul id=\"toolbarButtons\">
-                  <li><button class=\"toolbarButton\" name=\"".$uli."\" onclick=\"openLogin();\">Login</button></li>
+                  <li><button class=\"toolbarButton\" onclick=\"openLogin();\">Login</button></li>
                 </ul>";
           if(!isset($_COOKIE['accType']))
             setcookie("accType", "2", 0, "/");
@@ -133,7 +133,9 @@ if(isset($_POST['file_name'])){
       		if($_COOKIE['accType'] == 0 || $row['pHead'] == $_COOKIE['uFName']." ".$_COOKIE['uLName'])
       			echo "<button id=\"optionsButton\" onclick=\"openOptions()\"><i class=\"fa fa-cog fa-2x\"></i></button>
       				  <div id=\"options\">
-        				<button>Delete Project</button>
+                <form action=\"../php/deleteProject.php\" method=\"POST\">
+        				<button name=\"dlete\" value=".$_COOKIE['PID'].">Delete Project</button>
+                </form>
       				  </div>";
       	}
       ?>
