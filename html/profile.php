@@ -258,41 +258,62 @@
     </div>-->
 
     <div id="colleagues" class="tabContent">
-      <div class="member">
-        <img class="memberImage" src="../images/loginavatar.png">
-        <p class="memberName">John Smith
-        <p class="memberTitle">Professor
-      </div>
+      <?php
+        //$pHeadName = $_COOKIE['uFName']." ".$_COOKIE['uLName'];
+        $sql = "SELECT tpMemberName FROM tptable WHERE pHead = '".$_GET['mName']."'";
+        $result = mysqli_query($conn,$sql);
+        $queryResults = mysqli_num_rows($result);
+        $a=array("");
 
-      <div class="member">
-        <img class="memberImage" src="../images/loginavatar.png">
-        <p class="memberName">John Smith
-        <p class="memberTitle">Professor
-      </div>
+        if ($queryResults > 0){
+          while ($row = mysqli_fetch_assoc($result)){
+                
+                  $pieces = explode(",",$row['tpMemberName']);
 
-      <div class="member">
-        <img class="memberImage" src="../images/loginavatar.png">
-        <p class="memberName">John Smith
-        <p class="memberTitle">Professor
-      </div>
+                  foreach($pieces as $value){
+                    $pieces2 = explode(" ",$value);
 
-      <div class="member">
-        <img class="memberImage" src="../images/loginavatar.png">
-        <p class="memberName">John Smith
-        <p class="memberTitle">Professor
-      </div>
+                    $numberInArr = 0;
+                    foreach($pieces2 as $value2){
+                      $numberInArr++;
+                    }   
 
-      <div class="member">
-        <img class="memberImage" src="../images/loginavatar.png">
-        <p class="memberName">John Smith
-        <p class="memberTitle">Professor
-      </div>
+                    if($pieces2[0] != "" AND $pieces2[$numberInArr-1] != ""){                
+                      $sql2 = "SELECT * FROM users WHERE uFName LIKE '%".$pieces2[0]."%' AND uLName LIKE '%".$pieces2[$numberInArr-1]."%'";
+                      $result2 = mysqli_query($conn,$sql2);
+                      $queryResults2 = mysqli_num_rows($result2);
+                      if ($queryResults2 > 0){
+                        while ($row2 = mysqli_fetch_assoc($result2)){   
+                           $berTitle = "";
+                           if($row2['uType'] == 0){
+                             $berTitle = "Administrator";
+                           }
+                           else if($row2['uType'] == 1){
+                             $berTitle = "Member";
+                           }
 
-      <div class="member">
-        <img class="memberImage" src="../images/loginavatar.png">
-        <p class="memberName">John Smith
-        <p class="memberTitle">Professor
-      </div>
+                          
+                          if(!in_array($pieces2[0]." ".$pieces2[$numberInArr-1],$a)){
+                          echo "<a href='profile.php?mName=".$row2['uFName']." ".$row2['uLName']."&isUser=0' style=\"text-decoration:none;\">
+                          <div class=\"member\">
+                          <img class=\"memberImage\" src=\"../images/loginavatar.png\">
+                          <p class=\"memberName\">".$row2['uFName']." ".$row2['uLName'].
+                          "<p class=\"memberTitle\">".$berTitle."
+                          </div></a>";
+                    
+                          array_push($a,$pieces2[0]." ".$pieces2[$numberInArr-1]);
+                          }
+                          else{
+
+                          }
+                          $numberInArr = 0;
+                        }
+                      }
+                    }
+                  }
+            }
+          }
+      ?>
     </div>
 
   <div id="wrapbg">
