@@ -313,7 +313,7 @@
 
   <div id="login">
     <img src="../images/loginavatar.png">
-    <form action="index.html" method="post">
+    <form action="../php/logIn.php" method="post">
       <input id="username" name="uname" type="text" placeholder="Email" required/>
       <input id="password" name="pword" type="password" placeholder="Password" required/>
       <button type="submit">Log In</button>
