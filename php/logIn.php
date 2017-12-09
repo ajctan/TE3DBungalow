@@ -12,9 +12,10 @@
 			setcookie("uFName", $row['uFName'], 0, "/");
 			setcookie("uLName", $row['uLName'], 0, "/");
 			if(isset($_COOKIE['accType'])){
-				setcookie("accType", $row['uType'], "/");
+				unset($_COOKIE['accType']);
+				setcookie("accType", "\"".$row['uType']."\"", 0, "/");
 			}else{
-				setcookie("accType", $row['uType'], 0, "/");
+				setcookie("accType", "\"".$row['uType']."\"", 0, "/");
 			}
 			setcookie("eMail", $row['uName'], 0, "/");
 			setcookie("loggedIn", "1", 0, "/");
