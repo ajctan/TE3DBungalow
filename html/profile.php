@@ -266,11 +266,11 @@
 
 
                           if(!in_array($pieces2[0]." ".$pieces2[$numberInArr-1],$a)){
-                          echo "<a href='profile.php?mName=".$row2['uFName']." ".$row2['uLName']."&isUser=0' style=\"text-decoration:none;\">
+                          echo "
                           <div class=\"member\">
-                          <img class=\"memberImage\" src=\"../images/loginavatar.png\">
-                          <p class=\"memberName\">".$row2['uFName']." ".$row2['uLName'].
-                          "<p class=\"memberTitle\">".$berTitle."
+                          <img class=\"memberImage\" src=\"../images/userImages/" .$row2['uID']. ".png\">
+                          <a class=\"memberName\" href='profile.php?mName=".$row2['uFName']." ".$row2['uLName']."&isUser=0'>".$row2['uFName']." ".$row2['uLName']."</a>
+                          <p class=\"memberTitle\">".$berTitle."
                           </div></a>";
 
                           array_push($a,$pieces2[0]." ".$pieces2[$numberInArr-1]);
