@@ -8,13 +8,12 @@
 <!--Font Awesome Stylesheet for icons-->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <link rel="stylesheet" href="../css/style.css">
-<link rel="stylesheet" href="../css/index.css">
 <script src="../js/script.js" type="text/javascript"></script>
 </head>
 <body>
   <!-- Start of Toolbar -->
   <div id="toolbar">
-    <div id="logo">
+    <div id="logo"
       <a href="index.php"><img src="../images/logo_full.png" height="30px"></a>
     </div>
 
@@ -172,7 +171,6 @@
     </div>
 
     <div id="projects" class="tabContent">
-      <div id="wrap">
       <?php
           $sql = "SELECT * FROM tptable";
           $result = mysqli_query($conn,$sql);
@@ -217,22 +215,21 @@
                     $projStart = date_format($date, 'jS F Y');
                   }
 
-                  echo "<a href='project.php?pid=".$row['tpID']."' style=\"text-decoration:none;\"><div class=\"projectDisplay\">
+                  echo "<div class=\"projectDisplay\">
                   <i class=\"".$iClass."\"></i>
-                  <p class=\"projectTitle\">".$row['tpTitle']."
+                  <a class=\"projectTitle\" href='project.php?pid=".$row['tpID']."'>".$row['tpTitle']."</a>
                   <p class=\"projectHead\">".$row['pHead']."
                   <p class=\"projectStart\">".$projStart."
                  <p class=\"projectEnd\">".$projEnd."
                  <p class=\"projectAbstract\">".$row['tpDesc']."
                   <div class=\"cornerFold\">
                   </div>
-                  </div></a>";
+                  </div>";
                 }
             }
           }
-            
+
       ?>
-      </div>
     </div>
     <!--<div id="projects" class="tabContent">
       <div class="projectDisplay">
@@ -268,7 +265,7 @@
 
         if ($queryResults > 0){
           while ($row = mysqli_fetch_assoc($result)){
-                
+
                   $pieces = explode(",",$row['tpMemberName']);
 
                   foreach($pieces as $value){
@@ -277,14 +274,14 @@
                     $numberInArr = 0;
                     foreach($pieces2 as $value2){
                       $numberInArr++;
-                    }   
+                    }
 
-                    if($pieces2[0] != "" AND $pieces2[$numberInArr-1] != ""){                
+                    if($pieces2[0] != "" AND $pieces2[$numberInArr-1] != ""){
                       $sql2 = "SELECT * FROM users WHERE uFName LIKE '%".$pieces2[0]."%' AND uLName LIKE '%".$pieces2[$numberInArr-1]."%'";
                       $result2 = mysqli_query($conn,$sql2);
                       $queryResults2 = mysqli_num_rows($result2);
                       if ($queryResults2 > 0){
-                        while ($row2 = mysqli_fetch_assoc($result2)){   
+                        while ($row2 = mysqli_fetch_assoc($result2)){
                            $berTitle = "";
                            if($row2['uType'] == 0){
                              $berTitle = "Administrator";
@@ -293,7 +290,7 @@
                              $berTitle = "Member";
                            }
 
-                          
+
                           if(!in_array($pieces2[0]." ".$pieces2[$numberInArr-1],$a)){
                           echo "<a href='profile.php?mName=".$row2['uFName']." ".$row2['uLName']."&isUser=0' style=\"text-decoration:none;\">
                           <div class=\"member\">
@@ -301,7 +298,7 @@
                           <p class=\"memberName\">".$row2['uFName']." ".$row2['uLName'].
                           "<p class=\"memberTitle\">".$berTitle."
                           </div></a>";
-                    
+
                           array_push($a,$pieces2[0]." ".$pieces2[$numberInArr-1]);
                           }
                           else{
@@ -329,7 +326,7 @@
     <hr>
     <div id="notificationsContainer">
       <div class="notification">
-       
+
     </div>
   </div>
 
