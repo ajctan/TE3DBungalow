@@ -243,7 +243,7 @@ if(isset($_POST['file_name'])){
       		$row = mysqli_fetch_assoc($result);
       		echo "
       				<div class=\"member\">
-        				<img class=\"memberImage\" src=\"../images/loginavatar.png\">
+        				<img class=\"memberImage\" src=\"../images/userImages/" .$row['uID']. ".png\">
         				<a class=\"memberName\" href='profile.php?mName=".$row['pHead']."&isUser=0'>".$row['pHead']."</a>
         				<p class=\"memberTitle\">Project Head
       				</div>
@@ -255,7 +255,7 @@ if(isset($_POST['file_name'])){
       					break;
       				echo "
       						<div class=\"member\">
-        						<img class=\"memberImage\" src=\"../images/loginavatar.png\">
+        						<img class=\"memberImage\" src=\"../images/userImages/" .$row['uID']. ".png\">
         						<a class=\"memberName\" href='profile.php?mName=".$mem."&isUser=0'>".$mem."</a>
         						<p class=\"memberTitle\">Member
       						</div>

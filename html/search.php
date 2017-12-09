@@ -117,7 +117,7 @@
           }
 
       ?>
-          
+
     </div>
 
     <div id="members" class="tabContent">
@@ -138,7 +138,7 @@
                   }
                   echo "<a href='profile.php?mName=".$row['uFName']." ".$row['uLName']."&isUser=0' style=\"text-decoration:none;\">
                   <div class=\"member\">
-                  <img class=\"memberImage\" src=\"../images/loginavatar.png\">
+                  <img class=\"memberImage\" src=\"../images/userImages/" .$row['uID']. ".png\">
                   <p class=\"memberName\">".$row['uFName']." ".$row['uLName'].
                   "<p class=\"memberTitle\">".$berTitle."
                   </div></a>";
