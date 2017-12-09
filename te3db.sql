@@ -19,6 +19,11 @@ SET time_zone = "+00:00";
 --
 -- Database: `te3db`
 --
+DROP SCHEMA IF EXISTS te3db;
+
+CREATE SCHEMA te3db;
+
+USE te3db;
 
 -- --------------------------------------------------------
 
