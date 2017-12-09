@@ -241,9 +241,16 @@ if(isset($_POST['file_name'])){
 
       	if($queryResults > 0){
       		$row = mysqli_fetch_assoc($result);
+
+					$names = explode(" ", $row['pHead']);
+					$firstName = $names[0];
+					$lastName = $names[count($names)-1];
+					$getMember = 'SELECT uID FROM users WHERE uFName LIKE "%' .$firstName. '%" AND uLName LIKE "%' .$lastName. '%"';
+					$getMemberQuery = mysqli_query($conn,$getMember);
+					$member = mysqli_fetch_assoc($getMemberQuery);
       		echo "
       				<div class=\"member\">
-        				<img class=\"memberImage\" src=\"../images/userImages/" .$row['uID']. ".png\">
+        				<img class=\"memberImage\" src=\"../images/userImages/" .$member['uID']. ".png\">
         				<a class=\"memberName\" href='profile.php?mName=".$row['pHead']."&isUser=0'>".$row['pHead']."</a>
         				<p class=\"memberTitle\">Project Head
       				</div>
@@ -253,9 +260,17 @@ if(isset($_POST['file_name'])){
       			foreach($members as $mem){
       				if($mem == "")
       					break;
+
+							$names = explode(" ", $mem);
+							$firstName = $names[0];
+							$lastName = $names[count($names)-1];
+
+							$getMember = 'SELECT uID FROM users WHERE uFName LIKE "%' .$firstName. '%" AND uLName LIKE "%' .$lastName. '%"';
+							$getMemberQuery = mysqli_query($conn,$getMember);
+							$member = mysqli_fetch_assoc($getMemberQuery);
       				echo "
       						<div class=\"member\">
-        						<img class=\"memberImage\" src=\"../images/userImages/" .$row['uID']. ".png\">
+        						<img class=\"memberImage\" src=\"../images/userImages/" .$member['uID']. ".png\">
         						<a class=\"memberName\" href='profile.php?mName=".$mem."&isUser=0'>".$mem."</a>
         						<p class=\"memberTitle\">Member
       						</div>
