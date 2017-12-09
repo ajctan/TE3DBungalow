@@ -485,6 +485,7 @@ h1{
 }
 
 .projectTitle{
+  color: #000;
   display: block;
   font-size: 1.5em;
   font-weight: bold;
@@ -492,8 +493,13 @@ h1{
   overflow: hidden;
   padding: 0;
   position: relative;
+  text-decoration: none;
   width: 75%;
   white-space: nowrap;
+}
+
+.projectTitle:hover{
+  text-decoration: underline;
 }
 
 .projectHead{
