@@ -587,6 +587,7 @@ h1{
   font-weight: bold;
   margin: 0;
   text-decoration: none;
+  white-space:nowrap;
 }
 
 .memberName:hover{

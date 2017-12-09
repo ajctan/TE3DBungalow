@@ -13,7 +13,7 @@
 <body>
   <!-- Start of Toolbar -->
   <div id="toolbar">
-    <div id="logo"
+    <div id="logo">
       <a href="index.php"><img src="../images/logo_full.png" height="30px"></a>
     </div>
 
