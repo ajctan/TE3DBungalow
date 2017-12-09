@@ -284,41 +284,6 @@ if(isset($_POST['file_name'])){
       		}
       	}
       ?>
-      <!--<div class="member">
-        <img class="memberImage" src="../images/loginavatar.png">
-        <p class="memberName">John Smith
-        <p class="memberTitle">Professor
-      </div>
-
-      <div class="member">
-        <img class="memberImage" src="../images/loginavatar.png">
-        <p class="memberName">John Smith
-        <p class="memberTitle">Professor
-      </div>
-
-      <div class="member">
-        <img class="memberImage" src="../images/loginavatar.png">
-        <p class="memberName">John Smith
-        <p class="memberTitle">Professor
-      </div>
-
-      <div class="member">
-        <img class="memberImage" src="../images/loginavatar.png">
-        <p class="memberName">John Smith
-        <p class="memberTitle">Professor
-      </div>
-
-      <div class="member">
-        <img class="memberImage" src="../images/loginavatar.png">
-        <p class="memberName">John Smith
-        <p class="memberTitle">Professor
-      </div>
-
-      <div class="member">
-        <img class="memberImage" src="../images/loginavatar.png">
-        <p class="memberName">John Smith
-        <p class="memberTitle">Professor
-      </div>-->
     </div>
 
   <div id="wrapbg">
