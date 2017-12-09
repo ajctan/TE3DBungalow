@@ -69,15 +69,26 @@
 }
 
 #uploadFiles{
+  display: none;
+}
+
+#uploadFilesLbl{
   background: #1d9b72;
   border: none;
   color: #b0ddce;
   cursor: pointer;
+  display: inline-block;
+  font-size: 13px;
   margin: 20px 0 0 0;
+  min-width: 180px;
   outline: none;
   padding: 10px;
   position: relative;
-  width: 200px;
+  text-align: center;
+}
+
+#uploadFilesLbl:hover{
+  color: #fff;
 }
 
 #downloadAbstract:hover, #getCitation:hover, #contactProjectHead:hover{

@@ -232,7 +232,8 @@ if(isset($_POST['file_name'])){
 
       </table>
 			<div class="footbuttonContainer">
-				<button id="uploadFiles"><i class="fa fa-upload"></i> Upload Files</button>
+				<input id="uploadFiles" type="file">
+				<label id="uploadFilesLbl" for="uploadFiles" type="file"><i class="fa fa-upload"></i> Upload Files</label>
 			</div>
     </div>
 
