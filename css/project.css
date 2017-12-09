@@ -24,7 +24,9 @@
   text-align: right;
 }
 
-#footbuttonContainer{
+.footbuttonContainer{
+  display: inline-block;
+  height: 25px;
   position: relative;
   width: 100%;
 }
@@ -64,6 +66,18 @@
   position: absolute;
   right: 0;
   width: 180px;
+}
+
+#uploadFiles{
+  background: #1d9b72;
+  border: none;
+  color: #b0ddce;
+  cursor: pointer;
+  margin: 20px 0 0 0;
+  outline: none;
+  padding: 10px;
+  position: relative;
+  width: 200px;
 }
 
 #downloadAbstract:hover, #getCitation:hover, #contactProjectHead:hover{

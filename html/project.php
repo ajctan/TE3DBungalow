@@ -164,7 +164,7 @@ if(isset($_POST['file_name'])){
           	echo "<p>".$pGraph."</p>";
       	  echo "<br>";
       ?>
-      <div id="footbuttonContainer">
+      <div class="footbuttonContainer">
         <button id="downloadAbstract" onclick=""><i class="fa fa-download"></i> Download Abstract (.pdf)</button>
         <button id="getCitation" onclick=""><i class="fa fa-file-text-o"></i> Get Citation</button>
         <button id="contactProjectHead" onclick="openContactHead()"><i class="fa fa-envelope-o"></i> Contact Project Head</button>
@@ -231,6 +231,9 @@ if(isset($_POST['file_name'])){
 		?>
 
       </table>
+			<div class="footbuttonContainer">
+				<button id="uploadFiles"><i class="fa fa-upload"></i> Upload Files</button>
+			</div>
     </div>
 
     <div id="contributors" class="tabContent">
