@@ -301,7 +301,7 @@
     <hr>
     <div id="notificationsContainer">
       <div class="notification">
-
+      </div>
     </div>
   </div>
 

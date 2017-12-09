@@ -336,8 +336,8 @@ h1{
 }
 
 #optionsBackground{
-  background: blue;
-  display: none;
+  background: none;
+  display: block;
   height: 100%;
   left: 0;
   position: absolute;
