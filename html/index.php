@@ -100,9 +100,9 @@
                     $projStart = date_format($date, 'jS F Y');
                   }
 
-                  echo "<a href='project.php?pid=".$row['tpID']."' style=\"text-decoration:none;\"><div class=\"projectDisplay\">
+                  echo "<div class=\"projectDisplay\">
                   <i class=\"".$iClass."\"></i>
-                  <p class=\"projectTitle\">".$row['tpTitle']."
+                  <a class=\"projectTitle\" href='project.php?pid=".$row['tpID']."'>".$row['tpTitle']."</a>
                   <p class=\"projectHead\">".$row['pHead']."
                   <p class=\"projectStart\">".$projStart."
                  <p class=\"projectEnd\">".$projEnd."
