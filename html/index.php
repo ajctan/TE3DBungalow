@@ -139,7 +139,7 @@
   </div>
 
   <div id="createProjectModal">
-    <div id="createProjectContainer">
+    <div id="createContainer">
       <form action="index.html" method="post">
         <div style="text-align: center;">
           <label class="p100" for="nprojectTitle">Project Title</label>
@@ -211,7 +211,7 @@
   </div>
 
   <div id="createUserModal">
-    <div id="createUserContainer">
+    <div id="createContainer">
       <form action="index.html" method="post">
         <div id="imgcontainer">
         <img src="../images/loginavatar.png" />
@@ -245,7 +245,7 @@
         <label id="femalelbl" for="femalerbtn"><i class="fa fa-female"></i> Female</label>
 
         <label class="p50"></label>
-        <button class="p50" type="submit">Create User</button>
+        <button class="p50 modalBtn" type="submit">Create User</button>
       </form>
     </div>
   </div>
