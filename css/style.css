@@ -579,7 +579,9 @@ h1{
 }
 
 .memberImage{
+  border-radius: 300px;
   height: 150px;
+  width: 150px;
 }
 
 .memberName{
