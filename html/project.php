@@ -316,8 +316,8 @@ if(isset($_POST['file_name'])){
       </div>-->
     </div>
 
-  <!--<div id="wrapbg">
-  </div>-->
+  <div id="wrapbg">
+  </div>
 
   <!-- End of Content; start of Modules -->
 
