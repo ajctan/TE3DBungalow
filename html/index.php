@@ -150,49 +150,6 @@
           <label class="p100" for="nprojectAbstract">Abstract</label>
           <textarea name="nprojectAbstract" rows="17" required></textarea>
 
-          <label class="p100" for="nprojectFiles">Files</label>
-          <table id="nprojectFiles">
-            <tr>
-              <th class="name">Name</th>
-              <th class="size">Size</th>
-              <th class="extension">Extension</th>
-              <th></th>
-            </tr>
-            <tr>
-              <td>File_1</td>
-              <td>123kb</td>
-              <td>.ext</td>
-              <td><i class="fa fa-trash"></i></td>
-            </tr>
-            <tr>
-              <td>File_2</td>
-              <td>123kb</td>
-              <td>.ext</td>
-              <td><i class="fa fa-trash"></i></td>
-            </tr>
-            <tr>
-              <td>File_3</td>
-              <td>123kb</td>
-              <td>.ext</td>
-              <td><i class="fa fa-trash"></i></td>
-            </tr>
-            <tr>
-              <td>File_4</td>
-              <td>123kb</td>
-              <td>.ext</td>
-              <td><i class="fa fa-trash"></i></td>
-            </tr>
-            <tr>
-              <td>File_5</td>
-              <td>123kb</td>
-              <td>.ext</td>
-              <td><i class="fa fa-trash"></i></td>
-            </tr>
-          </table>
-
-          <div class="alignRightContainer">
-            <button class="p50 fRight modalBtn">Select File(s)</button>
-          </div>
 
           <label for="nprojectMembers" class="p100">Members</label>
           <select id="nprojectMembers" class="p100" size="5" multiple="multiple">
