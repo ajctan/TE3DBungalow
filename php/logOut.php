@@ -8,6 +8,6 @@
 	setcookie("occupation", NULL, -1, "/");
 	setcookie("affiliation", NULL, -1, "/");
 	setcookie("uID", NULL, -1, "/");
-	header("Location: {$_SERVER['HTTP_REFERER']}");
+	header("Location: ../html/index.php");
     exit;
 ?>
