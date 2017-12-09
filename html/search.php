@@ -115,29 +115,9 @@
                   </div></a>";
             }
           }
-            
-      ?>
-          <!-- <div class="projectDisplay">
-              <i class="projectStatus fa fa-hourglass-end"></i>
-              <p class="projectTitle">Project Title That Is Really Long That WIll Overlap With The Date
-              <p class="projectHead">Project Head
-              <p class="projectStart">January 1, 1990
-              <p class="projectEnd">December 31, 2050
-              <p class="projectAbstract">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas vel nisi id neque interdum ultrices sed nec lorem. Mauris et est orci. Vestibulum sagittis risus quis dolor luctus eleifend. Fusce gravida enim in ex congue, vel pulvinar quam molestie. Fusce vel rhoncus enim. Vivamus accumsan libero quis eros pellentesque tempor. Suspendisse sit amet volutpat nunc. Nam aliquam tellus quis purus dignissim convallis ac ac dolor. Praesent tristique non sem nec fringilla. Fusce nec diam et urna euismod faucibus vel et dolor. Fusce semper iaculis diam faucibus convallis.
-              <div class="cornerFold">
-              </div>
-            </div>
 
-            <div class="projectDisplay">
-              <i class="projectStatus fa fa-hourglass"></i>
-              <p class="projectTitle">Project Title
-              <p class="projectHead">Project Head
-              <p class="projectStart">January 1, 1990
-              <p class="projectEnd">December 31, 2050
-              <p class="projectAbstract">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas vel nisi id neque interdum ultrices sed nec lorem. Mauris et est orci. Vestibulum sagittis risus quis dolor luctus eleifend. Fusce gravida enim in ex congue, vel pulvinar quam molestie. Fusce vel rhoncus enim. Vivamus accumsan libero quis eros pellentesque tempor. Suspendisse sit amet volutpat nunc. Nam aliquam tellus quis purus dignissim convallis ac ac dolor. Praesent tristique non sem nec fringilla. Fusce nec diam et urna euismod faucibus vel et dolor. Fusce semper iaculis diam faucibus convallis.
-              <div class="cornerFold">
-              </div>
-            </div> -->
+      ?>
+          
     </div>
 
     <div id="members" class="tabContent">
@@ -164,7 +144,7 @@
                   </div></a>";
             }
           }
-            
+
       ?>
     </div>
 
@@ -179,7 +159,7 @@
     <p class="notificationsTitle">Notifications
     <hr>
     <div id="notificationsContainer">
-      
+
     </div>
   </div>
 
