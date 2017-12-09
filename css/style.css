@@ -271,8 +271,8 @@ h1{
 
 #pageHead{
   display: block;
-  height: auto;
-  margin: 0 auto 65px auto;
+  margin: 0 auto 10px auto;
+  min-height: 200px;
   padding: 20px;
   position: relative;
   width: 80%;
