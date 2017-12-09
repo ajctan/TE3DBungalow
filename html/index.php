@@ -62,9 +62,9 @@
       <h1>Projects</h1>
       <hr>
       <p class="pageLegend">
-        <i class="fa fa-hourglass-2"></i>: Ongoing
-        <i class="fa fa-hourglass-end"></i>: Finished
-        <i class="fa fa-hourglass"></i>: Cancelled
+        <i class="ongoing"></i>: Ongoing
+        <i class="done"></i>: Finished
+        <i class="cancelled"></i>: Cancelled
       </p>
     </div>
       <?php
@@ -78,21 +78,21 @@
                   $projStart = "";
                   $projEnd = "";
                   if($row['tpEDate'] != null && $row['tpEDate'] == $row['tpSDate']){
-                    $iClass = "projectStatus fa fa-hourglass";
+                    $iClass = "projectStatus cancelled";
                     $date = date_create($row['tpSDate']);
                     $projStart = date_format($date, 'jS F Y');
                     $date = date_create($row['tpEDate']);
                     $projEnd = date_format($date, 'jS F Y');
                   }
                   else if($row['tpEDate'] != null && $row['tpEDate'] != $row['tpSDate']){
-                    $iClass = "projectStatus fa fa-hourglass-end";
+                    $iClass = "projectStatus done";
                     $date = date_create($row['tpSDate']);
                     $projStart = date_format($date, 'jS F Y');
                     $date = date_create($row['tpEDate']);
                     $projEnd = date_format($date, 'jS F Y');
                   }
                   else if($row['tpEDate'] == null){
-                    $iClass = "projectStatus fa fa-hourglass-2";
+                    $iClass = "projectStatus ongoing";
                     $date = date_create($row['tpSDate']);
                     $projStart = date_format($date, 'jS F Y');
                   }

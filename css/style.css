@@ -597,3 +597,39 @@ h1{
   font-style: italic;
   margin: 0;
 }
+
+.cancelled:before{
+  background: url("../images/status/Cancelled.png");
+  background-repeat: no-repeat;
+  background-size: 40px;
+  content: '';
+  display: inline-block;
+  height: 25px;
+  margin: 0;
+  padding: 0;
+  width: 36px;
+}
+
+.done:before{
+  background: url("../images/status/Done.png");
+  background-repeat: no-repeat;
+  background-size: 40px;
+  content: '';
+  display: inline-block;
+  height: 25px;
+  margin: 0;
+  padding: 0;
+  width: 36px;
+}
+
+.ongoing:before{
+  background: url("../images/status/Ongoing.png");
+  background-repeat: no-repeat;
+  background-size: 40px;
+  content: '';
+  display: inline-block;
+  height: 25px;
+  margin: 0;
+  padding: 0;
+  width: 36px;
+}
