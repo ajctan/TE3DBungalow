@@ -12,6 +12,17 @@
 <link rel="stylesheet" href="../css/index.css">
 <script src="../js/script.js" type="text/javascript"></script>
 <script src="../js/index.js" type="text/javascript"></script>
+
+<?php
+  $uli = '0';
+  $accType = '2'; //0 Admin, 1 Member, 2 Guest
+
+  if(isset($_COOKIE['loggedIn'])){
+    $uli = $_COOKIE['loggedIn'];
+    $accType = $_COOKIE['accType'];
+  }
+?>
+
 </head>
 <body>
   <!-- Start of Toolbar -->
@@ -30,28 +41,17 @@
     </div>
 
     <?php
-      $uli = '0';
-      if(isset($_COOKIE['loggedIn'])){
-        $uli = $_COOKIE['loggedIn'];
-        if($uli == '1'){
-          echo "<ul id=\"toolbarButtons\">
-                  <li><button id=\"notificationButton\" class=\"toolbarButton\" onclick=\"openNotifications()\"><i id=\"notificationCount\">99</i><i class=\"fa fa-bell\"></i></button></li>
-                  <li><button id=\"userName\" class=\"toolbarButton\" onclick=\"location.href='profile.php?mID=".$_COOKIE['uID']."&isUser=1';\">".$_COOKIE['uFName']." ".$_COOKIE['uLName']."</button></li>
-                  <li><button class=\"toolbarButton\" onclick=\"location.href='../php/logOut.php'\">Logout</button></li>
-                </ul>";
-        }else{
-          echo "<ul id=\"toolbarButtons\">
-                  <li><button class=\"toolbarButton\" name=\"li1\" onclick=\"openLogin();\">Login</button></li>
-                </ul>";
-        }
+      if($uli == '1'){
+        echo "<ul id=\"toolbarButtons\">
+                <li><button id=\"notificationButton\" class=\"toolbarButton\" onclick=\"openNotifications()\"><i id=\"notificationCount\">99</i><i class=\"fa fa-bell\"></i></button></li>
+                <li><button id=\"userName\" class=\"toolbarButton\" onclick=\"location.href='profile.php?mID=".$_COOKIE['uID']."&isUser=1';\">".$_COOKIE['uFName']." ".$_COOKIE['uLName']."</button></li>
+                <li><button class=\"toolbarButton\" onclick=\"location.href='../php/logOut.php'\">Logout</button></li>
+              </ul>";
       }else{
-          echo "<ul id=\"toolbarButtons\">
-                  <li><button class=\"toolbarButton\" name=\"".$uli."\" onclick=\"openLogin();\">Login</button></li>
-                </ul>";
-          if(!isset($_COOKIE['accType']))
-            setcookie("accType", "2", 0, "/");
+        echo "<ul id=\"toolbarButtons\">
+                <li><button class=\"toolbarButton\" name=\"li1\" onclick=\"openLogin();\">Login</button></li>
+              </ul>";
       }
-
     ?>
 
   </div>
@@ -212,11 +212,18 @@
     </div>
   </div>
 
-  <div id="createSBContainer" class="createSBContainer-hidden">
-    <button id="createProject" class="createButtonContainer" onclick="openCreateProjectModal()"><p>Create Project</p> <div class="createSpecificButton"><i class="fa fa-folder-open"></i></div></button>
-    <button id="createUser" class="createButtonContainer" onclick="openCreateUserModal(); showCreateButtons()"><p>Create User</p> <div class="createSpecificButton"><i class="fa fa-user-plus"></i></div></button>
-  </div>
-  <button id="createButton" onclick="showCreateButtons()"><i class="fa fa-plus-circle fa-2x"></i></button>
+  <?php
+    if($uli == '1'){
+      echo "
+      <div id='createSBContainer' class='createSBContainer-hidden'>
+        <button id='createProject' class='createButtonContainer' onclick='openCreateProjectModal(); showCreateButtons()'><p>Create Project</p> <div class='createSpecificButton'><i class='fa fa-folder-open'></i></div></button>";
+        if($accType = 0)
+          echo "<button id='createUser' class='createButtonContainer' onclick='openCreateUserModal(); showCreateButtons()'><p>Create User</p> <div class='createSpecificButton'><i class='fa fa-user-plus'></i></div></button>";
+      echo "
+      </div>
+      <button id='createButton' onclick='showCreateButtons()'><i class='fa fa-plus-circle fa-2x'></i></button>";
+    }
+  ?>
 
   <div id="notificationsBackground" onclick="closeNotifications()"></div>
   <div id="loginbackground" onclick="closeLogin()"></div>
