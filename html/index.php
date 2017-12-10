@@ -167,8 +167,6 @@
                   echo "<option value='".$row['uID']."'>".$row['uFName']. " ".$row['uLName']."</option>";
                 }
               }
-
-
             ?>
           </select>
           <button class="p50 modalBtn">Remove User</button>
