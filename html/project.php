@@ -52,6 +52,23 @@ if(isset($_POST['file_name'])){
 <script src="../js/script.js" type="text/javascript"></script>
 <script src="../js/project.js" type="text/javascript"></script>
 <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+
+<?php
+  $uli = '0';
+  $accType = '2'; //0 Admin, 1 Member, 2 Guest
+	$pID = $_GET['pid'];
+
+  if(isset($_COOKIE['loggedIn'])){
+    $uli = $_COOKIE['loggedIn'];
+    $accType = $_COOKIE['accType'];
+		$uliID = $_COOKIE['uID'];
+  }
+
+	$sql = "SELECT * FROM tptable WHERE tpID LIKE ".$pID;
+	$result = mysqli_query($conn,$sql);
+	$project = mysqli_fetch_assoc($result);
+?>
+
 </head>
 <body>
   <!-- Start of Toolbar -->
@@ -68,31 +85,19 @@ if(isset($_POST['file_name'])){
         </button>
       </form>
     </div>
-    <?php
-      $uli = '0';
-      if(isset($_COOKIE['loggedIn'])){
-        $uli = $_COOKIE['loggedIn'];
-        if($uli == '1'){
-          echo "<ul id=\"toolbarButtons\">
-                  <li><button id=\"notificationButton\" class=\"toolbarButton\" onclick=\"openNotifications()\"><i id=\"notificationCount\">99</i><i class=\"fa fa-bell\"></i></button></li>
-                  <li><button id=\"userName\" class=\"toolbarButton\" onclick=\"location.href='profile.php?mID=".$_COOKIE['uID']."&isUser=1';\">".$_COOKIE['uFName']." ".$_COOKIE['uLName']."</button></li>
-                  <li><button class=\"toolbarButton\" onclick=\"location.href='../php/logOut.php'\">Logout</button></li>
-                </ul>";
-        }else{
-          echo "<ul id=\"toolbarButtons\">
-                  <li><button class=\"toolbarButton\" name=\"li1\" onclick=\"openLogin();\">Login</button></li>
-                </ul>";
-        }
+		<?php
+      if($uli == '1'){
+        echo "<ul id=\"toolbarButtons\">
+                <li><button id=\"notificationButton\" class=\"toolbarButton\" onclick=\"openNotifications()\"><i id=\"notificationCount\">99</i><i class=\"fa fa-bell\"></i></button></li>
+                <li><button id=\"userName\" class=\"toolbarButton\" onclick=\"location.href='profile.php?mID=".$_COOKIE['uID']."&isUser=1';\">".$_COOKIE['uFName']." ".$_COOKIE['uLName']."</button></li>
+                <li><button class=\"toolbarButton\" onclick=\"location.href='../php/logOut.php'\">Logout</button></li>
+              </ul>";
       }else{
-          echo "<ul id=\"toolbarButtons\">
-                  <li><button class=\"toolbarButton\" onclick=\"openLogin();\">Login</button></li>
-                </ul>";
-          if(!isset($_COOKIE['accType']))
-            setcookie("accType", "2", 0, "/");
+        echo "<ul id=\"toolbarButtons\">
+                <li><button class=\"toolbarButton\" name=\"li1\" onclick=\"openLogin();\">Login</button></li>
+              </ul>";
       }
-
     ?>
-
   </div>
 
   <!-- End of Toolbar; start of Content -->
@@ -100,60 +105,54 @@ if(isset($_POST['file_name'])){
   <div id="wrap">
     <div id="pageHead">
       <?php
-      	if(isset($_GET['pid'])){
-      		setcookie("PID", $_GET['pid'], 0, "/");
-      		$pID = mysqli_real_escape_string($conn, $_GET['pid']);
-      		if($_COOKIE['PID'] != $_GET['pid'])
-      			header('Location: ../html/project.php?pid='.$_GET['pid']);
-      	}else
-      		$pID = mysqli_real_escape_string($conn, $_COOKIE['PID']);
-
-        $sql = "SELECT * FROM tptable WHERE tpID LIKE ".$pID;
-        $result = mysqli_query($conn,$sql);
-        $row = mysqli_fetch_assoc($result);
-
-				$query = 'SELECT uID, uFName, uLName FROM users WHERE uID = ' .$row['pHead'].'';
+				$query = 'SELECT uID, uFName, uLName FROM users WHERE uID = ' .$project['pHead'].'';
 				$queryResult = mysqli_query($conn,$query);
 				$pHeadResult = mysqli_fetch_assoc($queryResult);
 
-      	if(isset($_COOKIE['loggedIn'])){
-      		if($_COOKIE['accType'] == 0 || $row['pHead'] == $_COOKIE['uFName']." ".$_COOKIE['uLName'])
-      			echo "<button id=\"optionsButton\" onclick=\"openOptions()\"><i class=\"fa fa-cog fa-2x\"></i></button>
-      				  <div id=\"options\">
-                <form action=\"../php/deleteProject.php\" method=\"POST\">
-        				<button name=\"dlete\" value=".$_COOKIE['PID'].">Delete Project</button>
-                </form>
+      	if($uli == 1){
+      		if($accType == 0 || $project['pHead'] == $uliID)
+      			echo "<button id='optionsButton' onclick='openOptions()'><i class='fa fa-cog fa-2x'></i></button>
+      				  <div id='options'>
+	                <form action='../php/deleteProject.php' method='POST'>
+	        					<button class='option' name='delete' value=".$pID.">Delete Project</button>
+	                </form>
       				  </div>";
       	}
       ?>
 
       <!-- End of MODALS -->
+			<img src="../images/projectlogo.png">
+			<?php
+				echo "<p id=\"pageTitle\">".$project['tpTitle'];
+			?>
+			<hr>
+			<p class="pageLegend">
+			<?php
+				echo "<p id=\"projectHead\">".$pHeadResult['uFName']." ".$pHeadResult['uLName']."</p>";
+			?>
+		</div>
 
-      <?php
-          $sanitized = nl2br($row['tpDesc']);
-          $pText = explode("<br />", $sanitized);
-          echo "<img src=\"../images/projectlogo.png\">
-                <p id=\"pageTitle\">".$row['tpTitle']."
-                <hr>
-                <p class=\"pageLegend\">
-                  <p id=\"projectHead\">".$pHeadResult['uFName']." ".$pHeadResult['uLName']."
-                </p>
+  	<div id="tabButtons">
+      <button id="defaultOpen" class="tabButton" onclick="openTab(event, 'abstract')">Abstract</button>
+			<?php
+	      if($uli == 1){
+	      	echo "<button class=\"tabButton\" onclick=\"openTab(event, 'files')\">Files</button>";
+					echo "<button class=\"tabButton\" onclick=\"openTab(event, 'contributors')\">Contributors</button>";
+				}
+	      else{
+	      	echo "<button class=\"tabButton\" onclick=\"alert('Please Log in to view/retrieve files')\" disabled>Files</button>";
+					echo "<button class=\"tabButton\" onclick=\"alert('Please Log in to view the contributors')\" disabled>Contributors</button>";
+				}
+			?>
     </div>
-                <div id=\"tabButtons\">
-                  <button id=\"defaultOpen\" class=\"tabButton\" onclick=\"openTab(event, 'abstract')\">Abstract</button>";
-          if(isset($_COOKIE['loggedIn']))
-          	echo "<button class=\"tabButton\" onclick=\"openTab(event, 'files')\">Files</button>";
-          else
-          	echo "<button class=\"tabButton\" onclick=\"alert('Please Log in to view/retrieve files')\">Files</button>";
 
-          echo 			"<button class=\"tabButton\" onclick=\"openTab(event, 'contributors')\">Contributors</button>
-                </div>
-
-  <div id=\"abstract\" class=\"tabContent\">";
-
-          foreach($pText as $pGraph)
-          	echo "<p>".$pGraph."</p>";
-      	  echo "<br>";
+  	<div id="abstract" class="tabContent">
+			<?php
+				$sanitized = nl2br($project['tpDesc']);
+				$pText = explode("<br />", $sanitized);
+        foreach($pText as $pGraph)
+         	echo "<p>".$pGraph."</p>";
+      	echo "<br>";
       ?>
       <div class="footbuttonContainer">
         <button id="downloadAbstract" onclick=""><i class="fa fa-download"></i> Download Abstract (.pdf)</button>
@@ -161,24 +160,24 @@ if(isset($_POST['file_name'])){
         <button id="contactProjectHead" onclick="openContactHead()"><i class="fa fa-envelope-o"></i> Contact Project Head</button>
       </div>
       <div id="contactHead">
-      <div class="contactHeadHeader">
-      </div>
-      <form action="../php/cphead.php" method="POST">
-        <input type="text" name="email" placeholder="Your Email" required/>
-        <?php
-        	$sql = "SELECT * FROM tptable WHERE tpID LIKE ".$_COOKIE['PID'];
-    		$result = mysqli_query($conn,$sql);
-    		$row = mysqli_fetch_assoc($result);
+	      <div class="contactHeadHeader">
+	      </div>
+	      <form action="../php/cphead.php" method="POST">
+	        <input type="text" name="email" placeholder="Your Email" required/>
+	        <?php
+	        	$sql = "SELECT * FROM tptable WHERE tpID LIKE ".$project['tpID'];
+	    			$result = mysqli_query($conn,$sql);
+	    			$row = mysqli_fetch_assoc($result);
 
-        	echo "<input name='projID' value=".$_COOKIE['PID']." type='hidden'>";
-        	echo "<input name='projHead' value=".$row['pHead']." type='hidden'>";
-        ?>
-        <textarea name="message" rows="17" required></textarea>
-        <button id="sendMessage" type="submit"><i class="fa fa-send fa-2x"></i></button>
-      </form>
-    </div>
+	        	echo "<input name='projID' value=".$project['tpID']." type='hidden'>";
+	        	echo "<input name='projHead' value=".$row['pHead']." type='hidden'>";
+	        ?>
+	        <textarea name="message" rows="17" required></textarea>
+	        <button id="sendMessage" type="submit"><i class="fa fa-send fa-2x"></i></button>
+	      </form>
+    	</div>
 
-  </div>
+  	</div>
 
     <div id="files" class="tabContent">
       <table id="projectFiles">
@@ -253,6 +252,7 @@ if(isset($_POST['file_name'])){
       	}
       ?>
     </div>
+	</div>
 
   <div id="wrapbg">
   </div>

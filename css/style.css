@@ -321,7 +321,7 @@ h1{
   z-index: 3;
 }
 
-#options button{
+.option{
   background: #eee;
   border: none;
   cursor: pointer;
@@ -338,7 +338,7 @@ h1{
 
 #optionsBackground{
   background: none;
-  display: block;
+  display: none;
   height: 100%;
   left: 0;
   position: absolute;

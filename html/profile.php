@@ -67,7 +67,7 @@
             echo "<button id=\"optionsButton\" onclick=\"openOptions()\"><i class=\"fa fa-cog fa-2x\"></i></button>
                   <div id=\"options\">
 
-                    <button>Terminate Account</button>
+                    <button class=\"option\">Terminate Account</button>
                   </div>";
         }
       ?>
