@@ -225,8 +225,7 @@ if(isset($_POST['file_name'])){
 							 <td>
 								<form action='project.php' method='post' name='downloadform'>
 									<input name='file_name' value=".$filename." type='hidden'>
-									<i class='fa fa-download'></i>
-									<input type='submit' value='Download'>
+									<button class='fileDownload' type='submit'><i class='fa fa-download'></i></button>
 								</form>
 							 </td>
 						   </tr>";

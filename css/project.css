@@ -238,3 +238,13 @@
 #downloadAll:hover{
   color: #fff;
 }
+
+.fileDownload{
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.fileDownload:hover{
+  color: green;
+}
