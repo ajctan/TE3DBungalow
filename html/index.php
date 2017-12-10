@@ -163,7 +163,7 @@
 						echo "<option value=".$row['uID'].">".$row['uFName']. " ".$row['uLName']."</option>";
 					}
 				}
-				
+
 			?>
 		  </select>
           <label class="p100" for="nprojectAbstract">Abstract</label>
@@ -183,8 +183,6 @@
               }
             ?>
           </select>
-          <button class="p50 modalBtn">Remove User</button>
-          <button class="p50 modalBtn">Add User(s)</button>
         </div>
 
         <div class="alignRightContainer">
