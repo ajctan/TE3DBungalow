@@ -157,9 +157,19 @@
 
 
           <label for="nprojectMembers" class="p100">Members</label>
-          <select id="nprojectMembers" class="p100" size="5" multiple="multiple">
-            <option>Juana dela Cruz</option>
-            <option>John Smith</option>
+          <select id="nprojectMembers" class="p100" size="5" multiple>
+            <?php
+              $query = 'SELECT uID, uFName, uLName FROM users';
+              $result = mysqli_query($conn,$query);
+              $queryResults = mysqli_num_rows($result);
+              if ($queryResults > 0){
+                while ($row = mysqli_fetch_assoc($result)){
+                  echo "<option value='".$row['uID']."'>".$row['uFName']. " ".$row['uLName']."</option>";
+                }
+              }
+
+
+            ?>
           </select>
           <button class="p50 modalBtn">Remove User</button>
           <button class="p50 modalBtn">Add User(s)</button>
