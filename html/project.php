@@ -89,7 +89,7 @@ if(isset($_POST['file_name'])){
         if($uli == '1'){
           echo "<ul id=\"toolbarButtons\">
                   <li><button id=\"notificationButton\" class=\"toolbarButton\" onclick=\"openNotifications()\"><i id=\"notificationCount\">99</i><i class=\"fa fa-bell\"></i></button></li>
-                  <li><button id=\"userName\" class=\"toolbarButton\" onclick=\"location.href='profile.php?mName=".$_COOKIE['uFName']." ".$_COOKIE['uLName']."&isUser=1';\">".$_COOKIE['uFName']." ".$_COOKIE['uLName']."</button></li>
+                  <li><button id=\"userName\" class=\"toolbarButton\" onclick=\"location.href='profile.php?mID=".$_COOKIE['uID']."&isUser=1';\">".$_COOKIE['uFName']." ".$_COOKIE['uLName']."</button></li>
                   <li><button class=\"toolbarButton\" onclick=\"location.href='../php/logOut.php'\">Logout</button></li>
                 </ul>";
         }else{
@@ -246,7 +246,7 @@ if(isset($_POST['file_name'])){
 				echo "
 						<div class=\"member\">
 							<img class=\"memberImage\" src=\"../images/userImages/" .$pHeadResult['uID']. ".png\">
-							<a class=\"memberName\" href='profile.php?mName=".$pHeadResult['uFName']." ".$pHeadResult['uLName']."&isUser=0'>".$pHeadResult['uFName']." ".$pHeadResult['uLName']."</a>
+							<a class=\"memberName\" href='profile.php?mID=".$pHeadResult['uID']."&isUser=0'>".$pHeadResult['uFName']." ".$pHeadResult['uLName']."</a>
 							<p class=\"memberTitle\">Project Head
 						</div>
 						</a>";
@@ -261,7 +261,7 @@ if(isset($_POST['file_name'])){
   				echo "
   						<div class=\"member\">
     						<img class=\"memberImage\" src=\"../images/userImages/" .$mem['uID']. ".png\">
-    						<a class=\"memberName\" href='profile.php?mName=".$mem['uFName']." ".$mem['uLName']."&isUser=0'>".$mem['uFName']." ".$mem['uLName']."</a>
+    						<a class=\"memberName\" href='profile.php?mID=".$mem['uID']."&isUser=0'>".$mem['uFName']." ".$mem['uLName']."</a>
     						<p class=\"memberTitle\">Member
   						</div>
   					  </a>";

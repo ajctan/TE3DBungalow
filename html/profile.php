@@ -5,11 +5,17 @@
 <!DOCTYPE html>
 <html>
 <title>TedBungalow</title>
-<!--Font Awesome Stylesheet for icons-->
-<link rel="shortcut icon" href="../images/logo_b.png">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<link rel="stylesheet" href="../css/style.css">
-<script src="../js/script.js" type="text/javascript"></script>
+  <!--Font Awesome Stylesheet for icons-->
+  <link rel="shortcut icon" href="../images/logo_b.png">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="../css/style.css">
+  <script src="../js/script.js" type="text/javascript"></script>
+  <?php
+    $mID = $_GET['mID'];
+    $query = 'SELECT * FROM users WHERE uID = ' .$mID;
+    $result = mysqli_query($conn, $query);
+    $user = mysqli_fetch_assoc($result);
+  ?>
 </head>
 <body>
   <!-- Start of Toolbar -->
@@ -34,7 +40,7 @@
         if($uli == '1'){
           echo "<ul id=\"toolbarButtons\">
                   <li><button id=\"notificationButton\" class=\"toolbarButton\" onclick=\"openNotifications()\"><i id=\"notificationCount\">99</i><i class=\"fa fa-bell\"></i></button></li>
-                  <li><button id=\"userName\" class=\"toolbarButton\" onclick=\"location.href='profile.php?mName=".$_COOKIE['uFName']." ".$_COOKIE['uLName']."&isUser=1';\">".$_COOKIE['uFName']." ".$_COOKIE['uLName']."</button></li>
+                  <li><button id=\"userName\" class=\"toolbarButton\" onclick=\"location.href='profile.php?mID=".$_COOKIE['uID']."&isUser=1';\">".$_COOKIE['uFName']." ".$_COOKIE['uLName']."</button></li>
                   <li><button class=\"toolbarButton\" onclick=\"location.href='../php/logOut.php'\">Logout</button></li>
                 </ul>";
         }else{
@@ -49,7 +55,6 @@
           if(!isset($_COOKIE['accType']))
             setcookie("accType", "2", 0, "/");
       }
-
     ?>
   </div>
 
@@ -69,19 +74,13 @@
 
       <!-- End of MODULE -->
       <img src="../images/loginavatar.png">
-      <?php
-        if($_GET['isUser'] == 1)
-          echo "<h1>".$_COOKIE['uFName']." ".$_COOKIE['uLName']."</h1>";
-        else
-          echo "<h1>".$_GET['mName']."</h1>";
-      ?>
+        <?php
+          echo "<h1>".$user['uFName']." ".$user['uLName']."</h1>";
+        ?>
       <hr>
       <p class="pageLegend">
         <?php
-          if($_GET['isUser'] == 1)
-            echo $_COOKIE['occupation']." at ".$_COOKIE['affiliation'];
-          else
-
+          echo $user['uOccupation'];
         ?>
       </p>
     </div>
@@ -90,140 +89,76 @@
       <button class="tabButton" onclick="openTab(event, 'projects')">Projects</button>
       <button class="tabButton" onclick="openTab(event, 'colleagues')">Colleagues</button>
     </div>
-    <?php
-      if($_GET['isUser'] == 0){
-        $getMInfo = "SELECT * FROM users WHERE CONCAT(uFName, \" \", uLName) LIKE '".$_GET['mName']."'";
-        $result = mysqli_query($conn,$getMInfo);
-        $mInfo = mysqli_fetch_assoc($result);
-      }
-    ?>
     <div id="details" class="tabContent">
       <table>
         <tr>
           <th>Full Name:</th>
           <?php
-            if($_GET['isUser'] == 1)
-              echo "<td>".$_COOKIE['uFName']." ".$_COOKIE['uLName']."</td>";
-            else
-              echo "<td>".$_GET['mName']."</td>";
+            echo "<td>".$user['uFName']." ".$user['uLName']."</td>";
           ?>
           <th>Gender:</th>
           <?php
-            if($_GET['isUser'] == 1)
-              echo "<td>".$_COOKIE['gender']."</td>";
-            else
-              echo "<td>".$mInfo['uGender']."</td>";
+            echo "<td>".$user['uGender']."</td>";
           ?>
         </tr>
         <tr>
           <th>Occupation:</th>
           <?php
-            if($_GET['isUser'] == 1)
-              echo "<td>".$_COOKIE['occupation']."</td>";
-            else
-              echo "<td>".$mInfo['uOccupation']."</td>";
+            echo "<td>".$user['uOccupation']."</td>";
           ?>
           <th>Affiliation:</th>
           <?php
-            if($_GET['isUser'] == 1)
-              echo "<td>".$_COOKIE['affiliation']."</td>";
-            else
-              echo "<td>".$mInfo['uAffiliation']."</td>";
+            echo "<td>".$user['uAffiliation']."</td>";
           ?>
         </tr>
       </table>
-
-      <ul>
-        <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</li>
-        <li>Donec et ex fringilla, laoreet elit sed, fringilla nisl.</li>
-        <li>Vestibulum laoreet justo consectetur sem maximus, ac vestibulum dui sagittis.</li>
-        <li>Suspendisse at nibh eget turpis interdum vestibulum.</li>
-        <li>Duis aliquet felis et nisi tempor mollis.</li>
-        <li>Suspendisse ut eros imperdiet, ultrices nisi at, fermentum neque.</li>
-        <li>Sed finibus leo eget mauris convallis pulvinar.</li>
-        <li>Praesent non sem vel enim mattis pulvinar.</li>
-        <li>Duis ac lacus ac elit sollicitudin egestas.</li>
-        <li>Suspendisse maximus mi non leo rhoncus, vitae egestas lectus egestas.</li>
-        <li>In in nulla facilisis, tristique elit in, molestie massa.</li>
-        <li>Phasellus sit amet nulla sed orci blandit lobortis at vel tellus.</li>
-        <li>Curabitur viverra nisl id justo sollicitudin mattis.</li>
-        <li>Suspendisse dictum ante a felis efficitur dignissim.</li>
-        <li>Phasellus feugiat justo eget consectetur rutrum.</li>
-        <li>Sed et sapien sed nibh gravida sodales sit amet id tortor.</li>
-        <li>Sed vitae nisi aliquet, cursus mauris rutrum, ultricies libero.</li>
-        <li>Nunc euismod justo placerat quam ultricies venenatis.</li>
-        <li>Phasellus a est nec risus faucibus dictum ac in leo.</li>
-        <li>Vivamus eget arcu sollicitudin, consequat eros nec, ornare elit.</li>
-        <li>Sed sit amet mi hendrerit, facilisis urna et, pellentesque nisl.</li>
-        <li>Donec feugiat ipsum a nulla bibendum, nec semper ex cursus.</li>
-        <li>Phasellus mattis velit vitae maximus semper.</li>
-        <li>Etiam ultricies arcu a metus volutpat, in gravida ante semper.</li>
-        <li>Etiam facilisis dolor sed faucibus facilisis.</li>
-        <li>In accumsan risus nec rutrum imperdiet.</li>
-        <li>Vestibulum a mi luctus, porttitor odio accumsan, pharetra nulla.</li>
-        <li>Nullam auctor diam ut nisi dapibus, quis facilisis massa congue.</li>
-        <li>Morbi bibendum nisi sit amet enim gravida placerat.</li>
-        <li>Ut et urna faucibus felis tincidunt volutpat vel at sem.</li>
-        <li>Curabitur nec velit accumsan, tincidunt diam eget, ullamcorper neque.</li>
-      </ul>
     </div>
 
     <div id="projects" class="tabContent">
       <?php
-          $sql = "SELECT * FROM tptable";
+          $sql = "SELECT * FROM tptable WHERE tpID IN (SELECT projectID FROM members WHERE userID = ".$user['uID'].")";
           $result = mysqli_query($conn,$sql);
           $queryResults = mysqli_num_rows($result);
           if ($queryResults > 0){
             while ($row = mysqli_fetch_assoc($result)){
-              $memberIDs = explode(',', $row['tpMemberName']);
-              $foundID = FALSE;
-              $fllName;
-              if($_GET['isUser'] == 1)
-                  $fllName = $_COOKIE['uFName']." ".$_COOKIE['uLName'];
-              else
-                  $fllName = $_GET['mName'];
+              $query = 'SELECT uFName, uLName FROM users WHERE uID = ' .$row['pHead'].'';
+              $queryResult = mysqli_query($conn,$query);
+              $pHeadResult = mysqli_fetch_assoc($queryResult);
 
-              foreach($memberIDs as $thisID){
-                  if($fllName == $thisID){
-                    $foundID = TRUE;
-                    break;
-                  }
+              $iClass = "";
+              $projStart = "";
+              $projEnd = "";
+
+              if($row['tpEDate'] != null && $row['tpEDate'] == $row['tpSDate']){
+                $iClass = "projectStatus cancelled";
+                $date = date_create($row['tpSDate']);
+                $projStart = date_format($date, 'jS F Y');
+                $date = date_create($row['tpEDate']);
+                $projEnd = date_format($date, 'jS F Y');
               }
-              if($foundID || $fllName == $row['pHead']){
-                  $iClass = "";
-                  $projStart = "";
-                  $projEnd = "";
-                  if($row['tpEDate'] != null && $row['tpEDate'] == $row['tpSDate']){
-                    $iClass = "projectStatus fa fa-hourglass";
-                    $date = date_create($row['tpSDate']);
-                    $projStart = date_format($date, 'jS F Y');
-                    $date = date_create($row['tpEDate']);
-                    $projEnd = date_format($date, 'jS F Y');
-                  }
-                  else if($row['tpEDate'] != null && $row['tpEDate'] != $row['tpSDate']){
-                    $iClass = "projectStatus fa fa-hourglass-end";
-                    $date = date_create($row['tpSDate']);
-                    $projStart = date_format($date, 'jS F Y');
-                    $date = date_create($row['tpEDate']);
-                    $projEnd = date_format($date, 'jS F Y');
-                  }
-                  else if($row['tpEDate'] == null){
-                    $iClass = "projectStatus fa fa-hourglass-2";
-                    $date = date_create($row['tpSDate']);
-                    $projStart = date_format($date, 'jS F Y');
-                  }
+              else if($row['tpEDate'] != null && $row['tpEDate'] != $row['tpSDate']){
+                $iClass = "projectStatus done";
+                $date = date_create($row['tpSDate']);
+                $projStart = date_format($date, 'jS F Y');
+                $date = date_create($row['tpEDate']);
+                $projEnd = date_format($date, 'jS F Y');
+              }
+              else if($row['tpEDate'] == null){
+                $iClass = "projectStatus ongoing";
+                $date = date_create($row['tpSDate']);
+                $projStart = date_format($date, 'jS F Y');
+              }
 
-                  echo "<div class=\"projectDisplay\">
-                  <i class=\"".$iClass."\"></i>
-                  <a class=\"projectTitle\" href='project.php?pid=".$row['tpID']."'>".$row['tpTitle']."</a>
-                  <p class=\"projectHead\">".$row['pHead']."
-                  <p class=\"projectStart\">".$projStart."
-                 <p class=\"projectEnd\">".$projEnd."
-                 <p class=\"projectAbstract\">".$row['tpDesc']."
-                  <div class=\"cornerFold\">
-                  </div>
-                  </div>";
-                }
+              echo "<div class=\"projectDisplay\">
+              <i class=\"".$iClass."\"></i>
+              <a class=\"projectTitle\" href='project.php?pid=".$row['tpID']."'>".$row['tpTitle']."</a>
+              <p class=\"projectHead\">".$pHeadResult['uFName']." ".$pHeadResult['uLName']."
+              <p class=\"projectStart\">".$projStart."
+              <p class=\"projectEnd\">".$projEnd."
+              <p class=\"projectAbstract\">".$row['tpDesc']."
+              <div class=\"cornerFold\">
+              </div>
+              </div></a>";
             }
           }
 
@@ -232,58 +167,18 @@
 
     <div id="colleagues" class="tabContent">
       <?php
-        //$pHeadName = $_COOKIE['uFName']." ".$_COOKIE['uLName'];
-        $sql = "SELECT tpMemberName FROM tptable WHERE pHead = '".$_GET['mName']."'";
+        $sql = 'SELECT u.uID, u.uFName, u.uLName, uOccupation FROM users AS u, members AS M WHERE u.uID = m.userID AND u.uID != ' .$user['uID']. ' AND projectID IN (SELECT projectID FROM members WHERE userID = ' .$user['uID']. ') GROUP BY u.uID';
         $result = mysqli_query($conn,$sql);
         $queryResults = mysqli_num_rows($result);
-        $a=array("");
 
         if ($queryResults > 0){
           while ($row = mysqli_fetch_assoc($result)){
-
-                  $pieces = explode(",",$row['tpMemberName']);
-
-                  foreach($pieces as $value){
-                    $pieces2 = explode(" ",$value);
-
-                    $numberInArr = 0;
-                    foreach($pieces2 as $value2){
-                      $numberInArr++;
-                    }
-
-                    if($pieces2[0] != "" AND $pieces2[$numberInArr-1] != ""){
-                      $sql2 = "SELECT * FROM users WHERE uFName LIKE '%".$pieces2[0]."%' AND uLName LIKE '%".$pieces2[$numberInArr-1]."%'";
-                      $result2 = mysqli_query($conn,$sql2);
-                      $queryResults2 = mysqli_num_rows($result2);
-                      if ($queryResults2 > 0){
-                        while ($row2 = mysqli_fetch_assoc($result2)){
-                           $berTitle = "";
-                           if($row2['uType'] == 0){
-                             $berTitle = "Administrator";
-                           }
-                           else if($row2['uType'] == 1){
-                             $berTitle = "Member";
-                           }
-
-
-                          if(!in_array($pieces2[0]." ".$pieces2[$numberInArr-1],$a)){
                           echo "
                           <div class=\"member\">
-                          <img class=\"memberImage\" src=\"../images/userImages/" .$row2['uID']. ".png\">
-                          <a class=\"memberName\" href='profile.php?mName=".$row2['uFName']." ".$row2['uLName']."&isUser=0'>".$row2['uFName']." ".$row2['uLName']."</a>
-                          <p class=\"memberTitle\">".$berTitle."
+                          <img class=\"memberImage\" src=\"../images/userImages/" .$row['uID']. ".png\">
+                          <a class=\"memberName\" href='profile.php?mID=".$row['uID']."&isUser=0'>".$row['uFName']." ".$row['uLName']."</a>
+                          <p class=\"memberTitle\">".$row['uOccupation']."
                           </div></a>";
-
-                          array_push($a,$pieces2[0]." ".$pieces2[$numberInArr-1]);
-                          }
-                          else{
-
-                          }
-                          $numberInArr = 0;
-                        }
-                      }
-                    }
-                  }
             }
           }
       ?>

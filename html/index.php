@@ -36,7 +36,7 @@
         if($uli == '1'){
           echo "<ul id=\"toolbarButtons\">
                   <li><button id=\"notificationButton\" class=\"toolbarButton\" onclick=\"openNotifications()\"><i id=\"notificationCount\">99</i><i class=\"fa fa-bell\"></i></button></li>
-                  <li><button id=\"userName\" class=\"toolbarButton\" onclick=\"location.href='profile.php?mName=".$_COOKIE['uFName']." ".$_COOKIE['uLName']."&isUser=1';\">".$_COOKIE['uFName']." ".$_COOKIE['uLName']."</button></li>
+                  <li><button id=\"userName\" class=\"toolbarButton\" onclick=\"location.href='profile.php?mID=".$_COOKIE['uID']."&isUser=1';\">".$_COOKIE['uFName']." ".$_COOKIE['uLName']."</button></li>
                   <li><button class=\"toolbarButton\" onclick=\"location.href='../php/logOut.php'\">Logout</button></li>
                 </ul>";
         }else{
@@ -107,8 +107,8 @@
                   <a class=\"projectTitle\" href='project.php?pid=".$row['tpID']."'>".$row['tpTitle']."</a>
                   <p class=\"projectHead\">".$pHeadResult['uFName']." ".$pHeadResult['uLName']."
                   <p class=\"projectStart\">".$projStart."
-                 <p class=\"projectEnd\">".$projEnd."
-                 <p class=\"projectAbstract\">".$row['tpDesc']."
+                  <p class=\"projectEnd\">".$projEnd."
+                  <p class=\"projectAbstract\">".$row['tpDesc']."
                   <div class=\"cornerFold\">
                   </div>
                   </div></a>";
