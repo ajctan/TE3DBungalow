@@ -75,7 +75,7 @@
       <!-- End of MODULE -->
       <img src="../images/loginavatar.png">
         <?php
-          echo "<h1>".$user['uFName']." ".$user['uLName']."</h1>";
+          echo "<p id=\"pageTitle\" <h1>".$user['uFName']." ".$user['uLName']."</h1>";
         ?>
       <hr>
       <p class="pageLegend">

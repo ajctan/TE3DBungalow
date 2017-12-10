@@ -52,20 +52,6 @@ if(isset($_POST['file_name'])){
 <script src="../js/script.js" type="text/javascript"></script>
 <script src="../js/project.js" type="text/javascript"></script>
 <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
-
-<script>
-        	function cph(){
-            var eml = document.getElementById('email').value;
-            var msg = document.getElementById('message').value;
-            $.ajax({
-              type:"post",
-              url:"../php/cphead.php",
-              data: {email:eml, message:msg},
-              cache:false
-            });
-            return false;
-          }
-</script>
 </head>
 <body>
   <!-- Start of Toolbar -->
@@ -147,7 +133,7 @@ if(isset($_POST['file_name'])){
           $sanitized = nl2br($row['tpDesc']);
           $pText = explode("<br />", $sanitized);
           echo "<img src=\"../images/projectlogo.png\">
-                <p id=\"projectTitle\">".$row['tpTitle']."
+                <p id=\"pageTitle\">".$row['tpTitle']."
                 <hr>
                 <p class=\"pageLegend\">
                   <p id=\"projectHead\">".$pHeadResult['uFName']." ".$pHeadResult['uLName']."
@@ -176,7 +162,6 @@ if(isset($_POST['file_name'])){
       </div>
       <div id="contactHead">
       <div class="contactHeadHeader">
-        <button id="closeContactHead" onclick="closeContactHead()">X</button>
       </div>
       <form action="../php/cphead.php" method="POST">
         <input type="text" name="email" placeholder="Your Email" required/>
@@ -188,7 +173,7 @@ if(isset($_POST['file_name'])){
         	echo "<input name='projID' value=".$_COOKIE['PID']." type='hidden'>";
         	echo "<input name='projHead' value=".$row['pHead']." type='hidden'>";
         ?>
-        <textarea name="message" rows="15" required></textarea>
+        <textarea name="message" rows="17" required></textarea>
         <button id="sendMessage" type="submit"><i class="fa fa-send fa-2x"></i></button>
       </form>
     </div>

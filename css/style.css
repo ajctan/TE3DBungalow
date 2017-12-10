@@ -79,6 +79,7 @@ h1{
   background: #1d9b72;
   border: none;
   color: #fff;
+  cursor: pointer;
   float: right;
   height: 25px;
   margin: 0;
@@ -632,4 +633,13 @@ h1{
   margin: 0;
   padding: 0;
   width: 36px;
+}
+
+#pageTitle{
+  display: block;
+  font-size: 3.0em;
+  font-weight: bold;
+  margin: 40px 0 0 0;
+  padding: 0;
+  position: relative;
 }
