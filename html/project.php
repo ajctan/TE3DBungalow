@@ -126,6 +126,10 @@ if(isset($_POST['file_name'])){
         $result = mysqli_query($conn,$sql);
         $row = mysqli_fetch_assoc($result);
 
+				$query = 'SELECT uID, uFName, uLName FROM users WHERE uID = ' .$row['pHead'].'';
+				$queryResult = mysqli_query($conn,$query);
+				$pHeadResult = mysqli_fetch_assoc($queryResult);
+
       	if(isset($_COOKIE['loggedIn'])){
       		if($_COOKIE['accType'] == 0 || $row['pHead'] == $_COOKIE['uFName']." ".$_COOKIE['uLName'])
       			echo "<button id=\"optionsButton\" onclick=\"openOptions()\"><i class=\"fa fa-cog fa-2x\"></i></button>
@@ -146,7 +150,7 @@ if(isset($_POST['file_name'])){
                 <p id=\"projectTitle\">".$row['tpTitle']."
                 <hr>
                 <p class=\"pageLegend\">
-                  <p id=\"projectHead\">".$row['pHead']."
+                  <p id=\"projectHead\">".$pHeadResult['uFName']." ".$pHeadResult['uLName']."
                 </p>
     </div>
                 <div id=\"tabButtons\">
@@ -240,48 +244,28 @@ if(isset($_POST['file_name'])){
 
     <div id="contributors" class="tabContent">
       <?php
-      	$getMembers = 'SELECT pHead, tpMemberName FROM tpTable WHERE tpID='.$pID;
-      	$result = mysqli_query($conn,$getMembers);
-      	$queryResults = mysqli_num_rows($result);
+				echo "
+						<div class=\"member\">
+							<img class=\"memberImage\" src=\"../images/userImages/" .$pHeadResult['uID']. ".png\">
+							<a class=\"memberName\" href='profile.php?mName=".$pHeadResult['uFName']." ".$pHeadResult['uLName']."&isUser=0'>".$pHeadResult['uFName']." ".$pHeadResult['uLName']."</a>
+							<p class=\"memberTitle\">Project Head
+						</div>
+						</a>";
+
+				$getMembers = 'SELECT uID, uFName, uLName FROM users, members WHERE projectID = ' .$pID.'';
+				$result = mysqli_query($conn, $getMembers);
+				$queryResults = mysqli_num_rows($result);
 
       	if($queryResults > 0){
-      		$row = mysqli_fetch_assoc($result);
+      		$mem = mysqli_fetch_assoc($result);
 
-					$names = explode(" ", $row['pHead']);
-					$firstName = $names[0];
-					$lastName = $names[count($names)-1];
-					$getMember = 'SELECT uID FROM users WHERE uFName LIKE "%' .$firstName. '%" AND uLName LIKE "%' .$lastName. '%"';
-					$getMemberQuery = mysqli_query($conn,$getMember);
-					$member = mysqli_fetch_assoc($getMemberQuery);
-      		echo "
-      				<div class=\"member\">
-        				<img class=\"memberImage\" src=\"../images/userImages/" .$member['uID']. ".png\">
-        				<a class=\"memberName\" href='profile.php?mName=".$row['pHead']."&isUser=0'>".$row['pHead']."</a>
-        				<p class=\"memberTitle\">Project Head
-      				</div>
-      			  </a>";
-      		if($row['tpMemberName'] != ""){
-      			$members = explode(",", $row['tpMemberName']);
-      			foreach($members as $mem){
-      				if($mem == "")
-      					break;
-
-							$names = explode(" ", $mem);
-							$firstName = $names[0];
-							$lastName = $names[count($names)-1];
-
-							$getMember = 'SELECT uID FROM users WHERE uFName LIKE "%' .$firstName. '%" AND uLName LIKE "%' .$lastName. '%"';
-							$getMemberQuery = mysqli_query($conn,$getMember);
-							$member = mysqli_fetch_assoc($getMemberQuery);
-      				echo "
-      						<div class=\"member\">
-        						<img class=\"memberImage\" src=\"../images/userImages/" .$member['uID']. ".png\">
-        						<a class=\"memberName\" href='profile.php?mName=".$mem."&isUser=0'>".$mem."</a>
-        						<p class=\"memberTitle\">Member
-      						</div>
-      					  </a>";
-      			}
-      		}
+  				echo "
+  						<div class=\"member\">
+    						<img class=\"memberImage\" src=\"../images/userImages/" .$mem['uID']. ".png\">
+    						<a class=\"memberName\" href='profile.php?mName=".$mem['uFName']." ".$mem['uLName']."&isUser=0'>".$mem['uFName']." ".$mem['uLName']."</a>
+    						<p class=\"memberTitle\">Member
+  						</div>
+  					  </a>";
       	}
       ?>
     </div>

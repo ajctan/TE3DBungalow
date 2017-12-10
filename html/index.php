@@ -75,6 +75,10 @@
 
           if ($queryResults > 0){
             while ($row = mysqli_fetch_assoc($result)){
+                  $query = 'SELECT uFName, uLName FROM users WHERE uID = ' .$row['pHead'].'';
+                  $queryResult = mysqli_query($conn,$query);
+                  $pHeadResult = mysqli_fetch_assoc($queryResult);
+
                   $iClass = "";
                   $projStart = "";
                   $projEnd = "";
@@ -101,7 +105,7 @@
                   echo "<div class=\"projectDisplay\">
                   <i class=\"".$iClass."\"></i>
                   <a class=\"projectTitle\" href='project.php?pid=".$row['tpID']."'>".$row['tpTitle']."</a>
-                  <p class=\"projectHead\">".$row['pHead']."
+                  <p class=\"projectHead\">".$pHeadResult['uFName']." ".$pHeadResult['uLName']."
                   <p class=\"projectStart\">".$projStart."
                  <p class=\"projectEnd\">".$projEnd."
                  <p class=\"projectAbstract\">".$row['tpDesc']."
