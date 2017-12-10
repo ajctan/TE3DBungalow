@@ -21,14 +21,6 @@
 		$row = mysqli_fetch_assoc($result);
 		
 		$lastMemberID = $row['memberID'];
-		/*
-		echo $id.'<br>' ;
-		echo $title.'<br>';
-		echo $abstract.'<br>';
-		echo $start.'<br>';
-		echo $access.'<br>';
-		echo count($members);
-		*/
 		$createProject = "INSERT INTO `tptable` (`tpID`, `tpTitle`, `tpDesc`, `tpSDate`, `tpAccessLVL`, `pHead`) VALUES(".$id.",'".$title."','".$abstract."','".$start."',".$access.",'".$head."');";
 		
 		foreach($members as $m){
@@ -36,9 +28,6 @@
 			$createProject .= 'INSERT INTO `members` (`memberID`, `projectID`, `userID`) VALUES('.$lastMemberID.','.$id.','.$m.');';
 		}
 
-		
-		//echo $createProject;
-		
 		if (mysqli_multi_query($conn, $createProject)){
 				echo "<script type='text/javascript'>alert('New project created');</script>";
 				header('Location: ../html/index.php');
@@ -46,24 +35,6 @@
 				echo "<script type='text/javascript'>alert('Error: ". $createProject."<br>". mysqli_error($conn)."');</script>";
 				header('Location: ../html/index.php');
 			}
-		
-	/*	if (mysqli_multi_query($conn, $addMembers)) {
-			echo "<script type='text/javascript'>alert('New members created');</script>";
-			
-			$createProject = 'INSERT INTO `tptable` (`tpID`, `tpTitle`, `tpDesc`, `tpSDate`, `tpAccessLVL`, `pHead`) VALUES('.$id.',"'.$title.'","'.$abstract.'","'.$start.'",'.$access.',"'.$head.'")';
-		
-			if (mysqli_query($conn, $createProject)) {
-				echo "<script type='text/javascript'>alert('New project created');</script>";
-				 header('Location: ../html/index.php');
-			} else {
-				echo "<script type='text/javascript'>alert('Error: ". $createProject."<br>". mysqli_error($conn)."');</script>";
-				header('Location: ../html/index.php');
-			}
-		} else {
-			echo "Error: " . $addMembers . "<br>" . mysqli_error($conn);
-		}
-		
-		*/
 		
 	?>
 </body>
