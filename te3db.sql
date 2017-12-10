@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 09, 2017 at 05:43 PM
+-- Generation Time: Dec 10, 2017 at 02:52 PM
 -- Server version: 10.1.25-MariaDB
 -- PHP Version: 7.1.7
 
@@ -21,6 +21,7 @@ SET time_zone = "+00:00";
 --
 -- Database: `te3db`
 --
+
 DROP SCHEMA IF EXISTS te3db;
 
 CREATE SCHEMA te3db;
@@ -73,7 +74,11 @@ INSERT INTO `members` (`memberID`, `projectID`, `userID`) VALUES
 (2, 3, 4),
 (3, 4, 6),
 (4, 4, 10),
-(5, 4, 12);
+(5, 4, 12),
+(6, 1, 2),
+(7, 2, 3),
+(8, 3, 3),
+(9, 4, 8);
 
 -- --------------------------------------------------------
 
