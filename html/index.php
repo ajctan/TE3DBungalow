@@ -217,7 +217,7 @@
       echo "
       <div id='createSBContainer' class='createSBContainer-hidden'>
         <button id='createProject' class='createButtonContainer' onclick='openCreateProjectModal(); showCreateButtons()'><p>Create Project</p> <div class='createSpecificButton'><i class='fa fa-folder-open'></i></div></button>";
-        if($accType = 0)
+        if($accType == 0)
           echo "<button id='createUser' class='createButtonContainer' onclick='openCreateUserModal(); showCreateButtons()'><p>Create User</p> <div class='createSpecificButton'><i class='fa fa-user-plus'></i></div></button>";
       echo "
       </div>
