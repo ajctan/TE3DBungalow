@@ -146,13 +146,26 @@
 
   <div id="createProjectModal">
     <div id="createContainer">
-      <form action="index.html" method="post">
+      <form action="../php/createProject.php" method="post">
         <div style="text-align: center;">
           <label class="p100" for="nprojectTitle">Project Title</label>
           <input class="p100" name="nprojectTitle" type="text" />
           <label class="p100" for="nprojectHead">Project Head</label>
-          <input type="text" name="selectedprojectHead" class="p50 selectedprojectHead" value="Juan dela Cruz" readonly>
-          <button class="p50 modalBtn">Change</button>
+          <!--<input type="text" name="selectedprojectHead" class="p50 selectedprojectHead" value="Juan dela Cruz" readonly>
+          <button class="p50 modalBtn">Change</button>-->
+		  <select name='selectedprojectHead' class="p100" style="padding:5px; display:inline;" >
+			<?php
+				$query = 'SELECT uID, uFName, uLName FROM users';
+				$result = mysqli_query($conn,$query);
+				$queryResults = mysqli_num_rows($result);
+				if ($queryResults > 0){
+					while ($row = mysqli_fetch_assoc($result)){
+						echo "<option value=".$row['uID'].">".$row['uFName']. " ".$row['uLName']."</option>";
+					}
+				}
+				
+			?>
+		  </select>
           <label class="p100" for="nprojectAbstract">Abstract</label>
           <textarea name="nprojectAbstract" rows="17" required></textarea>
 

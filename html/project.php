@@ -221,8 +221,11 @@ if(isset($_POST['file_name'])){
 
       </table>
 			<div class="footbuttonContainer">
-				<input id="uploadFiles" type="file">
-				<label id="uploadFilesLbl" for="uploadFiles" type="file"><i class="fa fa-upload"></i> Upload Files</label>
+				<form action="../php/uploadFile.php" method="post" enctype="multipart/form-data">
+					<?php echo '<input type="hidden" name="projToUpload" value='.$pID.'>'?>
+					<input id="uploadFiles" type="file" onchange="this.form.submit()">
+					<label id="uploadFilesLbl" for="uploadFiles" type="file"><i class="fa fa-upload"></i> Upload Files</label>
+				</form>
 			</div>
     </div>
 
