@@ -145,7 +145,7 @@
 
   <div id="createProjectModal">
     <div id="createContainer">
-      <form action="index.html" method="post">
+      <form action="../php/createProject.php" method="post">
         <div style="text-align: center;">
           <label class="p100" for="nprojectTitle">Project Title</label>
           <input class="p100" name="nprojectTitle" type="text" />
