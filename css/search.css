@@ -1,0 +1,85 @@
+#advSearch{
+  background: #eee;
+  cursor: pointer;
+  display: inline-block;
+  float: right;
+  line-height: 100%;
+  margin: 0 auto 0 auto;
+  padding: 0px;
+  position: relative;
+  width: 55%;
+}
+
+#advSearch p{
+  box-sizing: border-box;
+  margin: 0;
+  padding: 5px;
+}
+
+#advSearch:hover, #advSearch:active{
+  background: #ddd;
+}
+
+#advSearch-content{
+  background: #eee;
+  box-sizing: border-box;
+  cursor: default;
+  left: 0;
+  margin: 0;
+  position: absolute;
+  top: 25px;
+  width: 100%;
+}
+
+.close{
+  display: none;
+}
+
+.open{
+  display: block;
+}
+
+#advSearch-content input[type=checkbox]{
+  display: none;
+}
+
+.checkLabel{
+  background: #e4e4e4;
+  box-sizing: border-box;
+  cursor: pointer;
+  display: block;
+  margin: 0;
+  padding: 8px;
+  position: relative;
+  text-align: left;
+  white-space: nowrap;
+  width: 100%;
+}
+
+.checkLabel input, select{
+  box-sizing: border-box;
+  display: inline-block;
+  right: 10px;
+  width: 80%;
+}
+
+.checkLabel input::placeholder{
+  color: #ccc;
+}
+
+.checkLabel:hover{
+  background: #bbb;
+}
+
+#member:checked + #memberlbl, #datestart:checked + #datestartlbl, #fundedby:checked + #fundedbylbl, #status:checked + #statuslbl{
+  background: #1d9b72;
+  color: #fff;
+}
+
+.right{
+  float: right;
+  height: 100%;
+  line-height: 100%;
+  position: absolute;
+  right: 10px;
+}

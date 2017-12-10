@@ -72,8 +72,9 @@ if(isset($_POST['file_name'])){
 </head>
 <body>
   <!-- Start of Toolbar -->
-  <div id="toolbar">
+	<div id="toolbar">
     <div id="logo">
+      <img src="../images/dlsu_logo_w.png" height="30px">
       <a href="index.php"><img src="../images/logo_full.png" height="30px"></a>
     </div>
 
