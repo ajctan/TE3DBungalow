@@ -16,13 +16,6 @@
 		$head = $_POST['selectedprojectHead'];
 		$members = $_POST['nprojectMembers'];
 
-		if (strpbrk($filename, "\\/?%*:|\"<>") === FALSE) {
-		  $folder = $title;		  
-		}
-		else {
-		  $folder = str_replace(str_split('\\/:*?"<>|'), ' ', $folder);
-		}
-		
 		$lastAdded ='SELECT memberID FROM members ORDER BY memberID DESC LIMIT 1';
 		$result = mysqli_query($conn,$lastAdded);
 		$row = mysqli_fetch_assoc($result);
@@ -41,7 +34,6 @@
 
 		if (mysqli_multi_query($conn, $createProject)){
 				echo "<script type='text/javascript'>alert('New project created');</script>";
-				mkdir("../html/uploads/".$folder);
 				header('Location: ../html/index.php');
 			} else {
 				echo "<script type='text/javascript'>alert('Error: ". $createProject."<br>". mysqli_error($conn)."');</script>";
