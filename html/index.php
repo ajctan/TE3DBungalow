@@ -147,13 +147,11 @@
   <div id="createProjectModal">
     <div id="createContainer">
       <form action="../php/createProject.php" method="post">
-        <div style="text-align: center;">
+        <div class="center">
           <label class="p100" for="nprojectTitle">Project Title</label>
           <input class="p100" name="nprojectTitle" type="text" />
           <label class="p100" for="nprojectHead">Project Head</label>
-          <!--<input type="text" name="selectedprojectHead" class="p50 selectedprojectHead" value="Juan dela Cruz" readonly>
-          <button class="p50 modalBtn">Change</button>-->
-		  <select name='selectedprojectHead' class="p100" style="padding:5px; display:inline;" >
+		  <select name='selectedprojectHead' class="p100">
 			<?php
 				$query = 'SELECT uID, uFName, uLName FROM users';
 				$result = mysqli_query($conn,$query);

@@ -230,6 +230,10 @@
   z-index: 2;
 }
 
+.center{
+  text-align: center;
+}
+
 .dnone{
   display: none;
 }
@@ -250,7 +254,9 @@
 }
 
 .p100{
+  display: inline;
   margin: 5px;
+  padding: 5px;
   width: 96%;
 }
 

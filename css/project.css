@@ -217,3 +217,7 @@
 .fileDownload:hover{
   color: green;
 }
+
+.hidden{
+  display: none;
+}

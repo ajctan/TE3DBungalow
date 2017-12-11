@@ -170,20 +170,20 @@ if(isset($_POST['file_name'])){
         <button id="downloadAbstract" onclick=""><i class="fa fa-download"></i> Download Abstract (.pdf)</button>
         <?php
         	$sql = "SELECT * FROM tptable, users WHERE tptable.pHead = users.uID AND tptable.tpID LIKE ".$project['tpID'];
-	    	$result = mysqli_query($conn,$sql);
-	    	$row = mysqli_fetch_assoc($result);
-	    	$myURL = 'http://'.$_SERVER['HTTP_HOST'].$_SERVER['PHP_SELF'];
+		    	$result = mysqli_query($conn,$sql);
+		    	$row = mysqli_fetch_assoc($result);
+		    	$myURL = 'http://'.$_SERVER['HTTP_HOST'].$_SERVER['PHP_SELF'];
 
-	    	$pCitation = $row['uLName'].", ".substr($row['uFName'], 0, 1).". (".$row['tpSDate']."). ".$row['tpTitle'].". Retrieved from: ".$myURL;
-	    	
+	    		$pCitation = $row['uLName'].", ".substr($row['uFName'], 0, 1).". (".$row['tpSDate']."). ".$row['tpTitle'].". Retrieved from: ".$myURL."?pid=".$pID;
+
         	echo "<button id=\"getCitation\" onclick=\"copyToClipboard('#copy-text')\"><i class=\"fa fa-file-text-o\"></i> Get Citation</button>";
         	if(!isset($_COOKIE['loggedIn']))
         		echo "<button id=\"contactProjectHead\" onclick=\"openContactHead()\"><i class=\"fa fa-envelope-o\"></i> Contact Project Head</button>";
 
-        	echo "<div id=\"copy-text\" type=\"hidden\" style=\"color: #ffffff\">".$pCitation."</div>";
+        	echo "<div id=\"copy-text\" class=\"hidden\">".$pCitation."</div>";
         ?>
       </div>
-    
+
       <div id="contactHead">
 	      <div class="contactHeadHeader">
 	      </div>
