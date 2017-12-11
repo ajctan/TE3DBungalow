@@ -16,7 +16,20 @@
 <?php
   $uli = '0';
   $accType = '2'; //0 Admin, 1 Member, 2 Guest
+  if(array_key_exists('search-field', $_POST) == FALSE){
+    $term = $_POST['search-field-searchpage'];
+  }
+  else{
   $term = $_POST['search-field'];
+  }
+  $member = "";
+  $date = "";
+  $funded = "";
+  $status = "";
+  $memberCh = false;
+  $datCh = false;
+  $funCh = false;
+  $staCh = false;
 
   if(isset($_COOKIE['loggedIn'])){
 		$uli = $_COOKIE['loggedIn'];
@@ -38,7 +51,15 @@
 
     <div id="searchBar">
       <form action="search.php" method="POST">
-        <input id="searchTerm" type="text" name="search-field" placeholder="Search"/>
+        <input id="searchTerm" type="text" name="search-field-searchpage" placeholder="Search"/>
+        <input type="hidden" name="mem" value="" />
+        <input type="hidden" name="dat" value="" />
+        <input type="hidden" name="fun" value="" />
+        <input type="hidden" name="sta" value="" />
+        <input type="hidden" name="memChecked" value="" />
+        <input type="hidden" name="datChecked" value="" />
+        <input type="hidden" name="funChecked" value="" />
+        <input type="hidden" name="staChecked" value="" />
         <button id="searchButton" type="submit" name ="search-button">
           <i class="fa fa-search"></i>
         </button>
@@ -66,21 +87,28 @@
     <div id="pageHead">
       <img class="pageLogo" src="../images/searchlogo.png">
       <?php
-        echo "<h3>Search results for: '".$_POST['search-field']."'</h3>"
+         if(array_key_exists('search-field', $_POST) == FALSE){
+
+         }
+        else{
+        echo "<h3>Search results for: '".$_POST['search-field']."'</h3>";
+        }
       ?>
       <hr>
       <div id="advSearch" onclick="openAdvSearch()">
         <p>Advanced Search <i class="right fa fa-caret-down"></i>
         <div id="advSearch-content" class="close">
           <form>
-            <input id="member" type="checkbox"></input><label id="memberlbl" class="checkLabel" for="member">Member <input type="text" placeholder="Member name"/></label>
-            <input id="datestart" type="checkbox"></input><label id="datestartlbl" class="checkLabel" for="datestart">Date Start <input type="date"/></label>
-            <input id="fundedby" type="checkbox"></input><label id="fundedbylbl" class="checkLabel" for="fundedby">Funded by <input type="text" placeholder="Funded by"/></label>
-            <input id="status" type="checkbox"></input><label id="statuslbl" class="checkLabel" for="status">Status <select placeholder="Status">
+            <input id="member" type="checkbox" onclick="toggleCheckBoxMember();"></input><label id="memberlbl" class="checkLabel" for="member">Member <input type="text" placeholder="Member name"/></label>
+            <input id="datestart" type="checkbox" onclick="toggleCheckBoxDate();"></input><label id="datestartlbl" class="checkLabel" for="datestart">Date Start <input type="date"/></label>
+            <input id="fundedby" type="checkbox" onclick="toggleCheckBoxFunded();"></input><label id="fundedbylbl" class="checkLabel" for="fundedby">Funded by <input type="text" placeholder="Funded by"/></label>
+            <input id="status" type="checkbox" onclick="toggleCheckBoxStatus();"></input><label id="statuslbl" class="checkLabel" for="status">Status <select placeholder="Status">
                                                                                                                       <option>Ongoing</option>
                                                                                                                       <option>Finished</option>
                                                                                                                       <option>Cancelled</option>
                                                                                                                     </select></label>
+
+
           </form>
         </div>
       </div>
@@ -92,59 +120,107 @@
 
     <div id="projects" class="tabContent">
       <?php
-          $sql = "SELECT * FROM tptable WHERE tpTitle LIKE '%".$term."%' OR tpDesc LIKE '%".$term."%'";
-          $result = mysqli_query($conn,$sql);
-          $queryResults = mysqli_num_rows($result);
+          if(array_key_exists('search-field', $_POST) == FALSE){
+            $sql = "SELECT * FROM tptable WHERE tpTitle LIKE '%".$term."%' OR tpDesc LIKE '%".$term."%'";
+            $result = mysqli_query($conn,$sql);
+            $queryResults = mysqli_num_rows($result);
 
-          if ($queryResults > 0){
-            while ($row = mysqli_fetch_assoc($result)){
-                  $query = 'SELECT uFName, uLName FROM users WHERE uID = ' .$row['pHead'].'';
-                  $queryResult = mysqli_query($conn,$query);
-                  $pHeadResult = mysqli_fetch_assoc($queryResult);
+            if ($queryResults > 0){
+              while ($row = mysqli_fetch_assoc($result)){
+                    $query = 'SELECT uFName, uLName FROM users WHERE uID = ' .$row['pHead'].'';
+                    $queryResult = mysqli_query($conn,$query);
+                    $pHeadResult = mysqli_fetch_assoc($queryResult);
 
-                  $iClass = "";
-                  $projStart = "";
-                  $projEnd = "";
-                  if($row['tpEDate'] != null && $row['tpEDate'] == $row['tpSDate']){
-                    $iClass = "projectStatus cancelled";
-                    $date = date_create($row['tpSDate']);
-                    $projStart = date_format($date, 'jS F Y');
-                    $date = date_create($row['tpEDate']);
-                    $projEnd = date_format($date, 'jS F Y');
-                  }
-                  else if($row['tpEDate'] != null && $row['tpEDate'] != $row['tpSDate']){
-                    $iClass = "projectStatus done";
-                    $date = date_create($row['tpSDate']);
-                    $projStart = date_format($date, 'jS F Y');
-                    $date = date_create($row['tpEDate']);
-                    $projEnd = date_format($date, 'jS F Y');
-                  }
-                  else if($row['tpEDate'] == null){
-                    $iClass = "projectStatus ongoing";
-                    $date = date_create($row['tpSDate']);
-                    $projStart = date_format($date, 'jS F Y');
-                  }
+                    $iClass = "";
+                    $projStart = "";
+                    $projEnd = "";
+                    if($row['tpEDate'] != null && $row['tpEDate'] == $row['tpSDate']){
+                      $iClass = "projectStatus cancelled";
+                      $date = date_create($row['tpSDate']);
+                      $projStart = date_format($date, 'jS F Y');
+                      $date = date_create($row['tpEDate']);
+                      $projEnd = date_format($date, 'jS F Y');
+                    }
+                    else if($row['tpEDate'] != null && $row['tpEDate'] != $row['tpSDate']){
+                      $iClass = "projectStatus done";
+                      $date = date_create($row['tpSDate']);
+                      $projStart = date_format($date, 'jS F Y');
+                      $date = date_create($row['tpEDate']);
+                      $projEnd = date_format($date, 'jS F Y');
+                    }
+                    else if($row['tpEDate'] == null){
+                      $iClass = "projectStatus ongoing";
+                      $date = date_create($row['tpSDate']);
+                      $projStart = date_format($date, 'jS F Y');
+                    }
 
-                  echo "<div class=\"projectDisplay\">
-                  <i class=\"".$iClass."\"></i>
-                  <a class=\"projectTitle\" href='project.php?pid=".$row['tpID']."'>".$row['tpTitle']."</a>
-                  <p class=\"projectHead\">".$pHeadResult['uFName']." ".$pHeadResult['uLName']."
-                  <p class=\"projectStart\">".$projStart."
-                  <p class=\"projectEnd\">".$projEnd."
-                  <p class=\"projectAbstract\">".$row['tpDesc']."
-                  <div class=\"cornerFold\">
-                  </div>
-                  </div></a>";
+                    echo "<div class=\"projectDisplay\">
+                    <i class=\"".$iClass."\"></i>
+                    <a class=\"projectTitle\" href='project.php?pid=".$row['tpID']."'>".$row['tpTitle']."</a>
+                    <p class=\"projectHead\">".$pHeadResult['uFName']." ".$pHeadResult['uLName']."
+                    <p class=\"projectStart\">".$projStart."
+                    <p class=\"projectEnd\">".$projEnd."
+                    <p class=\"projectAbstract\">".$row['tpDesc']."
+                    <div class=\"cornerFold\">
+                    </div>
+                    </div></a>";
+              }
             }
           }
+          else{
+            $sql = "SELECT * FROM tptable WHERE tpTitle LIKE '%".$term."%' OR tpDesc LIKE '%".$term."%'";
+            $result = mysqli_query($conn,$sql);
+            $queryResults = mysqli_num_rows($result);
 
+            if ($queryResults > 0){
+              while ($row = mysqli_fetch_assoc($result)){
+                    $query = 'SELECT uFName, uLName FROM users WHERE uID = ' .$row['pHead'].'';
+                    $queryResult = mysqli_query($conn,$query);
+                    $pHeadResult = mysqli_fetch_assoc($queryResult);
+
+                    $iClass = "";
+                    $projStart = "";
+                    $projEnd = "";
+                    if($row['tpEDate'] != null && $row['tpEDate'] == $row['tpSDate']){
+                      $iClass = "projectStatus cancelled";
+                      $date = date_create($row['tpSDate']);
+                      $projStart = date_format($date, 'jS F Y');
+                      $date = date_create($row['tpEDate']);
+                      $projEnd = date_format($date, 'jS F Y');
+                    }
+                    else if($row['tpEDate'] != null && $row['tpEDate'] != $row['tpSDate']){
+                      $iClass = "projectStatus done";
+                      $date = date_create($row['tpSDate']);
+                      $projStart = date_format($date, 'jS F Y');
+                      $date = date_create($row['tpEDate']);
+                      $projEnd = date_format($date, 'jS F Y');
+                    }
+                    else if($row['tpEDate'] == null){
+                      $iClass = "projectStatus ongoing";
+                      $date = date_create($row['tpSDate']);
+                      $projStart = date_format($date, 'jS F Y');
+                    }
+
+                    echo "<div class=\"projectDisplay\">
+                    <i class=\"".$iClass."\"></i>
+                    <a class=\"projectTitle\" href='project.php?pid=".$row['tpID']."'>".$row['tpTitle']."</a>
+                    <p class=\"projectHead\">".$pHeadResult['uFName']." ".$pHeadResult['uLName']."
+                    <p class=\"projectStart\">".$projStart."
+                    <p class=\"projectEnd\">".$projEnd."
+                    <p class=\"projectAbstract\">".$row['tpDesc']."
+                    <div class=\"cornerFold\">
+                    </div>
+                    </div></a>";
+              }
+            }
+          }
       ?>
 
     </div>
 
     <div id="members" class="tabContent">
         <?php
-          $term = $_POST['search-field'];
+         if(array_key_exists('search-field', $_POST) == FALSE){
           $sql = "SELECT * FROM users WHERE CONCAT(uFName, \" \", uLName) LIKE '%".$term."%'";
           $result = mysqli_query($conn,$sql);
           $queryResults = mysqli_num_rows($result);
@@ -159,6 +235,23 @@
               </div></a>";
             }
           }
+          }
+          else{
+          $sql = "SELECT * FROM users WHERE CONCAT(uFName, \" \", uLName) LIKE '%".$term."%'";
+          $result = mysqli_query($conn,$sql);
+          $queryResults = mysqli_num_rows($result);
+
+          if ($queryResults > 0){
+            while ($row = mysqli_fetch_assoc($result)){
+              echo "
+              <div class=\"member\">
+              <img class=\"memberImage\" src=\"../images/userImages/" .$row['uID']. "\">
+              <a class=\"memberName\" href='profile.php?mID=".$row['uID']."&isUser=0'>".$row['uFName']." ".$row['uLName']."</a>
+              <p class=\"memberTitle\">".$row['uOccupation']."
+              </div></a>";
+            }
+          }
+        }
       ?>
     </div>
 
