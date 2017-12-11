@@ -194,7 +194,7 @@
 
   <div id="createUserModal">
     <div id="createContainer">
-      <form action="index.html" method="post">
+      <form action="../php/createuser.php" method="post">
         <div id="imgcontainer">
         <img src="../images/loginavatar.png" />
         <input id="profimgfile" type="file" name="pic" accept="image/*">
@@ -220,12 +220,15 @@
         <input name="lname" class="p45" type="text" placeholder="Last Name" /required>
         <label class="p50" for="bdate">Birth Date</label>
         <label class="p50" for="gender">Gender</label>
-        <input name="bdate" class="p50" type="date" required/>
+        <input name="bdate" class="p50" type="date"/>
         <input id="malerbtn" name="gender" class="dnone" type="radio" value="Male" />
         <label id="malelbl" for="malerbtn"><i class="fa fa-male"></i> Male</label>
         <input id="femalerbtn" name="gender" class="dnone" type="radio" value="Female" />
         <label id="femalelbl" for="femalerbtn"><i class="fa fa-female"></i> Female</label>
-
+        <label class="p50" for="occupation">Occupation</label>
+        <label class="p50" for="affiliation">Affiliation</label>
+        <input name="occupation" class="p50" type="text" required/>
+        <input name="affiliation" class="p50" type="text" required/>
         <label class="p50"></label>
         <button class="p50 modalBtn" type="submit">Create User</button>
       </form>
