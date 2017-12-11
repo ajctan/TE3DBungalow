@@ -155,6 +155,7 @@ if(isset($_POST['file_name'])){
     		$temp.val($(element).text()).select();
     		document.execCommand("copy");
     		$temp.remove();
+    		alert("Citation has been copied to your clipboard!");
 		}
     </script>
   	<div id="abstract" class="tabContent">
