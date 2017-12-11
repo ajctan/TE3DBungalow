@@ -4,7 +4,7 @@
 	$uName = $_POST['uname'];
 	$pWord = $_POST['pword'];
 
-	$sql = "SELECT * FROM users WHERE uName LIKE '".$uName."' AND uPass LIKE '".$pWord."'";
+	$sql = "SELECT * FROM users WHERE uName LIKE '".$uName."' AND uPass LIKE '".$pWord."' AND uActive = 1";
 	$result = mysqli_query($conn,$sql);
 	$queryResults = mysqli_num_rows($result);
 	if($queryResults > 0){

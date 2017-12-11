@@ -58,17 +58,33 @@
       }
     ?>
   </div>
-
+  <!--<script>
+  	function confirmDelete(){
+  		var result = confirm("Are you sure you want to delete this account?");
+  		if(result){
+  			//window.location="../php/delAcc.php?accID=".document.getElementByID("accID");
+			//window.location.replace("http://localhost/TE3dBungalow/php/delAcc.php?accID=".document.getElementByID("accID"));
+			//window.location.href = "http://localhost/TE3dBungalow/php/delAcc.php?accID=".document.getElementByID("accID");
+			//header("Location: ../php/delAcc.php".document.getElementByID("accID"));
+			alert("../php/delAcc.php".document.getElementByID('accID').value);
+  		}
+  	}
+  </script>-->
   <!-- End of Toolbar; start of Content -->
   <div id="wrap">
     <div id="pageHead">
       <?php
         if(isset($_COOKIE['loggedIn'])){
-          if($_COOKIE['accType'] == 0)
+          if($_COOKIE['accType'] == 0 && $user['uType'] != 0)
+            //echo "<button id=\"optionsButton\" onclick=\"openOptions()\"><i class=\"fa fa-cog fa-2x\"></i></button>
+            //      <div id=\"options\">
+            //        	<button class=\"option\" id=\"accID\" value=\"".$mID."\" onclick=\"confirmDelete()\">Terminate Account</button>
+            //      </div>";
             echo "<button id=\"optionsButton\" onclick=\"openOptions()\"><i class=\"fa fa-cog fa-2x\"></i></button>
                   <div id=\"options\">
-
-                    <button class=\"option\">Terminate Account</button>
+                  	<form action=\"../php/delAcc.php\" method=\"POST\">
+                    	<button class=\"option\" name=\"accID\" value=\"".$mID."\">Terminate Account</button>
+                    </form>
                   </div>";
         }
       ?>
