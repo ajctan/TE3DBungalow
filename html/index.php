@@ -212,19 +212,17 @@
 
         <h3>Basic Information</h3>
         <hr>
-        <label class="p45" for="fname">First Name</label>
-        <label class="p10" for="mname">M.I.</label>
-        <label class="p45" for="lname">Last Name</label>
-        <input name="fname" class="p45" type="text" placeholder="First Name" /required>
-        <input name="mname" class="p10" type="text" placeholder="M.I." /required>
-        <input name="lname" class="p45" type="text" placeholder="Last Name" /required>
-        <label class="p50" for="bdate">Birth Date</label>
+        <label class="p50" for="fname">First Name</label>
+        <label class="p50" for="lname">Last Name</label>
+        <input name="fname" class="p50" type="text" placeholder="First Name" /required>
+        <input name="lname" class="p50" type="text" placeholder="Last Name" /required>
         <label class="p50" for="gender">Gender</label>
-        <input name="bdate" class="p50" type="date"/>
+        <label class="p50" for="placeholder"></label>
         <input id="malerbtn" name="gender" class="dnone" type="radio" value="Male" />
         <label id="malelbl" for="malerbtn"><i class="fa fa-male"></i> Male</label>
         <input id="femalerbtn" name="gender" class="dnone" type="radio" value="Female" />
         <label id="femalelbl" for="femalerbtn"><i class="fa fa-female"></i> Female</label>
+        <label class="p50" for="placeholder"></label>
         <label class="p50" for="occupation">Occupation</label>
         <label class="p50" for="affiliation">Affiliation</label>
         <input name="occupation" class="p50" type="text" required/>
