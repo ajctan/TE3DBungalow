@@ -171,7 +171,7 @@
 
 
           <label for="nprojectMembers" class="p100">Members</label>
-          <select id="nprojectMembers" class="p100" size="5" multiple>
+          <select id="nprojectMembers" name="nprojectMembers[]" class="p100" size="5" multiple="multiple">
             <?php
               $query = 'SELECT uID, uFName, uLName FROM users';
               $result = mysqli_query($conn,$query);

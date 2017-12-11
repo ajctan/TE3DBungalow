@@ -239,13 +239,12 @@ if(isset($_POST['file_name'])){
 						</div>
 						</a>";
 
-				$getMembers = 'SELECT uID, uFName, uLName FROM users, members WHERE projectID = ' .$pID.'';
+				$getMembers = 'SELECT u.uID, u.uFName, u.uLName FROM users AS u, members AS m WHERE u.uID != '.$pHeadResult['uID'].' AND u.uID = m.userID AND m.projectID = ' .$pID.'';
 				$result = mysqli_query($conn, $getMembers);
 				$queryResults = mysqli_num_rows($result);
 
       	if($queryResults > 0){
-      		$mem = mysqli_fetch_assoc($result);
-
+      		while($mem = mysqli_fetch_assoc($result)){
   				echo "
   						<div class=\"member\">
     						<img class=\"memberImage\" src=\"../images/userImages/" .$mem['uID']. ".png\">
@@ -253,6 +252,7 @@ if(isset($_POST['file_name'])){
     						<p class=\"memberTitle\">Member
   						</div>
   					  </a>";
+					}
       	}
       ?>
     </div>
