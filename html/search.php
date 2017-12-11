@@ -150,7 +150,7 @@
             while ($row = mysqli_fetch_assoc($result)){
               echo "
               <div class=\"member\">
-              <img class=\"memberImage\" src=\"../images/userImages/" .$row['uID']. ".png\">
+              <img class=\"memberImage\" src=\"../images/userImages/" .$row['uID']. "\">
               <a class=\"memberName\" href='profile.php?mID=".$row['uID']."&isUser=0'>".$row['uFName']." ".$row['uLName']."</a>
               <p class=\"memberTitle\">".$row['uOccupation']."
               </div></a>";
