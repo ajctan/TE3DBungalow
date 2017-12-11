@@ -148,7 +148,15 @@ if(isset($_POST['file_name'])){
 				}
 			?>
     </div>
-
+    <script>
+        function copyToClipboard(element) {
+    		var $temp = $("<input>");
+    		$("body").append($temp);
+    		$temp.val($(element).text()).select();
+    		document.execCommand("copy");
+    		$temp.remove();
+		}
+    </script>
   	<div id="abstract" class="tabContent">
 			<?php
 				$sanitized = nl2br($project['tpDesc']);
@@ -159,21 +167,31 @@ if(isset($_POST['file_name'])){
       ?>
       <div class="footbuttonContainer">
         <button id="downloadAbstract" onclick=""><i class="fa fa-download"></i> Download Abstract (.pdf)</button>
-        <button id="getCitation" onclick=""><i class="fa fa-file-text-o"></i> Get Citation</button>
         <?php
+        	$sql = "SELECT * FROM tptable, users WHERE tptable.pHead = users.uID AND tptable.tpID LIKE ".$project['tpID'];
+	    	$result = mysqli_query($conn,$sql);
+	    	$row = mysqli_fetch_assoc($result);
+	    	$myURL = 'http://'.$_SERVER['HTTP_HOST'].$_SERVER['PHP_SELF'];
+
+	    	$pCitation = $row['uLName'].", ".substr($row['uFName'], 0, 1).". (".$row['tpSDate']."). ".$row['tpTitle'].". Retrieved from: ".$myURL;
+	    	
+        	echo "<button id=\"getCitation\" onclick=\"copyToClipboard('#copy-text')\"><i class=\"fa fa-file-text-o\"></i> Get Citation</button>";
         	if(!isset($_COOKIE['loggedIn']))
         		echo "<button id=\"contactProjectHead\" onclick=\"openContactHead()\"><i class=\"fa fa-envelope-o\"></i> Contact Project Head</button>";
+
+        	echo "<div id=\"copy-text\" type=\"hidden\" style=\"color: #ffffff\">".$pCitation."</div>";
         ?>
       </div>
+    
       <div id="contactHead">
 	      <div class="contactHeadHeader">
 	      </div>
 	      <form action="../php/cphead.php" method="POST">
 	        <input type="text" name="email" placeholder="Your Email" required/>
 	        <?php
-	        	$sql = "SELECT * FROM tptable WHERE tpID LIKE ".$project['tpID'];
-	    			$result = mysqli_query($conn,$sql);
-	    			$row = mysqli_fetch_assoc($result);
+	        	//$sql = "SELECT * FROM tptable WHERE tpID LIKE ".$project['tpID'];
+	    		//$result = mysqli_query($conn,$sql);
+	    		//$row = mysqli_fetch_assoc($result);
 
 	        	echo "<input name='projID' value=".$project['tpID']." type='hidden'>";
 	        	echo "<input name='projHead' value=".$row['pHead']." type='hidden'>";
