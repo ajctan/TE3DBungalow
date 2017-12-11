@@ -60,9 +60,11 @@ if(isset($_POST['file_name'])){
   $pID = $_GET['pid'];
 
   if(isset($_COOKIE['loggedIn'])){
-    $uli = $_COOKIE['loggedIn'];
-    $accType = $_COOKIE['accType'];
-		$uliID = $_COOKIE['uID'];
+		$uli = $_COOKIE['loggedIn'];
+		if($uli == 1){
+	    $accType = $_COOKIE['accType'];
+			$uliID = $_COOKIE['uID'];
+		}
   }
 
 	$sql = "SELECT * FROM tptable WHERE tpID LIKE ".$pID;

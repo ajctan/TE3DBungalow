@@ -19,8 +19,11 @@
   $term = $_POST['search-field'];
 
   if(isset($_COOKIE['loggedIn'])){
-    $uli = $_COOKIE['loggedIn'];
-    $accType = $_COOKIE['accType'];
+		$uli = $_COOKIE['loggedIn'];
+		if($uli == 1){
+	    $accType = $_COOKIE['accType'];
+			$uliID = $_COOKIE['uID'];
+		}
   }
 ?>
 
