@@ -60,9 +60,11 @@ if(isset($_POST['file_name'])){
   $pID = $_GET['pid'];
 
   if(isset($_COOKIE['loggedIn'])){
-    $uli = $_COOKIE['loggedIn'];
-    $accType = $_COOKIE['accType'];
-		$uliID = $_COOKIE['uID'];
+		$uli = $_COOKIE['loggedIn'];
+		if($uli == 1){
+	    $accType = $_COOKIE['accType'];
+			$uliID = $_COOKIE['uID'];
+		}
   }
 
 	$sql = "SELECT * FROM tptable WHERE tpID LIKE ".$pID;
@@ -258,7 +260,7 @@ if(isset($_POST['file_name'])){
       <?php
 				echo "
 						<div class=\"member\">
-							<img class=\"memberImage\" src=\"../images/userImages/" .$pHeadResult['uID']. ".png\">
+							<img class=\"memberImage\" src=\"../images/userImages/" .$pHeadResult['uID']. "\">
 							<a class=\"memberName\" href='profile.php?mID=".$pHeadResult['uID']."&isUser=0'>".$pHeadResult['uFName']." ".$pHeadResult['uLName']."</a>
 							<p class=\"memberTitle\">Project Head
 						</div>
@@ -272,7 +274,7 @@ if(isset($_POST['file_name'])){
       		while($mem = mysqli_fetch_assoc($result)){
   				echo "
   						<div class=\"member\">
-    						<img class=\"memberImage\" src=\"../images/userImages/" .$mem['uID']. ".png\">
+    						<img class=\"memberImage\" src=\"../images/userImages/" .$mem['uID']. "\">
     						<a class=\"memberName\" href='profile.php?mID=".$mem['uID']."&isUser=0'>".$mem['uFName']." ".$mem['uLName']."</a>
     						<p class=\"memberTitle\">Member
   						</div>

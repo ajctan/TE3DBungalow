@@ -18,8 +18,11 @@
   $accType = '2'; //0 Admin, 1 Member, 2 Guest
 
   if(isset($_COOKIE['loggedIn'])){
-    $uli = $_COOKIE['loggedIn'];
-    $accType = $_COOKIE['accType'];
+		$uli = $_COOKIE['loggedIn'];
+		if($uli == 1){
+	    $accType = $_COOKIE['accType'];
+			$uliID = $_COOKIE['uID'];
+		}
   }
 ?>
 
