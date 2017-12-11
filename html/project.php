@@ -115,7 +115,8 @@ if(isset($_POST['file_name'])){
       			echo "<button id='optionsButton' onclick='openOptions()'><i class='fa fa-cog fa-2x'></i></button>
       				  <div id='options'>
 	                <form action='../php/deleteProject.php' method='POST'>
-	        					<button class='option' name='delete' value=".$pID.">Delete Project</button>
+										<input name='delete' type='number' value='".$pID."' hidden/>
+	        					<button class='option'>Delete Project</button>
 	                </form>
       				  </div>";
       	}
