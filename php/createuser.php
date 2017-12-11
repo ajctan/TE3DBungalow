@@ -10,8 +10,7 @@
 		$id = $row['uID'] + 1;
 
 		$info = pathinfo($_FILES['pic']['name']);
-		$ext = $info['extension'];
-		$newname = $id.'.'.$ext;
+		$newname = $id;
 
 		$target = '../images/userImages/'.$newname;
 		move_uploaded_file( $_FILES['pic']['tmp_name'], $target);
