@@ -57,7 +57,7 @@ if(isset($_POST['file_name'])){
 <?php
   $uli = '0';
   $accType = '2'; //0 Admin, 1 Member, 2 Guest
-	$pID = $_GET['pid'];
+  $pID = $_GET['pid'];
 
   if(isset($_COOKIE['loggedIn'])){
     $uli = $_COOKIE['loggedIn'];
@@ -160,7 +160,10 @@ if(isset($_POST['file_name'])){
       <div class="footbuttonContainer">
         <button id="downloadAbstract" onclick=""><i class="fa fa-download"></i> Download Abstract (.pdf)</button>
         <button id="getCitation" onclick=""><i class="fa fa-file-text-o"></i> Get Citation</button>
-        <button id="contactProjectHead" onclick="openContactHead()"><i class="fa fa-envelope-o"></i> Contact Project Head</button>
+        <?php
+        	if(!isset($_COOKIE['loggedIn']))
+        		echo "<button id=\"contactProjectHead\" onclick=\"openContactHead()\"><i class=\"fa fa-envelope-o\"></i> Contact Project Head</button>";
+        ?>
       </div>
       <div id="contactHead">
 	      <div class="contactHeadHeader">
