@@ -1,44 +1,6 @@
 <?php
 include '../php/dbh.php';
 
-function findContentType($ext){
-	switch($ext){
-		case 'docx': return 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'; break;
-		case 'xlsx':  return 'application/vnd.ms-excel'; break;
-		case 'ppt':  return 'application/vnd.ms-powerpoint'; break;
-		case 'pdf':  return 'application/pdf'; break;
-		case 'html': return 'text/html'; break;
-		case 'jpeg': return 'image/jpeg'; break;
-		case 'png':  return 'image/png'; break;
-		case 'css':  return 'text/css'; break;
-		case 'zip':  return 'application/zip'; break;
-		case 'rar': return 'application/x-rar-compressed'; break;
-		default: return 'application/octet-stream';
-	}
-}
-
-if(isset($_POST['file_name'])){
-
-	$file = $_POST['file_name'];
-	$download_file = 'SELECT * , OCTET_LENGTH(tpFile) as file_size FROM files f, tptable tp WHERE f.tpID = tp.tpID AND f.tpFileName = "'.$file.'"';
-	$found_file = mysqli_query($conn, $download_file);
-	$row = mysqli_fetch_assoc($found_file);
-	$file_size= $row['file_size'];
-	$file_extension = explode(".", $file);
-
-    $file_exist = mysqli_num_rows($found_file);
-
-	if ($file_exist > 0){
-
-			header('Content-type: '. findContentType($file_extension[sizeof($file_extension)-1]));
-			header("Content-Length: ". $file_size);
-			header('Content-Disposition: attachment; filename="'.$file.'"');
-			//readfile('uploads/'.$file);
-			echo $row['tpFile'];
-			mysqli_free_result($found_file);
-
-	}
-}
 ?>
 
 <!DOCTYPE html>
@@ -209,7 +171,7 @@ if(isset($_POST['file_name'])){
 							 <td>.".$file_extension[sizeof($file_extension)-1]."</td>
 							 <td>".$modified_date."</td>
 							 <td>
-								<form action='project.php' method='post' name='downloadform'>
+								<form action='../php/downloadFile.php' method='post' name='downloadform'>
 									<input name='file_name' value=".$filename." type='hidden'>
 									<button class='fileDownload' type='submit'><i class='fa fa-download'></i></button>
 								</form>
