@@ -61,7 +61,7 @@
 
   <div id="wrap">
     <div id="pageHead">
-      <img src="../images/searchlogo.png">
+      <img class="pageLogo" src="../images/searchlogo.png">
       <?php
         echo "<h3>Search results for: '".$_POST['search-field']."'</h3>"
       ?>

@@ -278,10 +278,12 @@ h1{
   width: 80%;
 }
 
-#pageHead img{
+.pageLogo{
+  border-radius: 200px;
   float: left;
   height: 200px;
   margin: 0 50px 0 0;
+  width: 200px;
 }
 
 #optionsButton{

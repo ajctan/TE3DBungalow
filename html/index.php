@@ -60,7 +60,7 @@
   <!-- End of Toolbar; start of Content -->
   <div id="wrap">
     <div id="pageHead">
-      <img src="../images/projectlogo.png">
+      <img class="pageLogo" src="../images/projectlogo.png">
       <h1>Projects</h1>
       <hr>
       <p class="pageLegend">
@@ -194,7 +194,7 @@
 
   <div id="createUserModal">
     <div id="createContainer">
-      <form action="../php/createuser.php" method="post">
+      <form action="../php/createuser.php" method="post" enctype="multipart/form-data">
         <div id="imgcontainer">
         <img src="../images/loginavatar.png" />
         <input id="profimgfile" type="file" name="pic" accept="image/*">

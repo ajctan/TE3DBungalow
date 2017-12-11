@@ -123,7 +123,7 @@ if(isset($_POST['file_name'])){
       ?>
 
       <!-- End of MODALS -->
-			<img src="../images/projectlogo.png">
+			<img class="pageLogo" src="../images/projectlogo.png">
 			<?php
 				echo "<p id=\"pageTitle\">".$project['tpTitle'];
 			?>

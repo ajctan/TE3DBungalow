@@ -74,10 +74,11 @@
       ?>
 
       <!-- End of MODULE -->
-      <img src="../images/loginavatar.png">
-        <?php
-          echo "<p id=\"pageTitle\" <h1>".$user['uFName']." ".$user['uLName']."</h1>";
-        ?>
+      <?php
+        echo "
+          <img class='pageLogo' src='../images/userImages/".$user['uID'].".png'>
+          <p id=\"pageTitle\" <h1>".$user['uFName']." ".$user['uLName']."</h1>";
+      ?>
       <hr>
       <p class="pageLegend">
         <?php
