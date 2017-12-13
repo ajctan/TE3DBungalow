@@ -645,3 +645,20 @@ h1{
   padding: 0;
   position: relative;
 }
+
+.p100{
+  display: inline;
+  margin: 5px;
+  padding: 5px;
+  width: 96%;
+}
+
+.modalBtn{
+  background: #1d9b72;
+  border: none;
+  color: #b0ddce;
+  cursor: pointer;
+  outline: none;
+  padding: 7px;
+  text-align: center;
+}

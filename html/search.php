@@ -107,7 +107,7 @@
                                                                                                                       <option>Finished</option>
                                                                                                                       <option>Cancelled</option>
                                                                                                                     </select></label>
-            <button>Advanced Search</button>
+            <button class="p100 modalBtn">Advanced Search</button>
 
 
           </form>
