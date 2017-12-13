@@ -107,6 +107,7 @@
                                                                                                                       <option>Finished</option>
                                                                                                                       <option>Cancelled</option>
                                                                                                                     </select></label>
+            <button>Advanced Search</button>
 
 
           </form>
