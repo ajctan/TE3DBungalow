@@ -304,9 +304,55 @@ if(isset($_POST['file_name'])){
     </form>
   </div>
 
+	<div id="createProjectModal">
+    <div id="createContainer">
+      <form action="../php/createProject.php" method="post">
+        <div class="center">
+          <label class="p100" for="nprojectTitle">Project Title</label>
+          <input class="p100" name="nprojectTitle" type="text" />
+          <label class="p100" for="nprojectHead">Project Head</label>
+		  <select name='selectedprojectHead' class="p100">
+			<?php
+				$query = 'SELECT uID, uFName, uLName FROM users';
+				$result = mysqli_query($conn,$query);
+				$queryResults = mysqli_num_rows($result);
+				if ($queryResults > 0){
+					while ($row = mysqli_fetch_assoc($result)){
+						echo "<option value=".$row['uID'].">".$row['uFName']. " ".$row['uLName']."</option>";
+					}
+				}
+
+			?>
+		  </select>
+          <label class="p100" for="nprojectAbstract">Abstract</label>
+          <textarea name="nprojectAbstract" rows="17" required></textarea>
+
+
+          <label for="nprojectMembers" class="p100">Members</label>
+          <select id="nprojectMembers" name="nprojectMembers[]" class="p100" size="5" multiple="multiple">
+            <?php
+              $query = 'SELECT uID, uFName, uLName FROM users';
+              $result = mysqli_query($conn,$query);
+              $queryResults = mysqli_num_rows($result);
+              if ($queryResults > 0){
+                while ($row = mysqli_fetch_assoc($result)){
+                  echo "<option value='".$row['uID']."'>".$row['uFName']. " ".$row['uLName']."</option>";
+                }
+              }
+            ?>
+          </select>
+        </div>
+
+        <div class="alignRightContainer">
+          <button class="p50 fRight modalBtn" type="submit">Create Project</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
 	<?php
 		if($uli == 1){
-			echo "<button id='updateButton'><i class='fa fa-pencil fa-2x'	></i></button>";
+			echo "<button class='contextButton'><i class='fa fa-pencil fa-2x'	></i></button>";
 		}
 	?>
 

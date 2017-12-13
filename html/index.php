@@ -171,10 +171,11 @@
           <textarea name="nprojectAbstract" rows="17" required></textarea>
 
 
-          <label for="nprojectMembers" class="p100">Members</label>
-          <select id="nprojectMembers" name="nprojectMembers[]" class="p100" size="5" multiple="multiple">
+          <label class="p50">All Members</label>
+          <label class="p50">Project Members</label>
+          <select id="allMembers" class="select p50" size="5" multiple="multiple">
             <?php
-              $query = 'SELECT uID, uFName, uLName FROM users';
+              $query = 'SELECT uID, uFName, uLName FROM users ORDER BY uFName';
               $result = mysqli_query($conn,$query);
               $queryResults = mysqli_num_rows($result);
               if ($queryResults > 0){
@@ -184,10 +185,15 @@
               }
             ?>
           </select>
+          <select id="projectMembers" name="nprojectMembers[]" class="select p50" size="5" multiple="multiple">
+
+          </select>
+          <button class="p50 modalBtn" type="button" onclick="addMember()">Add</button>
+          <button class="p50 modalBtn" type="button" onclick="removeMember()">Remove</button>
         </div>
 
         <div class="alignRightContainer">
-          <button class="p50 fRight modalBtn" type="submit">Create Project</button>
+          <button class="p50 fRight modalBtn" type="submit" onclick="submitMembers()">Create Project</button>
         </div>
       </form>
     </div>

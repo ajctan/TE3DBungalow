@@ -32,6 +32,44 @@ function closeOptions(){
   document.getElementById('optionsBackground').style.display = "none";
 }
 
+function addMember(){
+  var allMembers = document.getElementById('allMembers');
+  var projectMembers = document.getElementById('projectMembers');
+  var selectedItem = allMembers.selectedIndex;
+
+  if(selectedItem == -1){
+    window.alert("Select a member to add");
+  } else{
+    var newMember = allMembers[selectedItem].cloneNode(true);
+
+    projectMembers.appendChild(newMember);
+    allMembers.removeChild(allMembers[selectedItem]);
+  }
+}
+
+function removeMember(){
+  var projectMembers = document.getElementById('projectMembers');
+  var allMembers = document.getElementById('allMembers');
+  var selectedItem = projectMembers.selectedIndex;
+
+  if(selectedItem == -1){
+    window.alert("Select a member to remove");
+  } else{
+    var selMember = projectMembers[selectedItem].cloneNode(true);
+
+    allMembers.appendChild(selMember);
+    projectMembers.removeChild(projectMembers[selectedItem]);
+  }
+}
+
+function submitMembers(){
+  var projectMembers = document.getElementById('projectMembers');
+
+  for(var i = 0; i < projectMembers.options.length; i++){
+    projectMembers.options[i].selected = true;
+  }
+}
+
 function openTab(evt, tabName) {
     // Declare all variables
     var i, tabcontent, tablinks;

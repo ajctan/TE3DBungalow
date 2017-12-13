@@ -222,32 +222,134 @@
   display: none;
 }
 
-#updateButton{
+#createProjectModal:before{
+  background: #1d9b72;
+  content: '';
+  display: block;
+  height: 30px;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+}
+
+#createProjectModal{
+  background: #eee;
+  box-shadow: 0 0 10px 1px #555;
+  display: none;
+  height: 82%;
+  left: 50%;
+  margin: auto;
+  overflow: hidden;
+  position: fixed;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 600px;
+  z-index: 3;
+}
+
+#createContainer{
+  height: 93%;
+  overflow-y: scroll;
+  padding: 5px;
+}
+
+#createContainer::-webkit-scrollbar{
+  background: #eee;
+  width: 10px;
+}
+
+#createContainer::-webkit-scrollbar-thumb{
+  background: #eee;
+  border-radius: 10px;
+}
+
+#createContainer:hover::-webkit-scrollbar-thumb{
+  background: #1d9b72;
+}
+
+#createProjectModal textarea{
+  box-sizing: border-box;
+  display: inline-block;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 1.0em;
+  height: 82%;
+  margin: 0 auto 0 auto;
+  outline: none;
+  overflow-x: hidden;
+  padding: 5px;
+  resize: none;
+  width: 96%;
+}
+
+#createProjectModal label{
+  display: inline-block;
+  font-weight: bold;
+  margin: 5px 5px 0 5px;
+  text-align: left;
+}
+
+#createProjectModal input[type=file]{
+  display: none;
+}
+
+#createProjectModal input{
+  box-sizing: border-box;
+  padding: 5px;
+}
+
+#createProjectModal select option{
+  padding: 10px;
+}
+
+.center{
+  text-align: center;
+}
+
+.dnone{
+  display: none;
+}
+
+.p10{
+  margin: 5px;
+  width: 7%;
+}
+
+.p45{
+  margin: 5px;
+  width: 43%;
+}
+
+.p50{
+  margin: 5px;
+  width: 47%;
+}
+
+.p100{
+  display: inline;
+  margin: 5px;
+  padding: 5px;
+  width: 96%;
+}
+
+.alignRightContainer{
+  width: 100%;
+}
+
+.fRight{
+  float: right;
+  margin: 10px;
+}
+
+.modalBtn{
   background: #1d9b72;
   border: none;
-  border-radius: 100px;
-  bottom:5%;
   color: #b0ddce;
   cursor: pointer;
-  height: 75px;
   outline: none;
-  position: absolute;
-  right: 5%;
-  width: 75px;
-  z-index: 2;
+  padding: 7px;
+  text-align: center;
 }
 
-#updateButton:hover{
+.modalBtn:hover{
   color: #fff;
-}
-
-#updateButtonbackground{
-  background: none;
-  display: none;
-  height: 100%;
-  left: 0;
-  position: absolute;
-  top: 0;
-  width: 100%;
-  z-index: 1;
 }

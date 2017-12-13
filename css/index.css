@@ -72,33 +72,6 @@
   background: #1d9b72;
 }
 
-#nprojectFiles{
-  display: inline-block;
-  margin: 0 auto 0 auto;
-}
-
-#createProjectModal tr:nth-child(even){
-  background: #56e39f;
-}
-
-#createProjectModal th.name{
-  text-align: left;
-  width: 60%;
-}
-
-#createProjectModal th.size, th.extension{
-  text-align: center;
-  width: 15%;
-}
-
-#createProjectModal td:first-child{
-  text-align: left;
-}
-
-#createProjectModal td:not(:first-child){
-  text-align: center;
-}
-
 #createUserModal:before{
   background: #1d9b72;
   content: '';
@@ -356,4 +329,8 @@
 
 .createButtonbackground-visible{
   display: block;
+}
+
+.select{
+  min-height: 180px;
 }
