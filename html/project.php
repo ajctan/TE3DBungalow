@@ -144,10 +144,6 @@ if(isset($_POST['file_name'])){
 	      	echo "<button class=\"tabButton\" onclick=\"openTab(event, 'files')\">Files</button>";
 					echo "<button class=\"tabButton\" onclick=\"openTab(event, 'contributors')\">Contributors</button>";
 				}
-	      else{
-	      	echo "<button class=\"tabButton\" onclick=\"alert('Please Log in to view/retrieve files')\" disabled>Files</button>";
-					echo "<button class=\"tabButton\" onclick=\"alert('Please Log in to view the contributors')\" disabled>Contributors</button>";
-				}
 			?>
     </div>
     <script>
@@ -266,7 +262,7 @@ if(isset($_POST['file_name'])){
 						</div>
 						</a>";
 
-				$getMembers = 'SELECT u.uID, u.uFName, u.uLName FROM users AS u, members AS m WHERE u.uID != '.$pHeadResult['uID'].' AND u.uID = m.userID AND m.projectID = ' .$pID.'';
+				$getMembers = 'SELECT DISTINCT u.uID, u.uFName, u.uLName FROM users AS u, members AS m WHERE u.uID != '.$pHeadResult['uID'].' AND u.uID = m.userID AND m.projectID = ' .$pID.'';
 				$result = mysqli_query($conn, $getMembers);
 				$queryResults = mysqli_num_rows($result);
 
@@ -307,6 +303,13 @@ if(isset($_POST['file_name'])){
       <a href="">Forgot Password?</a>
     </form>
   </div>
+
+	<?php
+		if($uli == 1){
+			echo "<button id='updateButton'><i class='fa fa-pencil fa-2x'	></i></button>";
+		}
+	?>
+
   <!-- These are transparent 100% x 100% box behind the module, that closes the module when clicked -->
   <div id="notificationsBackground" onclick="closeNotifications()"></div>
   <div id="optionsBackground" onclick="closeOptions()"></div>

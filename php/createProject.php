@@ -32,14 +32,11 @@
 			mysqli_query($conn, $addMember);
 		}
 
-		if (mysqli_multi_query($conn, $createProject)){
-				echo "<script type='text/javascript'>alert('New project created');</script>";
-				header('Location: ../html/index.php');
-			} else {
-				echo "<script type='text/javascript'>alert('Error: ". $createProject."<br>". mysqli_error($conn)."');</script>";
-				header('Location: ../html/index.php');
-			}
-
+		if (mysqli_multi_query($conn, $createProject))
+			echo "<script type='text/javascript'>alert('New project created');</script>";
+		else
+			echo "<script type='text/javascript'>alert('Error: ". $createProject."<br>". mysqli_error($conn)."');</script>";
+		header('Location: ../html/index.php');
 	?>
 </body>
 </html>
