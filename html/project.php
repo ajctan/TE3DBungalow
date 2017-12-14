@@ -171,9 +171,17 @@ if(isset($_POST['file_name'])){
 		    	$result = mysqli_query($conn,$sql);
 		    	$row = mysqli_fetch_assoc($result);
 		    	$myURL = 'http://'.$_SERVER['HTTP_HOST'].$_SERVER['PHP_SELF'];
+		    	$head = $row['uLName'].", ".substr($row['uFName'], 0, 1).".";
+	    		$pCitation = "(".$row['tpSDate']."). ".$row['tpTitle'].". Retrieved from: ".$myURL."?pid=".$pID;
 
-	    		$pCitation = $row['uLName'].", ".substr($row['uFName'], 0, 1).". (".$row['tpSDate']."). ".$row['tpTitle'].". Retrieved from: ".$myURL."?pid=".$pID;
+	    		$sql = "select projectID, count(projectID) from members where projectID = ".$project['tpID']." group by projectID";
+	    		$result = mysqli_query($conn,$sql);
+		    	$row = mysqli_fetch_assoc($result);
 
+		    	if($row['count(projectID)'] == 1)
+		    		echo "<div id=\"copy-text\" class=\"hidden\">".$head." ".$pCitation."</div>";
+		    	else
+		    		echo "<div id=\"copy-text\" class=\"hidden\">".$head.", et al. ".$pCitation."</div>";
         	echo "<button id=\"getCitation\" onclick=\"copyToClipboard('#copy-text')\"><i class=\"fa fa-file-text-o\"></i> Get Citation</button>";
         	if(!isset($_COOKIE['loggedIn']))
         		echo "<button id=\"contactProjectHead\" onclick=\"openContactHead()\"><i class=\"fa fa-envelope-o\"></i> Contact Project Head</button>";
