@@ -324,9 +324,9 @@ if(isset($_POST['file_name'])){
 
 	<div id="editProjectModal" class="largeModal">
     <div class="modalPadding">
-      <form action="../php/createProject.php" method="post">
+      <form action="../php/updateproject.php" method="post">
 				<?php
-					echo "<input id='nprojectID' type='hidden' value='".$pID."'>";
+					echo "<input id='nprojectID' name='nprojectID' type='hidden' value='".$pID."'>";
 				?>
         <div class="center">
           <label class="p100" for="nprojectTitle">Project Title</label>
