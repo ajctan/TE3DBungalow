@@ -214,8 +214,9 @@
         <input name="email" class="p100" type="text" placeholder="me@domain.com" required/>
         <label class="p50" for="pwd">Password</label>
         <label class="p50" for="cpwd">Confirm Password</label>
-        <input name="pwd" class="p50" type="password" required/>
-        <input name="cpwd" class="p50" type="password" required/>
+        <input id="pwd" name="pwd" class="p50" type="password" onkeyup="validatePassword();" required/>
+        <input id="cpwd" name="cpwd" class="p50" type="password" onkeyup="validatePassword();" required/>
+        <label id="validatePwd" class="p100 validate">Passwords do not match!</label>
 
         <h3>Basic Information</h3>
         <hr>
@@ -235,7 +236,7 @@
         <input name="occupation" class="p50" type="text" required/>
         <input name="affiliation" class="p50" type="text" required/>
         <label class="p50"></label>
-        <button class="p50" type="submit">Create User</button>
+        <button id="createUserBtn" class="p50" type="submit">Create User</button>
       </form>
     </div>
   </div>

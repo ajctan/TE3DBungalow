@@ -32,6 +32,20 @@ function closeOptions(){
   document.getElementById('optionsBackground').style.display = "none";
 }
 
+function validatePassword(){
+  var pwd = document.getElementById('pwd').value;
+  var cpwd = document.getElementById('cpwd').value;
+
+  if(pwd == cpwd){
+    document.getElementById('validatePwd').style.display="none";
+    document.getElementById('createUserBtn').disabled = false;
+  } else{
+    document.getElementById('validatePwd').style.display="block";
+    document.getElementById('createUserBtn').disabled = true;
+  }
+
+}
+
 function PreviewImage() {
   var reader = new FileReader();
   reader.readAsDataURL(document.getElementById("profimgfile").files[0]);
