@@ -161,17 +161,6 @@ h1{
   margin: 0;
 }
 
-#notificationsBackground{
-  background: none;
-  display: none;
-  height: 100%;
-  left: 0;
-  position: absolute;
-  top: 0;
-  width: 100%;
-  z-index: 2;
-}
-
 #login:before {
   border:10px solid #000;
   border-color:transparent transparent #fff;
@@ -235,17 +224,6 @@ h1{
 
 #login a:hover{
   text-decoration: underline;
-}
-
-#loginbackground{
-  background: none;
-  display: none;
-  height: 100%;
-  left: 0;
-  position: absolute;
-  top: 0;
-  width: 100%;
-  z-index: 2;
 }
 
 #wrap{
@@ -336,17 +314,6 @@ h1{
 
 #options button:hover{
   text-decoration: underline;
-}
-
-#optionsBackground{
-  background: none;
-  display: none;
-  height: 100%;
-  left: 0;
-  position: absolute;
-  top: 0;
-  width: 100%;
-  z-index: 2;
 }
 
 #tabButtons{
@@ -442,13 +409,12 @@ h1{
   width: 33.33%;
 }
 
-.half{
-  width: 50%;
+.tabButton:hover{
+  color: #000;
 }
 
-.tabButton[disabled]{
-  cursor: not-allowed;
-  text-decoration: line-through;
+.half{
+  width: 50%;
 }
 
 .tabButton:last-child{
@@ -460,6 +426,60 @@ h1{
   height: 100%;
   padding: 10px 12px;
   position: relative;
+}
+
+.modalPadding{
+  height: 93%;
+  overflow-y: scroll;
+  padding: 5px;
+}
+
+.largeModal:before{
+  background: #1d9b72;
+  content: '';
+  display: block;
+  height: 30px;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+}
+
+.largeModal{
+  background: #eee;
+  box-shadow: 0 0 10px 1px #555;
+  display: none;
+  height: 82%;
+  left: 50%;
+  margin: auto;
+  overflow: hidden;
+  position: fixed;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 600px;
+  z-index: 3;
+}
+
+.largeModal h3{
+  margin: 10px;
+  padding: 0;
+}
+
+.largeModal hr{
+  margin: 0 5px 0 5px;
+}
+
+.modalPadding::-webkit-scrollbar{
+  background: #eee;
+  width: 10px;
+}
+
+.modalPadding::-webkit-scrollbar-thumb{
+  background: #eee;
+  border-radius: 10px;
+}
+
+.modalPadding:hover::-webkit-scrollbar-thumb{
+  background: #1d9b72;
 }
 
 .projectDisplay{
@@ -646,6 +666,24 @@ h1{
   position: relative;
 }
 
+button, input[type=button], input[type=submit]{
+  background: #1d9b72;
+  border: none;
+  color: #b0ddce;
+  cursor: pointer;
+  outline: none;
+  padding: 7px;
+  text-align: center;
+}
+
+.modalBtn:hover{
+  color: #fff;
+}
+
+button:hover, input[type=button]:hover, input[type=submit]:hover{
+  color: #fff;
+}
+
 .contextButton{
   background: #1d9b72;
   border: none;
@@ -665,7 +703,88 @@ h1{
   color: #fff;
 }
 
-.contextButtonbackground{
+.largeModal textarea{
+  box-sizing: border-box;
+  display: inline-block;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 1.0em;
+  height: 82%;
+  margin: 0 auto 0 auto;
+  outline: none;
+  overflow-x: hidden;
+  padding: 5px;
+  resize: none;
+  width: 96%;
+}
+
+.largeModal img{
+  height: 150px;
+}
+
+.largeModal label{
+  display: inline-block;
+  font-weight: bold;
+  margin: 5px 5px 0 5px;
+  text-align: left;
+}
+
+.largeModal input[type=file]{
+  display: none;
+}
+
+.largeModal input{
+  box-sizing: border-box;
+  padding: 5px;
+}
+
+.largeModal select option{
+  padding: 10px;
+}
+
+.center{
+  text-align: center;
+}
+
+.dnone{
+  display: none;
+}
+
+.p10{
+  margin: 5px;
+  width: 7%;
+}
+
+.p45{
+  margin: 5px;
+  width: 43%;
+}
+
+.p50{
+  margin: 5px;
+  width: 47%;
+}
+
+.p100{
+  display: inline;
+  margin: 5px;
+  padding: 5px;
+  width: 96%;
+}
+
+.alignRightContainer{
+  width: 100%;
+}
+
+.fRight{
+  float: right;
+  margin: 10px;
+}
+
+.select{
+  min-height: 180px;
+}
+
+.modalBackground{
   background: none;
   display: none;
   height: 100%;
