@@ -16,11 +16,6 @@ USE `te3db`;
 /*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
-DROP SCHEMA IF EXISTS te3db;
-
-CREATE SCHEMA te3db;
-
-USE te3db;
 
 --
 -- Table structure for table `files`
@@ -88,6 +83,7 @@ CREATE TABLE `tptable` (
   `tpEDate` date DEFAULT NULL,
   `tpAccessLVL` int(11) NOT NULL,
   `pHead` varchar(50) DEFAULT NULL,
+  `pVentureC` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`tpID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -98,7 +94,7 @@ CREATE TABLE `tptable` (
 
 LOCK TABLES `tptable` WRITE;
 /*!40000 ALTER TABLE `tptable` DISABLE KEYS */;
-INSERT INTO `tptable` VALUES (1,'BICTORY SRS SOFENGG','A software requirements specification (SRS) is a description of a software system to be developed. It lays out functional and non-functional requirements, and may include a set of use cases that describe user interactions that the software must provide.\r\n\r\nSoftware requirements specification establishes the basis for an agreement between customers and contractors or suppliers (in market-driven projects, these roles may be played by the marketing and development divisions) on what the software product is to do as well as what it is not expected to do. Software requirements specification permits a rigorous assessment of requirements before design can begin and reduces later redesign. It should also provide a realistic basis for estimating product costs, risks, and schedules. Used appropriately, software requirements specifications can help prevent software project failure.','2017-01-01','2017-11-29',1,'2'),(2,'4 Pics 1 Hung (WEBAPDE)','A web application which is a crossover of 4 pics 1 word and hangman. Developed for WEBAPDE X22 under Arturo Caronongan.','2017-08-22','2017-09-15',1,'3'),(3,'CSETHIC Intellectual Property Paper','A paper on issues that shows unethical practices when it comes to patents, copyrights, and the like','2017-11-27','2017-11-28',1,'3'),(4,'ADVANDB Query Optimization','A simple query application that issues queries to the Yelp database. The application displays an interface for selecting the query to be executed and viewing the query results.','2017-11-28','2017-11-29',1,'8');
+INSERT INTO `tptable` VALUES (1,'BICTORY SRS SOFENGG','A software requirements specification (SRS) is a description of a software system to be developed. It lays out functional and non-functional requirements, and may include a set of use cases that describe user interactions that the software must provide.\r\n\r\nSoftware requirements specification establishes the basis for an agreement between customers and contractors or suppliers (in market-driven projects, these roles may be played by the marketing and development divisions) on what the software product is to do as well as what it is not expected to do. Software requirements specification permits a rigorous assessment of requirements before design can begin and reduces later redesign. It should also provide a realistic basis for estimating product costs, risks, and schedules. Used appropriately, software requirements specifications can help prevent software project failure.','2017-01-01','2017-11-29',1,'2','Christine Gendrano'),(2,'4 Pics 1 Hung (WEBAPDE)','A web application which is a crossover of 4 pics 1 word and hangman. Developed for WEBAPDE X22 under Arturo Caronongan.','2017-08-22','2017-09-15',1,'3','Arturo Caronongan'),(3,'CSETHIC Intellectual Property Paper','A paper on issues that shows unethical practices when it comes to patents, copyrights, and the like','2017-11-27','2017-11-28',1,'3','Edmund Gerald Cruz'),(4,'ADVANDB Query Optimization','A simple query application that issues queries to the Yelp database. The application displays an interface for selecting the query to be executed and viewing the query results.','2017-11-28','2017-11-29',1,'8','Christine Gendrano');
 /*!40000 ALTER TABLE `tptable` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -143,4 +139,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-12-11 22:05:30
+-- Dump completed on 2017-12-14 19:06:31
