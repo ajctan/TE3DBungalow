@@ -241,9 +241,9 @@ if(isset($_POST['file_name'])){
 	      <form action="../php/cphead.php" method="POST">
 	        <input type="text" name="email" placeholder="Your Email" required/>
 	        <?php
-	        	//$sql = "SELECT * FROM tptable WHERE tpID LIKE ".$project['tpID'];
-	    		//$result = mysqli_query($conn,$sql);
-	    		//$row = mysqli_fetch_assoc($result);
+	        	$sql = "SELECT * FROM tptable, users WHERE tptable.pHead = users.uID AND tptable.tpID LIKE ".$project['tpID'];
+	    		$result = mysqli_query($conn,$sql);
+	    		$row = mysqli_fetch_assoc($result);
 
 	        	echo "<input name='projID' value=".$project['tpID']." type='hidden'>";
 	        	echo "<input name='projHead' value=".$row['pHead']." type='hidden'>";
