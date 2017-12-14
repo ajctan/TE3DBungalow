@@ -718,7 +718,9 @@ button:hover, input[type=button]:hover, input[type=submit]:hover{
 }
 
 .largeModal img{
+  border-radius: 200px;
   height: 150px;
+  width: 150px;
 }
 
 .largeModal label{

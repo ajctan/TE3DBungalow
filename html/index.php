@@ -203,8 +203,8 @@
     <div class="modalPadding">
       <form action="../php/createuser.php" method="post" enctype="multipart/form-data">
         <div id="imgcontainer">
-        <img src="../images/loginavatar.png" />
-        <input id="profimgfile" type="file" name="pic" accept="image/*">
+        <img id="previewImage" src="../images/loginavatar.png" />
+        <input id="profimgfile" type="file" name="pic" accept="image/*" onchange="PreviewImage();">
         <label id="profimglbl" for="profimgfile"><i class="fa fa-pencil"></i></label>
         </div>
 

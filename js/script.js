@@ -32,6 +32,15 @@ function closeOptions(){
   document.getElementById('optionsBackground').style.display = "none";
 }
 
+function PreviewImage() {
+  var reader = new FileReader();
+  reader.readAsDataURL(document.getElementById("profimgfile").files[0]);
+
+  reader.onload = function (e) {
+      document.getElementById("previewImage").src = e.target.result;
+  };
+}
+
 function addMember(){
   var allMembers = document.getElementById('allMembers');
   var projectMembers = document.getElementById('projectMembers');
