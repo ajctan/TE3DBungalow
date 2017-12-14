@@ -126,7 +126,6 @@ if(isset($_POST['file_name'])){
       ?>
 
       <!-- End of MODALS -->
-			<img class="pageLogo" src="../images/projectlogo.png">
 			<?php
 				echo "<p id=\"pageTitle\">".$project['tpTitle'];
 			?>
