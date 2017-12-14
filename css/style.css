@@ -754,6 +754,11 @@ button:hover, input[type=button]:hover, input[type=submit]:hover{
   width: 7%;
 }
 
+.p25{
+  margin: 5px;
+  width: 22%;
+}
+
 .p45{
   margin: 5px;
   width: 43%;

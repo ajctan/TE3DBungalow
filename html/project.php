@@ -138,7 +138,7 @@ if(isset($_POST['file_name'])){
 		</div>
 
   	<div id="tabButtons">
-      <button id="defaultOpen" class="tabButton" onclick="openTab(event, 'abstract')">Abstract</button>
+      <button id="defaultOpen" class="tabButton" onclick="openTab(event, 'abstract')">Details & Abstract</button>
 			<?php
 	      if($uli == 1){
 	      	echo "<button class=\"tabButton\" onclick=\"openTab(event, 'files')\">Files</button>";
@@ -157,6 +157,50 @@ if(isset($_POST['file_name'])){
 		}
     </script>
   	<div id="abstract" class="tabContent">
+			<?php
+				if($project['tpEDate'] != null && $project['tpEDate'] == $project['tpSDate']){
+					$iClass = "cancelled";
+					$date = date_create($project['tpSDate']);
+					$projStart = date_format($date, 'jS F Y');
+					$date = date_create($project['tpEDate']);
+					$projEnd = date_format($date, 'jS F Y');
+				}
+				else if($project['tpEDate'] != null && $project['tpEDate'] != $project['tpSDate']){
+					$iClass = "done";
+					$date = date_create($project['tpSDate']);
+					$projStart = date_format($date, 'jS F Y');
+					$date = date_create($project['tpEDate']);
+					$projEnd = date_format($date, 'jS F Y');
+				}
+				else if($project['tpEDate'] == null){
+					$iClass = "ongoing";
+					$date = date_create($project['tpSDate']);
+					$projStart = date_format($date, 'jS F Y');
+					$projEnd = "";
+				}
+			?>
+			<table class="p100">
+				<tr>
+					<th class="p25">Start Date:</th>
+					<?php
+						echo "<td class='p25'> ".$projStart." </td>";
+					?>
+					<th class="p25">Status:</th>
+					<?php
+						echo "<td class='p25'><i class='".$iClass."'></i></td>";
+					?>
+				</tr>
+				<tr>
+					<th>End Date:</th>
+					<?php
+						echo "<td> ".$projEnd." </td>";
+					?>
+					<th>Funded By:</th>
+					<?php
+						echo "<td> FUNDED BY </td>";
+					?>
+				</tr>
+			</table>
 			<div id="projectAbstract">
 			<?php
 				$sanitized = nl2br($project['tpDesc']);
