@@ -398,6 +398,7 @@ if(isset($_POST['file_name'])){
   <!-- These are transparent 100% x 100% box behind the module, that closes the module when clicked -->
   <div id="notificationsBackground" class="modalBackground" onclick="closeNotifications()"></div>
   <div id="optionsBackground" class="modalBackground" onclick="closeOptions()"></div>
+	<div id="editProjectBackground" class="modalBackground" onclick="closeEditProjctModal()"></div>
   <div id="contactHeadBackground" class="modalBackground" onclick="closeContactHead()"></div>
   <div id="loginbackground" class="modalBackground" onclick="closeLogin()"></div>
 </body>
