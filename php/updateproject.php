@@ -12,7 +12,8 @@
 
 		print_r($members);
 
-		$removeMembers = "DELETE FROM members WHERE tpID = " .$id;
+		$removeMembers = "DELETE FROM members WHERE projectID = " .$id;
+		mysqli_query($conn, $removeMembers);
 
 		$lastAdded ='SELECT memberID FROM members ORDER BY memberID DESC LIMIT 1';
 		$result = mysqli_query($conn,$lastAdded);
