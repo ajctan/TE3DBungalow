@@ -201,7 +201,7 @@ if(isset($_POST['file_name'])){
 	    		//$row = mysqli_fetch_assoc($result);
 
 	        	echo "<input name='projID' value=".$project['tpID']." type='hidden'>";
-	        	echo "<input name='projHead' value=".$project['pHead']." type='hidden'>";
+	        	echo "<input name='projHead' value=".$row['pHead']." type='hidden'>";
 	        ?>
 	        <textarea name="message" rows="17" placeholder="Your Message to the project head" required></textarea>
 	        <button id="sendMessage" type="submit"><i class="fa fa-send fa-2x"></i></button>
@@ -251,13 +251,21 @@ if(isset($_POST['file_name'])){
 		?>
 
       </table>
-			<div class="footbuttonContainer">
-				<form action="../php/uploadFile.php" method="post" enctype="multipart/form-data">
-					<?php echo '<input type="hidden" name="projToUpload" value='.$pID.'>'?>
-					<input id="uploadFiles" type="file" onchange="this.form.submit()">
-					<label id="uploadFilesLbl" for="uploadFiles" type="file"><i class="fa fa-upload"></i> Upload Files</label>
-				</form>
-			</div>
+      <?php
+      		$sql = 'select count(*) from members where projectID = '.$pID.' and userID = '.$_COOKIE['uID'];
+      		$result = mysqli_query($conn,$sql);
+	    	$row = mysqli_fetch_assoc($result);
+
+	    	if($row['count(*)'] > 0){
+			echo '<div class="footbuttonContainer">';
+				echo '<form action="../php/uploadFile.php" method="post" enctype="multipart/form-data">';
+					echo '<input type="hidden" name="projToUpload" value='.$pID.'>';
+					echo '<input id="uploadFiles" type="file" onchange="this.form.submit()">';
+					echo '<label id="uploadFilesLbl" for="uploadFiles" type="file"><i class="fa fa-upload"></i> Upload Files</label>';
+				echo '</form>';
+			echo '</div>';
+			}
+	  ?>
     </div>
 
     <div id="contributors" class="tabContent">
