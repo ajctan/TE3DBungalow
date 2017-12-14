@@ -34,7 +34,7 @@
 				echo "<script type='text/javascript'>alert('Error: ". $addMember."<br>". mysqli_error($conn)."');</script>";
 				//header('Location: ../html/index.php');
 			}
-
+			header("Location: ../html/index.php");
 	?>
 </body>
 </html>
