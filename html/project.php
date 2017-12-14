@@ -201,9 +201,9 @@ if(isset($_POST['file_name'])){
 	    		//$row = mysqli_fetch_assoc($result);
 
 	        	echo "<input name='projID' value=".$project['tpID']." type='hidden'>";
-	        	echo "<input name='projHead' value=".$row['pHead']." type='hidden'>";
+	        	echo "<input name='projHead' value=".$project['pHead']." type='hidden'>";
 	        ?>
-	        <textarea name="message" rows="17" required></textarea>
+	        <textarea name="message" rows="17" placeholder="Your Message to the project head" required></textarea>
 	        <button id="sendMessage" type="submit"><i class="fa fa-send fa-2x"></i></button>
 	      </form>
     	</div>
