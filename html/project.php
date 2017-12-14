@@ -157,13 +157,15 @@ if(isset($_POST['file_name'])){
 		}
     </script>
   	<div id="abstract" class="tabContent">
+			<div id="projectAbstract">
 			<?php
 				$sanitized = nl2br($project['tpDesc']);
-				$pText = explode("<br />", $sanitized);
+				$pText = explode("<br>", $sanitized);
         foreach($pText as $pGraph)
          	echo "<p>".$pGraph."</p>";
       	echo "<br>";
       ?>
+		</div>
       <div class="footbuttonContainer">
         <button id="downloadAbstract" onclick=""><i class="fa fa-download"></i> Download Abstract (.pdf)</button>
         <?php
@@ -320,34 +322,40 @@ if(isset($_POST['file_name'])){
     </form>
   </div>
 
-	<div id="createProjectModal">
-    <div id="createContainer">
-      <form action="../php/createProject.php" method="post">
+	<div id="editProjectModal" class="largeModal">
+    <div class="modalPadding">
+      <form action="../php/updateproject.php" method="post">
+				<?php
+					echo "<input id='nprojectID' name='nprojectID' type='hidden' value='".$pID."'>";
+				?>
         <div class="center">
           <label class="p100" for="nprojectTitle">Project Title</label>
-          <input class="p100" name="nprojectTitle" type="text" />
+          <input id="nprojectTitle" class="p100" name="nprojectTitle" type="text" />
           <label class="p100" for="nprojectHead">Project Head</label>
 		  <select name='selectedprojectHead' class="p100">
-			<?php
-				$query = 'SELECT uID, uFName, uLName FROM users';
-				$result = mysqli_query($conn,$query);
-				$queryResults = mysqli_num_rows($result);
-				if ($queryResults > 0){
-					while ($row = mysqli_fetch_assoc($result)){
-						echo "<option value=".$row['uID'].">".$row['uFName']. " ".$row['uLName']."</option>";
+				<?php
+					$query = 'SELECT uID, uFName, uLName FROM users ORDER BY uFName';
+					$result = mysqli_query($conn,$query);
+					$queryResults = mysqli_num_rows($result);
+					if ($queryResults > 0){
+						while ($row = mysqli_fetch_assoc($result)){
+							if($row['uID'] == $project['pHead'])
+								echo "<option value=".$row['uID']." selected='selected'>".$row['uFName']. " ".$row['uLName']."</option>";
+							else
+								echo "<option value=".$row['uID'].">".$row['uFName']. " ".$row['uLName']."</option>";
+						}
 					}
-				}
 
-			?>
+				?>
 		  </select>
           <label class="p100" for="nprojectAbstract">Abstract</label>
-          <textarea name="nprojectAbstract" rows="17" required></textarea>
+          <textarea id="nprojectAbstract" name="nprojectAbstract" rows="17" required></textarea>
 
 
           <label for="nprojectMembers" class="p100">Members</label>
-          <select id="nprojectMembers" name="nprojectMembers[]" class="p100" size="5" multiple="multiple">
+					<select id="allMembers" class="select p50" size="5" multiple="multiple">
             <?php
-              $query = 'SELECT uID, uFName, uLName FROM users';
+              $query = 'SELECT uID, uFName, uLName FROM users WHERE uID NOT IN (SELECT userID FROM members WHERE projectID = '.$pID.') AND uID != '.$project['pHead'].' ORDER BY users.uFName';
               $result = mysqli_query($conn,$query);
               $queryResults = mysqli_num_rows($result);
               if ($queryResults > 0){
@@ -357,10 +365,25 @@ if(isset($_POST['file_name'])){
               }
             ?>
           </select>
+
+          <select id="projectMembers" name="nprojectMembers[]" class="select p50" size="5" multiple="multiple">
+						<?php
+              $query = 'SELECT uID, uFName, uLName FROM users WHERE uID IN (SELECT userID FROM members WHERE projectID = '.$pID.') AND uID != '.$project['pHead'].' ORDER BY users.uFName';
+              $result = mysqli_query($conn,$query);
+              $queryResults = mysqli_num_rows($result);
+              if ($queryResults > 0){
+                while ($row = mysqli_fetch_assoc($result)){
+                  echo "<option value='".$row['uID']."'>".$row['uFName']. " ".$row['uLName']."</option>";
+                }
+              }
+            ?>
+          </select>
+					<button class="p50" type="button" onclick="addMember()">Add</button>
+          <button class="p50" type="button" onclick="removeMember()">Remove</button>
         </div>
 
         <div class="alignRightContainer">
-          <button class="p50 fRight modalBtn" type="submit">Create Project</button>
+          <button class="p50 fRight" type="submit" onclick="submitMembers()">Update Project</button>
         </div>
       </form>
     </div>
@@ -368,14 +391,15 @@ if(isset($_POST['file_name'])){
 
 	<?php
 		if($uli == 1){
-			echo "<button class='contextButton'><i class='fa fa-pencil fa-2x'	></i></button>";
+			echo "<button class='contextButton' onclick='openEditProjectModal()'><i class='fa fa-pencil fa-2x'	></i></button>";
 		}
 	?>
 
   <!-- These are transparent 100% x 100% box behind the module, that closes the module when clicked -->
-  <div id="notificationsBackground" onclick="closeNotifications()"></div>
-  <div id="optionsBackground" onclick="closeOptions()"></div>
-  <div id="contactHeadBackground" onclick="closeContactHead()"></div>
-  <div id="loginbackground" onclick="closeLogin()"></div>
+  <div id="notificationsBackground" class="modalBackground" onclick="closeNotifications()"></div>
+  <div id="optionsBackground" class="modalBackground" onclick="closeOptions()"></div>
+	<div id="editProjectBackground" class="modalBackground" onclick="closeEditProjctModal()"></div>
+  <div id="contactHeadBackground" class="modalBackground" onclick="closeContactHead()"></div>
+  <div id="loginbackground" class="modalBackground" onclick="closeLogin()"></div>
 </body>
 </html>

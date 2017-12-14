@@ -229,8 +229,8 @@
     </form>
   </div>
   <!-- These are transparent 100% x 100% box behind the module, that closes the module when clicked -->
-  <div id="notificationsBackground" onclick="closeNotifications()"></div>
-  <div id="optionsBackground" onclick="closeOptions()"></div>
-  <div id="loginbackground" onclick="closeLogin()"></div>
+  <div id="notificationsBackground" class="modalBackground" onclick="closeNotifications()"></div>
+  <div id="optionsBackground" class="modalBackground" onclick="closeOptions()"></div>
+  <div id="loginbackground" class="modalBackground" onclick="closeLogin()"></div>
 </body>
 </html>
