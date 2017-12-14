@@ -8,6 +8,14 @@ function closeContactHead(){
   document.getElementById('contactHeadBackground').style.display="none";
 }
 
+function openEditProjectModal(){
+  document.getElementById('editProjectModal').style.display="block";
+  var projectTitle = document.getElementById('pageTitle').innerHTML;
+  var projectAbstract = document.getElementById('projectAbstract').innerHTML;
+  document.getElementById('nprojectTitle').value = projectTitle;
+  document.getElementById('nprojectAbstract').innerHTML = projectAbstract.replace(/<[^>]*>/g, "");
+}
+
 function cph(){
   var eml = document.getElementById('email').value;
   var msg = document.getElementById('message').value;

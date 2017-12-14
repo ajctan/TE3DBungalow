@@ -147,8 +147,8 @@
     </form>
   </div>
 
-  <div id="createProjectModal">
-    <div id="createContainer">
+  <div id="createProjectModal" class="largeModal">
+    <div class="modalPadding">
       <form action="../php/createProject.php" method="post">
         <div class="center">
           <label class="p100" for="nprojectTitle">Project Title</label>
@@ -156,7 +156,7 @@
           <label class="p100" for="nprojectHead">Project Head</label>
 		  <select name='selectedprojectHead' class="p100">
 			<?php
-				$query = 'SELECT uID, uFName, uLName FROM users';
+				$query = 'SELECT uID, uFName, uLName FROM users ORDER BY uFName';
 				$result = mysqli_query($conn,$query);
 				$queryResults = mysqli_num_rows($result);
 				if ($queryResults > 0){
@@ -188,19 +188,19 @@
           <select id="projectMembers" name="nprojectMembers[]" class="select p50" size="5" multiple="multiple">
 
           </select>
-          <button class="p50 modalBtn" type="button" onclick="addMember()">Add</button>
-          <button class="p50 modalBtn" type="button" onclick="removeMember()">Remove</button>
+          <button class="p50" type="button" onclick="addMember()">Add</button>
+          <button class="p50" type="button" onclick="removeMember()">Remove</button>
         </div>
 
         <div class="alignRightContainer">
-          <button class="p50 fRight modalBtn" type="submit" onclick="submitMembers()">Create Project</button>
+          <button class="p50 fRight" type="submit" onclick="submitMembers()">Create Project</button>
         </div>
       </form>
     </div>
   </div>
 
-  <div id="createUserModal">
-    <div id="createContainer">
+  <div id="createUserModal" class="largeModal">
+    <div class="modalPadding">
       <form action="../php/createuser.php" method="post" enctype="multipart/form-data">
         <div id="imgcontainer">
         <img src="../images/loginavatar.png" />
@@ -235,7 +235,7 @@
         <input name="occupation" class="p50" type="text" required/>
         <input name="affiliation" class="p50" type="text" required/>
         <label class="p50"></label>
-        <button class="p50 modalBtn" type="submit">Create User</button>
+        <button class="p50" type="submit">Create User</button>
       </form>
     </div>
   </div>
@@ -253,10 +253,10 @@
     }
   ?>
 
-  <div id="notificationsBackground" onclick="closeNotifications()"></div>
-  <div id="loginbackground" onclick="closeLogin()"></div>
-  <div id="createButtonbackground" class="createButtonbackground" onclick="showCreateButtons()"></div>
-  <div id="createUserbackground" onclick="closeCreateUserModal()"></div>
-  <div id="createProjectbackground" onclick="closeCreateProjectModal()"></div>
+  <div id="notificationsBackground" class="modalBackground" onclick="closeNotifications()"></div>
+  <div id="loginbackground" class="modalBackground" onclick="closeLogin()"></div>
+  <div id="createButtonbackground" class="modalBackground createButtonbackground" onclick="showCreateButtons()"></div>
+  <div id="createUserbackground" class="modalBackground" onclick="closeCreateUserModal()"></div>
+  <div id="createProjectbackground" class="modalBackground" onclick="closeCreateProjectModal()"></div>
 </body>
 </html>
