@@ -5,10 +5,13 @@
 	<?php
 		include '../php/dbh.php';
 		$pID = $_POST['projToUpload'];
-		$target_dir = "../projectFiles/";
+		if (!file_exists('../projectFiles/'.$pID)) {
+    	mkdir('../projectFiles/'.$pID, 0777, true);
+		}
+		$target_dir = "../projectFiles/".$pID."/";
 		$modified = date("Y-m-d");
 		$count = count($_FILES['fileToUpload']['name']);
-		
+		echo "<script type='text/javascript'>alert('".$target_dir."');</script>";
 		for($i = 0; $i < $count; $i++){
 			$fileName = basename($_FILES["fileToUpload"]["name"][$i]);
 			$target_file = $target_dir . $fileName;
@@ -31,7 +34,7 @@
 			}
 		}
 
-		//header('Location: ../html/project.php?pid='.$pID);
+		header('Location: ../html/project.php?pid='.$pID);
 
 	?>
 </body>
