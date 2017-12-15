@@ -274,7 +274,7 @@
         <input id="nuseroccupation" name="occupation" class="p50" type="text" required/>
         <input id="nuseraffiliation" name="affiliation" class="p50" type="text" required/>
         <label class="p50"></label>
-        <button id="createUserBtn" class="p50" type="submit">Create User</button>
+        <button id="createUserBtn" class="p50" type="submit">Update User</button>
       </form>
     </div>
   </div>

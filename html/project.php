@@ -196,7 +196,7 @@ if(isset($_POST['file_name'])){
 					?>
 					<th>Funded By:</th>
 					<?php
-						echo "<td> FUNDED BY </td>";
+						echo "<td> ".$project['pVentureC']." </td>";
 					?>
 				</tr>
 			</table>
