@@ -12,7 +12,7 @@ function performAdvSearch(){
 
 	//build query for members
 	if(document.getElementById('member').checked){
-		
+
 		var member_querybuilder = "SELECT * FROM users WHERE CONCAT(uFName, \" \", uLName) LIKE '%" + document.getElementById('membervalue').value + "%'";
 		document.getElementById('memberQuery').value = member_querybuilder;
 
@@ -32,7 +32,7 @@ function performAdvSearch(){
 	firstWhere = 1;
 	}
 	if(document.getElementById('datestart').checked || document.getElementById('fundedby').checked || document.getElementById('status').checked){
-		
+
 			if(document.getElementById('datestart').checked){
 
 			if(firstWhere == 1){
@@ -75,12 +75,12 @@ function performAdvSearch(){
 				date_query = "tpSDate == tpEDate"
 			}
 			stringbuilder = stringbuilder + date_query;
-		}	
+		}
 
 		document.getElementById('projectQuery').value = stringbuilder;
 		alert(document.getElementById('projectQuery').value);
 	}
-	
+
 }
 
 function toggleCheckBoxMember(){
