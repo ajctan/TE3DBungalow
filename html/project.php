@@ -315,6 +315,7 @@ if(isset($_POST['file_name'])){
 
     <div id="contributors" class="tabContent">
       <?php
+      			$canEdit = 0;
 				echo "
 						<div class=\"member\">
 							<img class=\"memberImage\" src=\"../images/userImages/" .$pHeadResult['uID']. "\">
@@ -322,7 +323,8 @@ if(isset($_POST['file_name'])){
 							<p class=\"memberTitle\">Project Head
 						</div>
 						</a>";
-
+				if($_COOKIE['uID'] == $pHeadResult['uID'] || $_COOKIE['accType'] == 0)
+					$canEdit = 1;
 				$getMembers = 'SELECT DISTINCT u.uID, u.uFName, u.uLName FROM users AS u, members AS m WHERE u.uID != '.$pHeadResult['uID'].' AND u.uID = m.userID AND m.projectID = ' .$pID.'';
 				$result = mysqli_query($conn, $getMembers);
 				$queryResults = mysqli_num_rows($result);
@@ -336,6 +338,8 @@ if(isset($_POST['file_name'])){
     						<p class=\"memberTitle\">Member
   						</div>
   					  </a>";
+  					  if($canEdit == 0 && $mem['uID'] == $_COOKIE['uID'])
+  					  	$canEdit = 1;
 					}
       	}
       ?>
@@ -435,7 +439,7 @@ if(isset($_POST['file_name'])){
   </div>
 
 	<?php
-		if($uli == 1){
+		if($uli == 1 && $canEdit == 1){
 			echo "<button class='contextButton' onclick='openEditProjectModal(\"".$project['tpTitle']."\", ".json_encode($project['pVentureC']).", ".json_encode($project['tpDesc']).")'><i class='fa fa-pencil fa-2x'	></i></button>";
 		}
 	?>
