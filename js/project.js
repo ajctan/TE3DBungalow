@@ -8,12 +8,12 @@ function closeContactHead(){
   document.getElementById('contactHeadBackground').style.display="none";
 }
 
-function openEditProjectModal(title, abstract){
+function openEditProjectModal(title, pVentureC, abstract){
   document.getElementById('editProjectModal').style.display="block";
   document.getElementById('editProjectBackground').style.display="block";
-  var projectTitle = document.getElementById('pageTitle').innerHTML;
-  var projectAbstract = document.getElementById('projectAbstract').innerHTML;
+
   document.getElementById('nprojectTitle').value = title;
+  document.getElementById('nprojectCapital').value = pVentureC;
   document.getElementById('nprojectAbstract').innerHTML = abstract;
 }
 

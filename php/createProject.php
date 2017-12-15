@@ -10,6 +10,7 @@
 
 		$id = $row['tpID'] + 1;
 		$title = $_POST['nprojectTitle'];
+		$fund = $_POST['nprojectcapital'];
 		$abstract = $_POST['nprojectAbstract'];
 		$start = date("Y-m-d");
 		$access = 1;
@@ -23,7 +24,7 @@
 		$row = mysqli_fetch_assoc($result);
 
 		$lastMemberID = $row['memberID'];
-		$createProject = "INSERT INTO `tptable` (`tpID`, `tpTitle`, `tpDesc`, `tpSDate`, `tpAccessLVL`, `pHead`) VALUES(".$id.",'".$title."','".$abstract."','".$start."',".$access.",'".$head."');";
+		$createProject = "INSERT INTO `tptable` (`tpID`, `tpTitle`, `tpDesc`, `tpSDate`, `tpAccessLVL`, `pHead`, `pVentureC`) VALUES(".$id.",'".$title."','".$abstract."','".$start."',".$access.",'".$head."','".$fund."');";
 
 		$lastMemberID += 1;
 		$addMember = "INSERT INTO `members` (`memberID`, `projectID`, `userID`) VALUES('".$lastMemberID."','".$id."','".$head."');";

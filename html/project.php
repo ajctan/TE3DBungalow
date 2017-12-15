@@ -374,6 +374,8 @@ if(isset($_POST['file_name'])){
         <div class="center">
           <label class="p100" for="nprojectTitle">Project Title</label>
           <input id="nprojectTitle" class="p100" name="nprojectTitle" type="text" />
+					<label class="p100" for="nprojectcapital">Project Venure Capital</label>
+          <input id="nprojectCapital" class="p100" name="nprojectcapital" type="text" />
           <label class="p100" for="nprojectHead">Project Head</label>
 		  <select name='selectedprojectHead' class="p100">
 				<?php
@@ -434,7 +436,7 @@ if(isset($_POST['file_name'])){
 
 	<?php
 		if($uli == 1){
-			echo "<button class='contextButton' onclick='openEditProjectModal(\"".$project['tpTitle']."\", ".json_encode($project['tpDesc']).")'><i class='fa fa-pencil fa-2x'	></i></button>";
+			echo "<button class='contextButton' onclick='openEditProjectModal(\"".$project['tpTitle']."\", ".json_encode($project['pVentureC']).", ".json_encode($project['tpDesc']).")'><i class='fa fa-pencil fa-2x'	></i></button>";
 		}
 	?>
 
