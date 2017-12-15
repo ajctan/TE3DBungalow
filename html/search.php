@@ -1,5 +1,6 @@
 <?php
     include '../php/dbh.php';
+
 ?>
 
 <!DOCTYPE html>
@@ -52,14 +53,6 @@
     <div id="searchBar">
       <form action="search.php" method="POST">
         <input id="searchTerm" type="text" name="search-field-searchpage" placeholder="Search"/>
-        <input type="hidden" name="mem" value="" />
-        <input type="hidden" name="dat" value="" />
-        <input type="hidden" name="fun" value="" />
-        <input type="hidden" name="sta" value="" />
-        <input type="hidden" name="memChecked" value="" />
-        <input type="hidden" name="datChecked" value="" />
-        <input type="hidden" name="funChecked" value="" />
-        <input type="hidden" name="staChecked" value="" />
         <button id="searchButton" type="submit" name ="search-button">
           <i class="fa fa-search"></i>
         </button>
@@ -88,7 +81,7 @@
       <img class="pageLogo" src="../images/searchlogo.png">
       <?php
          if(array_key_exists('search-field', $_POST) == FALSE){
-
+         //echo "<h3>Search results for: '".$_POST['proj_q']." ".$_POST['mem_q']."'</h3>";
          }
         else{
         echo "<h3>Search results for: '".$_POST['search-field']."'</h3>";
@@ -98,17 +91,18 @@
       <div id="advSearch" onclick="openAdvSearch()">
         <p>Advanced Search <i class="right fa fa-caret-down"></i>
         <div id="advSearch-content" class="close">
-          <form>
-            <input id="member" type="checkbox" onclick="toggleCheckBoxMember();"></input><label id="memberlbl" class="checkLabel" for="member">Member <input type="text" placeholder="Member name"/></label>
-            <input id="datestart" type="checkbox" onclick="toggleCheckBoxDate();"></input><label id="datestartlbl" class="checkLabel" for="datestart">Date Start <input type="date"/></label>
-            <input id="fundedby" type="checkbox" onclick="toggleCheckBoxFunded();"></input><label id="fundedbylbl" class="checkLabel" for="fundedby">Funded by <input type="text" placeholder="Funded by"/></label>
-            <input id="status" type="checkbox" onclick="toggleCheckBoxStatus();"></input><label id="statuslbl" class="checkLabel" for="status">Status <select placeholder="Status">
+          <form action="search.php" method="POST" onsubmit="performAdvSearch()">
+            <input id="member" type="checkbox" onclick="toggleCheckBoxMember()"></input><label id="memberlbl" class="checkLabel" for="member">Member <input type="text" id="membervalue" placeholder="Member name"/></label>
+            <input id="datestart" type="checkbox" onclick="toggleCheckBoxDate()"></input><label id="datestartlbl" class="checkLabel" for="datestart">Date Start <input type="date" id="datevalue"/></label>
+            <input id="fundedby" type="checkbox" onclick="toggleCheckBoxFunded()"></input><label id="fundedbylbl" class="checkLabel" for="fundedby">Funded by <input type="text" id="fundedbyvalue" placeholder="Funded by"/></label>
+            <input id="status" type="checkbox" onclick="toggleCheckBoxStatus()"></input><label id="statuslbl" class="checkLabel" for="status">Status <select placeholder="Status" id="statusvalue">
                                                                                                                       <option>Ongoing</option>
                                                                                                                       <option>Finished</option>
                                                                                                                       <option>Cancelled</option>
                                                                                                                     </select></label>
-            <button class="p100 modalBtn">Advanced Search</button>
-
+            <button class="p100 modalBtn" type="submit">Advanced Search</button>
+            <input type="hidden" id="memberQuery" name="mem_q" value="" />
+            <input type="hidden" id="projectQuery" name="proj_q" value="" />
 
           </form>
         </div>
@@ -122,10 +116,9 @@
     <div id="projects" class="tabContent">
       <?php
           if(array_key_exists('search-field', $_POST) == FALSE){
-            $sql = "SELECT * FROM tptable WHERE tpTitle LIKE '%".$term."%' OR tpDesc LIKE '%".$term."%'";
+            $sql = $_POST['proj_q'];
             $result = mysqli_query($conn,$sql);
             $queryResults = mysqli_num_rows($result);
-
             if ($queryResults > 0){
               while ($row = mysqli_fetch_assoc($result)){
                     $query = 'SELECT uFName, uLName FROM users WHERE uID = ' .$row['pHead'].'';
@@ -222,7 +215,7 @@
     <div id="members" class="tabContent">
         <?php
          if(array_key_exists('search-field', $_POST) == FALSE){
-          $sql = "SELECT * FROM users WHERE CONCAT(uFName, \" \", uLName) LIKE '%".$term."%'";
+          $sql = $_POST['mem_q'];
           $result = mysqli_query($conn,$sql);
           $queryResults = mysqli_num_rows($result);
 
