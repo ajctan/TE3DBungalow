@@ -186,7 +186,7 @@ if(isset($_POST['file_name'])){
 					?>
 					<th class="p25">Status:</th>
 					<?php
-						echo "<td class='p25'><i class='".$iClass."'></i></td>";
+						echo "<td id='statusTD' class='p25'><i class='".$iClass."'></i></td>";
 					?>
 				</tr>
 				<tr>

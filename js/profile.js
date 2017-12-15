@@ -24,3 +24,7 @@ function closeEditUserModal(){
   document.getElementById('editUserModal').style.display="none";
   document.getElementById('editUserBackground').style.display="none";
 }
+
+function changeStatus(){
+  document.getElementById('statusTD').innerHTML = "test";
+}
