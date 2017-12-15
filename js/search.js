@@ -16,7 +16,7 @@ function performAdvSearch(){
 		var member_querybuilder = "SELECT * FROM users WHERE CONCAT(uFName, \" \", uLName) LIKE '%" + document.getElementById('membervalue').value + "%'";
 		document.getElementById('memberQuery').value = member_querybuilder;
 
-		alert(document.getElementById('memberQuery').value);
+		//alert(document.getElementById('memberQuery').value);
 	}
 	else{
 		var member_querybuilder = "SELECT * FROM users WHERE uFName = \"sdafoiasjdfoasfdasfd\"";
