@@ -434,7 +434,7 @@ if(isset($_POST['file_name'])){
 
 	<?php
 		if($uli == 1){
-			echo "<button class='contextButton' onclick='openEditProjectModal()'><i class='fa fa-pencil fa-2x'	></i></button>";
+			echo "<button class='contextButton' onclick='openEditProjectModal(\"".$project['tpTitle']."\", ".json_encode($project['tpDesc']).")'><i class='fa fa-pencil fa-2x'	></i></button>";
 		}
 	?>
 

@@ -8,13 +8,13 @@ function closeContactHead(){
   document.getElementById('contactHeadBackground').style.display="none";
 }
 
-function openEditProjectModal(){
+function openEditProjectModal(title, abstract){
   document.getElementById('editProjectModal').style.display="block";
   document.getElementById('editProjectBackground').style.display="block";
   var projectTitle = document.getElementById('pageTitle').innerHTML;
   var projectAbstract = document.getElementById('projectAbstract').innerHTML;
-  document.getElementById('nprojectTitle').value = projectTitle;
-  document.getElementById('nprojectAbstract').innerHTML = projectAbstract.replace(/<[^>]*>/g, "");
+  document.getElementById('nprojectTitle').value = title;
+  document.getElementById('nprojectAbstract').innerHTML = abstract;
 }
 
 function closeEditProjctModal(){
