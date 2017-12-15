@@ -258,7 +258,7 @@ include '../php/dbh.php';
 					<?php
 						echo "<input type='hidden' name='projToUpload' value='$pID'>";
 					 ?>
-					<input id="uploadFiles" name="fileToUpload" type="file" onchange="this.form.submit()">
+					<input id="uploadFiles" name="fileToUpload[]" type="file" onchange="this.form.submit()"  multiple='multiple'>
 					<label id="uploadFilesLbl" for="uploadFiles" type="file"><i class="fa fa-upload"></i> Upload Files</label>
 				</form>
 			</div>

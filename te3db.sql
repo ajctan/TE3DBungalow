@@ -77,7 +77,7 @@ DROP TABLE IF EXISTS `tptable`;
 CREATE TABLE `tptable` (
   `tpID` int(11) NOT NULL AUTO_INCREMENT,
   `tpTitle` varchar(99) NOT NULL,
-  `tpDesc` varchar(5000) NOT NULL,
+  `tpDesc` varchar(10000) NOT NULL,
   `tpSDate` date NOT NULL,
   `tpEDate` date DEFAULT NULL,
   `tpAccessLVL` int(11) NOT NULL,
