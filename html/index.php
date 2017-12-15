@@ -169,7 +169,7 @@
 			?>
 		  </select>
           <label class="p100" for="nprojectAbstract">Abstract</label>
-          <textarea name="nprojectAbstract" rows="17" required></textarea>
+          <textarea name="nprojectAbstract" rows="17" maxlength="25000" required></textarea>
 
 
           <label class="p50">All Members</label>

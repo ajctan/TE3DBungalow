@@ -230,7 +230,7 @@
           }
           }
           else{
-          $sql = "SELECT * FROM users WHERE CONCAT(uFName, \" \", uLName) LIKE '%".$term."%'";
+          $sql = "SELECT * FROM users WHERE CONCAT(uFName, \" \", uLName) LIKE '%".$term."%' ORDER BY uFName";
           $result = mysqli_query($conn,$sql);
           $queryResults = mysqli_num_rows($result);
 

@@ -78,7 +78,7 @@ function performAdvSearch(){
 		}
 
 		document.getElementById('projectQuery').value = stringbuilder;
-		alert(document.getElementById('projectQuery').value);
+		//alert(document.getElementById('projectQuery').value);
 	}
 
 }
