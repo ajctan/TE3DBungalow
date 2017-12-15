@@ -1,47 +1,6 @@
 <?php
 include '../php/dbh.php';
-
-function findContentType($ext){
-	switch($ext){
-		case 'docx': return 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'; break;
-		case 'xlsx':  return 'application/vnd.ms-excel'; break;
-		case 'ppt':  return 'application/vnd.ms-powerpoint'; break;
-		case 'pdf':  return 'application/pdf'; break;
-		case 'html': return 'text/html'; break;
-		case 'jpeg': return 'image/jpeg'; break;
-		case 'png':  return 'image/png'; break;
-		case 'css':  return 'text/css'; break;
-		case 'zip':  return 'application/zip'; break;
-		case 'rar': return 'application/x-rar-compressed'; break;
-		default: return 'application/octet-stream';
-	}
-}
-
-if(isset($_POST['file_name'])){
-
-	$file = $_POST['file_name'];
-	$download_file = 'SELECT * , OCTET_LENGTH(tpFile) as file_size FROM files f, tptable tp WHERE f.tpID = tp.tpID AND f.tpFileName = "'.$file.'"';
-	$found_file = mysqli_query($conn, $download_file);
-	$row = mysqli_fetch_assoc($found_file);
-	$file_size= $row['file_size'];
-	$file_extension = explode(".", $file);
-
-    $file_exist = mysqli_num_rows($found_file);
-
-	if ($file_exist > 0){
-
-			header('Content-type: '. findContentType($file_extension[sizeof($file_extension)-1]));
-			header("Content-Length: ". $file_size);
-			header('Content-Disposition: attachment; filename="'.$file.'"');
-			//readfile('uploads/'.$file);
-			echo $row['tpFile'];
-			mysqli_free_result($found_file);
-
-	}
-}
-
 ?>
-
 <!DOCTYPE html>
 <html>
 <title>TedBungalow</title>
@@ -209,7 +168,7 @@ if(isset($_POST['file_name'])){
       ?>
 		</div>
       <div class="footbuttonContainer">
-        
+
         <?php
         	$sql = "SELECT * FROM tptable, users WHERE tptable.pHead = users.uID AND tptable.tpID LIKE ".$project['tpID'];
 		    	$result = mysqli_query($conn,$sql);
@@ -265,14 +224,14 @@ if(isset($_POST['file_name'])){
         </tr>
 
 		<?php
-			$acquire_files = 'SELECT f.tpID, f.tpFile, OCTET_LENGTH(f.tpFile) as file_size, f.tpFileName, f.tpModified, tp.tpTitle, tp.pHead FROM files f, tptable tp WHERE f.tpID = tp.tpID  AND tp.tpID ='.$pID;
+			$acquire_files = 'SELECT * FROM files f, tptable tp WHERE f.tpID = tp.tpID  AND tp.tpID ='.$pID;
 			$result = mysqli_query($conn,$acquire_files);
 			$num_of_files = mysqli_num_rows($result);
 
 			if ($num_of_files > 0){
 				while ($row = mysqli_fetch_assoc($result)){
 					$filename = $row['tpFileName'];
-					$file_size = round($row['file_size'] / 1024);
+					$file_size = round($row['tpSize'] / 1024);
 					$modified_date = $row['tpModified'];
 					$file_extension = explode(".", $filename);
 
@@ -282,10 +241,8 @@ if(isset($_POST['file_name'])){
 							 <td>.".$file_extension[sizeof($file_extension)-1]."</td>
 							 <td>".$modified_date."</td>
 							 <td>
-							 	<form action='project.php' method='post' name='downloadform'>
-								<form action='../php/downloadFile.php' method='post' name='downloadform'>
-									<input name='file_name' value=".$filename." type='hidden'>
-									<button class='fileDownload' type='submit'><i class='fa fa-download'></i></button>
+							 	<form action='../projectFiles/".$filename."'>
+							 		<button class='fileDownload' type='submit'><i class='fa fa-download'></i></button>
 								</form>
 							 </td>
 						   </tr>";
@@ -295,21 +252,16 @@ if(isset($_POST['file_name'])){
 		?>
 
       </table>
-      <?php
-      		$sql = 'select count(*) from members where projectID = '.$pID.' and userID = '.$_COOKIE['uID'];
-      		$result = mysqli_query($conn,$sql);
-	    	$row = mysqli_fetch_assoc($result);
 
-	    	if($row['count(*)'] > 0){
-			echo '<div class="footbuttonContainer">';
-				echo '<form action="../php/uploadFile.php" method="post" enctype="multipart/form-data">';
-					echo '<input type="hidden" name="projToUpload" value='.$pID.'>';
-					echo '<input id="uploadFiles" type="file" onchange="this.form.submit()">';
-					echo '<label id="uploadFilesLbl" for="uploadFiles" type="file"><i class="fa fa-upload"></i> Upload Files</label>';
-				echo '</form>';
-			echo '</div>';
-			}
-	  ?>
+			<div class="footbuttonContainer">
+				<form action="../php/uploadFile.php" method="post" enctype="multipart/form-data">
+					<?php
+						echo "<input type='hidden' name='projToUpload' value='$pID'>";
+					 ?>
+					<input id="uploadFiles" name="fileToUpload" type="file" onchange="this.form.submit()">
+					<label id="uploadFilesLbl" for="uploadFiles" type="file"><i class="fa fa-upload"></i> Upload Files</label>
+				</form>
+			</div>
     </div>
 
     <div id="contributors" class="tabContent">

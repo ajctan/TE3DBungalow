@@ -5,22 +5,30 @@
 	<?php
 		include '../php/dbh.php';
 
-
 		$pID = $_POST['projToUpload'];
-		$fName = $_FILES['fileToUpload']['name'];
-		$fData = mysqli_real_escape_string($conn, file_get_contents($_FILES['fileToUpload']['tmp_name']));
-		$dateUploaded = date("Y-m-d");
+		$target_dir = "../projectFiles/";
+		$fileName = basename($_FILES["fileToUpload"]["name"]);
+		$target_file = $target_dir . $fileName;
+		$size = $_FILES["fileToUpload"]["size"];
+		$modified = date("Y-m-d");
 
-		$uploadFile = 'INSERT INTO `files` (`tpID`, `tpFile`, `tpFileName`, `tpModified`) VALUES('.$pID.',"'.$fData.'",'.$fName.',"'.$dateUploaded.'")';
+		if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
+        echo "The file ". basename( $_FILES["fileToUpload"]["name"]). " has been uploaded.";
+    } else {
+        echo "Sorry, there was an error uploading your file.";
+    }
 
+		$uploadFile = "INSERT INTO `files` (`fileID`, `tpID`, `tpFileName`, `tpSize`, `tpModified`) VALUES (NULL, $pID, '$fileName', $size, '$modified');";
+
+		print_r($uploadFile);
 		if (mysqli_query($conn, $uploadFile)) {
 			echo "<script type='text/javascript'>alert('File uploaded.');</script>";
-			header('Location: ../html/project.php?pid='.$pID);
 		} else {
 			echo "<script type='text/javascript'>alert('Error: ". $uploadFile."<br>". mysqli_error($conn)."');</script>";
-			//header('Location: ../html/project.php?pid='.$pID);
 		}
-		//INSERT INTO `files` (`tpID`, `tpFile`, `tpFileName`, `tpModified`)
+
+		header('Location: ../html/project.php?pid='.$pID);
+
 	?>
 </body>
 </html>
