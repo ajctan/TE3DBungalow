@@ -39,6 +39,8 @@
       $uli = '0';
       if(isset($_COOKIE['loggedIn'])){
         $uli = $_COOKIE['loggedIn'];
+        $uID = $_COOKIE['uID'];
+        $uType = $_COOKIE['accType'];
         if($uli == '1'){
           echo "<ul id=\"toolbarButtons\">
                   <li><button id=\"notificationButton\" class=\"toolbarButton\" onclick=\"openNotifications()\"><i id=\"notificationCount\">99</i><i class=\"fa fa-bell\"></i></button></li>
@@ -278,7 +280,7 @@
   </div>
 
   <?php
-		if($uli == 1){
+		if($uli == 1 && ($mID == $uID || $uType == 0)){
 			echo "<button class='contextButton' onclick='openEditUserModal(\"".$user['uName']."\", \"".$user['uPass']."\", \"".$user['uFName']."\", \"".$user['uLName']."\", \"".$user['uGender']."\", \"".$user['uOccupation']."\", \"".$user['uAffiliation']."\")'><i class='fa fa-pencil fa-2x'	></i></button>";
 		}
 	?>
