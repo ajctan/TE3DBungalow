@@ -141,7 +141,7 @@ if(isset($_POST['file_name'])){
 			<?php
 	      if($uli == 1){
 	      	echo "<button class=\"tabButton\" onclick=\"openTab(event, 'files')\">Files</button>";
-					echo "<button class=\"tabButton\" onclick=\"openTab(event, 'contributors')\">Contributors</button>";
+					echo "<button class=\"tabButton\" onclick=\"openTab(event, 'contributors')\">Collaborators</button>";
 				}
 			?>
     </div>

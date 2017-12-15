@@ -10,6 +10,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <link rel="stylesheet" href="../css/style.css">
   <script src="../js/script.js" type="text/javascript"></script>
+  <script src="../js/profile.js" type="text/javascript"></script>
   <?php
     $mID = $_GET['mID'];
     $query = 'SELECT * FROM users WHERE uID = ' .$mID;
@@ -228,9 +229,64 @@
       <a href="">Forgot Password?</a>
     </form>
   </div>
+
+  <div id="editUserModal" class="largeModal">
+    <div class="modalPadding">
+      <form action="../php/updateuser.php" method="post" enctype="multipart/form-data">
+        <?php
+					echo "<input id='nuserID' name='nuserID' type='hidden' value='".$user['uID']."'>";
+				?>
+        <div id="imgcontainer">
+        <?php
+          echo "<img id='previewImage' src='../images/userImages/".$user['uID'].".'>";
+        ?>
+        <input id="profimgfile" type="file" name="pic" accept="image/*" onchange="PreviewImage();">
+        <label id="profimglbl" for="profimgfile"><i class="fa fa-pencil"></i></label>
+        </div>
+
+        <h3>Login Information</h3>
+        <hr>
+        <label class="p100" for="email">Email Address</label>
+        <input id="nuseremail" name="email" class="p100" type="text" placeholder="me@domain.com" required/>
+        <label class="p50" for="pwd">Password</label>
+        <label class="p50" for="cpwd">Confirm Password</label>
+        <input id="pwd" name="pwd" class="p50" type="password" onkeyup="validatePassword();" required/>
+        <input id="cpwd" name="cpwd" class="p50" type="password" onkeyup="validatePassword();" required/>
+        <label id="validatePwd" class="p100 validate">Passwords do not match!</label>
+
+        <h3>Basic Information</h3>
+        <hr>
+        <label class="p50" for="fname">First Name</label>
+        <label class="p50" for="lname">Last Name</label>
+        <input id="nuserfname" name="fname" class="p50" type="text" placeholder="First Name" /required>
+        <input id="nuserlname" name="lname" class="p50" type="text" placeholder="Last Name" /required>
+        <label class="p50" for="gender">Gender</label>
+        <label class="p50" for="placeholder"></label>
+        <input id="malerbtn" name="gender" class="dnone" type="radio" value="Male" />
+        <label id="malelbl" for="malerbtn"><i class="fa fa-male"></i> Male</label>
+        <input id="femalerbtn" name="gender" class="dnone" type="radio" value="Female" />
+        <label id="femalelbl" for="femalerbtn"><i class="fa fa-female"></i> Female</label>
+        <label class="p50" for="placeholder"></label>
+        <label class="p50" for="occupation">Occupation</label>
+        <label class="p50" for="affiliation">Affiliation</label>
+        <input id="nuseroccupation" name="occupation" class="p50" type="text" required/>
+        <input id="nuseraffiliation" name="affiliation" class="p50" type="text" required/>
+        <label class="p50"></label>
+        <button id="createUserBtn" class="p50" type="submit">Create User</button>
+      </form>
+    </div>
+  </div>
+
+  <?php
+		if($uli == 1){
+			echo "<button class='contextButton' onclick='openEditUserModal(\"".$user['uName']."\", \"".$user['uPass']."\", \"".$user['uFName']."\", \"".$user['uLName']."\", \"".$user['uGender']."\", \"".$user['uOccupation']."\", \"".$user['uAffiliation']."\")'><i class='fa fa-pencil fa-2x'	></i></button>";
+		}
+	?>
+
   <!-- These are transparent 100% x 100% box behind the module, that closes the module when clicked -->
   <div id="notificationsBackground" class="modalBackground" onclick="closeNotifications()"></div>
   <div id="optionsBackground" class="modalBackground" onclick="closeOptions()"></div>
   <div id="loginbackground" class="modalBackground" onclick="closeLogin()"></div>
+  <div id="editUserBackground" class="modalBackground" onclick="closeEditUserModal()"></div>
 </body>
 </html>

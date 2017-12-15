@@ -338,6 +338,46 @@ h1{
   padding: 10px;
 }
 
+#imgcontainer{
+  display: table;
+  margin: 5px auto 0 auto;
+  position: relative;
+}
+
+#profimglbl{
+  background: #1d9b72;
+  border-radius: 60px;
+  bottom: 10px;
+  color: #b0ddce;
+  cursor: pointer;
+  display: inline-block;
+  height: 30px;
+  line-height: 30px;
+  position: absolute;
+  right: 0;
+  text-align: center;
+  width: 30px;
+}
+
+#profimglbl:hover{
+  color: #fff;
+}
+
+#malelbl, #femalelbl{
+  background: #e4e4e4;
+  cursor: pointer;
+  display: inline-block;
+  margin: 0;
+  padding: 8px;
+  text-align: center;
+  width: 20%;
+}
+
+#malerbtn:checked + #malelbl, #femalerbtn:checked + #femalelbl {
+  background: #1d9b72;
+  color: #fff;
+}
+
 .toolbarButton{
   background: #1d9b72;
   border: none;
