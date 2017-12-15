@@ -241,7 +241,7 @@ include '../php/dbh.php';
 							 <td>.".$file_extension[sizeof($file_extension)-1]."</td>
 							 <td>".$modified_date."</td>
 							 <td>
-							 	<form action='../projectFiles/".$filename."'>
+							 	<form action='../projectFiles/".$pID."/".$filename."'>
 							 		<button class='fileDownload' type='submit'><i class='fa fa-download'></i></button>
 								</form>
 							 </td>
