@@ -8,7 +8,7 @@
 		$target_dir = "../projectFiles/";
 		$modified = date("Y-m-d");
 		$count = count($_FILES['fileToUpload']['name']);
-		echo "<script type='text/javascript'>alert('".$count.".');</script>";
+		
 		for($i = 0; $i < $count; $i++){
 			$fileName = basename($_FILES["fileToUpload"]["name"][$i]);
 			$target_file = $target_dir . $fileName;
