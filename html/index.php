@@ -119,10 +119,6 @@
           }
 
       ?>
-      <div class="footer">
-        <hr>
-        © <?php echo date("Y"); ?> <a href="bictory.php">Bictory</a>
-      </div>
   </div>
 
   <div id="wrapbg">

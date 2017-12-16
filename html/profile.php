@@ -78,14 +78,10 @@
       <?php
         if(isset($_COOKIE['loggedIn'])){
           if($_COOKIE['accType'] == 0 && $user['uType'] != 0)
-            //echo "<button id=\"optionsButton\" onclick=\"openOptions()\"><i class=\"fa fa-cog fa-2x\"></i></button>
-            //      <div id=\"options\">
-            //        	<button class=\"option\" id=\"accID\" value=\"".$mID."\" onclick=\"confirmDelete()\">Terminate Account</button>
-            //      </div>";
             if($user['uActive'] == 1)
-              echo "<button id=\"optionsButton\" onclick=\"openOptions()\"><i class=\"fa fa-cog fa-2x\"></i></button>
-                    <div id=\"options\">
-                  	  <form action=\"../php/delAcc.php\" method=\"POST\">
+              echo "<button id='optionsButton' onclick='openOptions()'><i class='fa fa-cog fa-2x'></i></button>
+                    <div id='options'>
+                  	  <form action='../php/delAcc.php' method='POST' onsubmit='return confirm(\"Are you sure you want to deactivate ".$user['uFName']." ".$user['uLName']."?\")'>
                     	 <button class=\"option\" name=\"accID\" value=\"".$mID."\">Deactivate Account</button>
                       </form>
                     </div>";
