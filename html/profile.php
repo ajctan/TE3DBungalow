@@ -86,7 +86,7 @@
               echo "<button id=\"optionsButton\" onclick=\"openOptions()\"><i class=\"fa fa-cog fa-2x\"></i></button>
                     <div id=\"options\">
                   	  <form action=\"../php/delAcc.php\" method=\"POST\">
-                    	 <button class=\"option\" name=\"accID\" value=\"".$mID."\">Terminate Account</button>
+                    	 <button class=\"option\" name=\"accID\" value=\"".$mID."\">Deactivate Account</button>
                       </form>
                     </div>";
             else
