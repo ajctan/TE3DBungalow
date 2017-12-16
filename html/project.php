@@ -107,12 +107,13 @@ include '../php/dbh.php';
     </div>
     <script>
         function copyToClipboard(element) {
-    		var $temp = $("<input>");
+    		var $temp = $("<textarea>");
     		$("body").append($temp);
     		$temp.val($(element).text()).select();
     		document.execCommand("copy");
     		$temp.remove();
-    		alert("Citation has been copied to your clipboard!");
+    		alert("It is now copied to your clipboard!");
+    		//alert($(element).text());
 		}
     </script>
   	<div id="abstract" class="tabContent">
@@ -164,9 +165,14 @@ include '../php/dbh.php';
 			<?php
 				$sanitized = nl2br($project['tpDesc']);
 				$pText = explode("<br>", $sanitized);
-        foreach($pText as $pGraph)
-         	echo "<p>".$pGraph."</p>";
-      	echo "<br>";
+        //foreach($pText as $pGraph)
+         	//echo "<p>".$pGraph."</p>";
+      	//echo "<br>";
+			echo "<p>";
+			foreach($pText as $pGraph){
+				echo $pGraph."<br>";
+			}
+			echo "</p>";
       ?>
 		</div>
       <div class="footbuttonContainer">
@@ -187,7 +193,7 @@ include '../php/dbh.php';
 		    		echo "<div id=\"copy-text\" class=\"hidden\">".$head." ".$pCitation."</div>";
 		    	else
 		    		echo "<div id=\"copy-text\" class=\"hidden\">".$head.", et al. ".$pCitation."</div>";
-          echo "<button id=\"getAbstract\" onclick=\"\"><i class=\"fa fa-file-text-o\"></i> Copy Abstract</button>";
+          echo "<button id=\"getAbstract\" onclick=\"copyToClipboard('#projectAbstract')\"><i class=\"fa fa-file-text-o\"></i> Copy Abstract</button>";
         	echo "<button id=\"getCitation\" onclick=\"copyToClipboard('#copy-text')\"><i class=\"fa fa-file-text-o\"></i> Get Citation</button>";
         	if(!isset($_COOKIE['loggedIn']))
         		echo "<button id=\"contactProjectHead\" onclick=\"openContactHead()\"><i class=\"fa fa-envelope-o\"></i> Contact Project Head</button>";
