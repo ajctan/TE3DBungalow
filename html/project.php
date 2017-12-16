@@ -70,9 +70,9 @@ include '../php/dbh.php';
 				$query = 'SELECT uID, uFName, uLName FROM users WHERE uID = ' .$project['pHead'].'';
 				$queryResult = mysqli_query($conn,$query);
 				$pHeadResult = mysqli_fetch_assoc($queryResult);
-
+				$isPart = 0;
       	if($uli == 1){
-      		if($accType == 0 || $project['pHead'] == $uliID)
+      		if($accType == 0 || $project['pHead'] == $uliID){
       			echo "<button id='optionsButton' onclick='openOptions()'><i class='fa fa-cog fa-2x'></i></button>
       				  <div id='options'>
 	                <form action='../php/deleteProject.php' method='POST'>
@@ -80,6 +80,8 @@ include '../php/dbh.php';
 	        					<button class='option'>Delete Project</button>
 	                </form>
       				  </div>";
+      			$isPart = 1;
+      		}
       	}
       ?>
 
@@ -224,6 +226,15 @@ include '../php/dbh.php';
         </tr>
 
 		<?php
+			if($isPart == 0 && $uli == 1){
+				$isMember = "SELECT count(*) AS 'memCount' FROM members WHERE projectID=".$pID." AND userID=".$uliID;
+				$result = mysqli_query($conn,$isMember);
+				$memCount = mysqli_fetch_assoc($result);
+				if($memCount['memCount'] > 0){
+					$isPart = 1;
+				}
+			}
+
 			$acquire_files = 'SELECT * FROM files f, tptable tp WHERE f.tpID = tp.tpID  AND tp.tpID ='.$pID;
 			$result = mysqli_query($conn,$acquire_files);
 			$num_of_files = mysqli_num_rows($result);
@@ -255,13 +266,17 @@ include '../php/dbh.php';
       </table>
 
 			<div class="footbuttonContainer">
-				<form action="../php/uploadFile.php" method="post" enctype="multipart/form-data">
-					<?php
+			<?php
+				if($isPart == 1){
+					echo "<form action=\"../php/uploadFile.php\" method=\"post\" enctype=\"multipart/form-data\">";
+					
 						echo "<input type='hidden' name='projToUpload' value='$pID'>";
-					 ?>
-					<input id="uploadFiles" name="fileToUpload[]" type="file" onchange="this.form.submit()"  multiple='multiple'>
-					<label id="uploadFilesLbl" for="uploadFiles" type="file"><i class="fa fa-upload"></i> Upload Files</label>
-				</form>
+					 
+						echo "<input id=\"uploadFiles\" name=\"fileToUpload[]\" type=\"file\" onchange=\"this.form.submit()\"  multiple='multiple'>";
+						echo "<label id=\"uploadFilesLbl\" for=\"uploadFiles\" type=\"file\"><i class=\"fa fa-upload\"></i> Upload Files</label>";
+					echo "</form>";
+				}
+				?>
 			</div>
     </div>
 
