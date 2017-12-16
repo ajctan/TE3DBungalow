@@ -194,6 +194,11 @@
   color: red;
 }
 
+.noFiles{
+  text-align: center;
+  width: 100%;
+}
+
 .hidden{
   display: none;
 }

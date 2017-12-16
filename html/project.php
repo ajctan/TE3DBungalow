@@ -223,15 +223,6 @@ include '../php/dbh.php';
   	</div>
 
     <div id="files" class="tabContent">
-      <table id="projectFiles">
-        <tr>
-          <th class="name">Name</th>
-          <th class="size">Size</th>
-          <th class="extension">Extension</th>
-          <th class="lastModified">Last Modified</th>
-          <th></th>
-          <th></th>
-        </tr>
 
 		<?php
 			if($isPart == 0 && $uli == 1){
@@ -248,6 +239,16 @@ include '../php/dbh.php';
 			$num_of_files = mysqli_num_rows($result);
 
 			if ($num_of_files > 0){
+        echo
+        "<table id='projectFiles'>
+          <tr>
+            <th class='name'>Name</th>
+            <th class='size'>Size</th>
+            <th class='extension'>Extension</th>
+            <th class='lastModified'>Last Modified</th>
+            <th></th>
+            <th></th>
+          </tr>";
 				while ($row = mysqli_fetch_assoc($result)){
 					$filename = $row['tpFileName'];
 					$file_size = round($row['tpSize'] / 1024);
@@ -274,7 +275,9 @@ include '../php/dbh.php';
                </td>
 						   </tr>";
 				}
-			}
+			} else {
+        echo "<p class='noFiles'>This project doesn't have any files.";
+      }
 
 		?>
 
