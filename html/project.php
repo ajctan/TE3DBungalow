@@ -187,6 +187,7 @@ include '../php/dbh.php';
 		    		echo "<div id=\"copy-text\" class=\"hidden\">".$head." ".$pCitation."</div>";
 		    	else
 		    		echo "<div id=\"copy-text\" class=\"hidden\">".$head.", et al. ".$pCitation."</div>";
+          echo "<button id=\"getAbstract\" onclick=\"\"><i class=\"fa fa-file-text-o\"></i> Copy Abstract</button>";
         	echo "<button id=\"getCitation\" onclick=\"copyToClipboard('#copy-text')\"><i class=\"fa fa-file-text-o\"></i> Get Citation</button>";
         	if(!isset($_COOKIE['loggedIn']))
         		echo "<button id=\"contactProjectHead\" onclick=\"openContactHead()\"><i class=\"fa fa-envelope-o\"></i> Contact Project Head</button>";
@@ -269,9 +270,9 @@ include '../php/dbh.php';
 			<?php
 				if($isPart == 1){
 					echo "<form action=\"../php/uploadFile.php\" method=\"post\" enctype=\"multipart/form-data\">";
-					
+
 						echo "<input type='hidden' name='projToUpload' value='$pID'>";
-					 
+
 						echo "<input id=\"uploadFiles\" name=\"fileToUpload[]\" type=\"file\" onchange=\"this.form.submit()\"  multiple='multiple'>";
 						echo "<label id=\"uploadFilesLbl\" for=\"uploadFiles\" type=\"file\"><i class=\"fa fa-upload\"></i> Upload Files</label>";
 					echo "</form>";

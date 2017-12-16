@@ -16,8 +16,8 @@
   width: 100%;
 }
 
-#downloadAbstract, #getCitation{
-  margin: 20px 0 0 0;
+#getAbstract, #getCitation{
+  margin: 20px 5px 0 0;
   padding: 10px;
   position: relative;
   width: 200px;
