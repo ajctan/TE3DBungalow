@@ -64,7 +64,7 @@ CREATE TABLE `members` (
 
 LOCK TABLES `members` WRITE;
 /*!40000 ALTER TABLE `members` DISABLE KEYS */;
-INSERT INTO `members` VALUES (0,2,5),(1,2,4),(2,3,4),(3,4,6),(4,4,10),(5,4,12),(6,1,2),(7,2,3),(8,3,3),(9,4,8);
+INSERT INTO `members` VALUES (0,2,7),(1,2,4),(2,3,4),(3,4,6),(4,4,10),(5,4,12),(6,1,2),(7,2,3),(8,3,3),(9,4,8);
 /*!40000 ALTER TABLE `members` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -139,4 +139,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-12-16 10:34:55
+-- Dump completed on 2017-12-16 15:21:05
