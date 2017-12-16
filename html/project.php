@@ -231,7 +231,8 @@ include '../php/dbh.php';
 			if ($num_of_files > 0){
 				while ($row = mysqli_fetch_assoc($result)){
 					$filename = $row['tpFileName'];
-					$file_size = round($row['tpSize'] / 1024);
+					//$file_size = round($row['tpSize'] / 1024);
+					$file_size = round(strlen($row['tpFile'])/1024);
 					$modified_date = $row['tpModified'];
 					$file_extension = explode(".", $filename);
 
