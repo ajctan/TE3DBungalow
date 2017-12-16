@@ -119,12 +119,17 @@
           }
 
       ?>
+      <div class="footer">
+        <hr>
+        © <?php echo date("Y"); ?> <a href="bictory.php">Bictory</a>
+      </div>
   </div>
 
   <div id="wrapbg">
     <!--LEAVE THIS DIV BLANK. THIS IS JUST THE WHITE BACKGROUND THAT FILLS THE
     HEIGHT OF THE BROWSER WITHOUT ENABLING THE SCROLL BAR-->
   </div>
+
 
   <!-- End of Content; start of Modules -->
 
