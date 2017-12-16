@@ -1,7 +1,4 @@
-<html>
-<head></head>
-<body>
-	<?php
+<?php
 		include '../php/dbh.php';
 
 		$id = $_POST['nprojectID'];
@@ -40,5 +37,3 @@
 
 		header('Location: ../html/project.php?pid='.$id);
 	?>
-</body>
-</html>

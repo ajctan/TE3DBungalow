@@ -1,7 +1,4 @@
-<html>
-<head></head>
-<body>
-	<?php
+<?php
 		include '../php/dbh.php';
 
 		$id = $_POST['nuserID'];
@@ -34,5 +31,3 @@
 			}
 			header("Location: ../html/profile.php?mID=".$id);
 	?>
-</body>
-</html>

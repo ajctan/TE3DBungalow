@@ -155,7 +155,10 @@
 				$queryResults = mysqli_num_rows($result);
 				if ($queryResults > 0){
 					while ($row = mysqli_fetch_assoc($result)){
-						echo "<option value=".$row['uID'].">".$row['uFName']. " ".$row['uLName']."</option>";
+            if($row['uID'] == $userLoggedIn)
+              echo "<option value=".$row['uID']." selected='selected'>".$row['uFName']. " ".$row['uLName']."</option>";
+            else
+              echo "<option value=".$row['uID'].">".$row['uFName']. " ".$row['uLName']."</option>";
 					}
 				}
 

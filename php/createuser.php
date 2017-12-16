@@ -1,6 +1,4 @@
-<html>
-<head></head>
-<body>
+
 	<?php
 		include '../php/dbh.php';
 
@@ -42,5 +40,3 @@
 			}
 			header("Location: ../html/index.php");
 	?>
-</body>
-</html>

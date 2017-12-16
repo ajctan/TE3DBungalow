@@ -1,7 +1,4 @@
-<html>
-<head>
-</head>
-<body>
+
 	<?php
 		include '../php/dbh.php';
 		$pID = $_POST['projToUpload'];
@@ -29,5 +26,3 @@
 		header('Location: ../html/project.php?pid='.$pID);
 
 	?>
-</body>
-</html>

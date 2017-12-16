@@ -1,6 +1,4 @@
-<html>
-<head></head>
-<body>
+
 	<?php
 		include '../php/dbh.php';
 
@@ -41,5 +39,3 @@
 			echo "<script type='text/javascript'>alert('Error: ". $createProject."<br>". mysqli_error($conn)."');</script>";
 		header("Location: ../html/index.php");
 	?>
-</body>
-</html>
