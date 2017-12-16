@@ -232,7 +232,7 @@ include '../php/dbh.php';
 				while ($row = mysqli_fetch_assoc($result)){
 					$filename = $row['tpFileName'];
 					//$file_size = round($row['tpSize'] / 1024);
-					$file_size = round(strlen($row['tpFile'])/1024);
+					$file_size = round(filesize("../projectFiles/".$pID."/".$filename)/1024);
 					$modified_date = $row['tpModified'];
 					$file_extension = explode(".", $filename);
 

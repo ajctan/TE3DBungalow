@@ -15,16 +15,16 @@
 		for($i = 0; $i < $count; $i++){
 			$fileName = basename($_FILES["fileToUpload"]["name"][$i]);
 			$target_file = $target_dir . $fileName;
-			$size = $_FILES["fileToUpload"]["size"][$i];
+			//$size = $_FILES["fileToUpload"]["size"][$i];
 
 
 			if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"][$i], $target_file)) {
-	        echo "The file ". basename( $_FILES["fileToUpload"]["name"][$i]). " has been uploaded.";
-	    } else {
-	        echo "Sorry, there was an error uploading your file.";
+	        	echo "The file ". basename( $_FILES["fileToUpload"]["name"][$i]). " has been uploaded.";
+	    	} else {
+	        	echo "Sorry, there was an error uploading your file.";
 	    }
 
-			$uploadFile = "INSERT INTO `files` (`fileID`, `tpID`, `tpFileName`, `tpSize`, `tpModified`) VALUES (NULL, $pID, '$fileName', $size, '$modified');";
+			$uploadFile = "INSERT INTO `files` (`fileID`, `tpID`, `tpFileName`, `tpModified`) VALUES (NULL, $pID, '$fileName', '$modified');";
 
 			print_r($uploadFile);
 			if (mysqli_query($conn, $uploadFile)) {
