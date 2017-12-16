@@ -82,12 +82,20 @@
             //      <div id=\"options\">
             //        	<button class=\"option\" id=\"accID\" value=\"".$mID."\" onclick=\"confirmDelete()\">Terminate Account</button>
             //      </div>";
-            echo "<button id=\"optionsButton\" onclick=\"openOptions()\"><i class=\"fa fa-cog fa-2x\"></i></button>
-                  <div id=\"options\">
-                  	<form action=\"../php/delAcc.php\" method=\"POST\">
-                    	<button class=\"option\" name=\"accID\" value=\"".$mID."\">Terminate Account</button>
-                    </form>
-                  </div>";
+            if($user['uActive'] == 1)
+              echo "<button id=\"optionsButton\" onclick=\"openOptions()\"><i class=\"fa fa-cog fa-2x\"></i></button>
+                    <div id=\"options\">
+                  	  <form action=\"../php/delAcc.php\" method=\"POST\">
+                    	 <button class=\"option\" name=\"accID\" value=\"".$mID."\">Terminate Account</button>
+                      </form>
+                    </div>";
+            else
+              echo "<button id=\"optionsButton\" onclick=\"openOptions()\"><i class=\"fa fa-cog fa-2x\"></i></button>
+                    <div id=\"options\">
+                      <form action=\"../php/reacAcc.php\" method=\"POST\">
+                       <button class=\"option\" name=\"accID\" value=\"".$mID."\">Reactivate Account</button>
+                      </form>
+                    </div>";
         }
       ?>
 
