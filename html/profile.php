@@ -10,9 +10,7 @@
     }
 
     $memberID = $_GET['mID'];
-    $query = 'SELECT * FROM users WHERE uID = ' .$memberID;
-    $result = mysqli_query($conn, $query);
-    $user = mysqli_fetch_assoc($result);
+    $member = mysqli_fetch_assoc(getMember($memberID));
 ?>
 
 <!DOCTYPE html>
@@ -60,11 +58,11 @@
     <div id="pageHead">
       <?php
         if(isset($_SESSION['uType'])){
-          if($uType == 0 && $user['uType'] != 0)
-            if($user['uActive'] == 1)
+          if($uType == 0 && $member['uType'] != 0)
+            if($member['uActive'] == 1)
               echo "<button id='optionsButton' onclick='openOptions()'><i class='fa fa-cog fa-2x'></i></button>
                     <div id='options'>
-                  	  <form action='../php/delAcc.php' method='POST' onsubmit='return confirm(\"Are you sure you want to deactivate ".$user['uFName']." ".$user['uLName']."?\")'>
+                  	  <form action='../php/delAcc.php' method='POST' onsubmit='return confirm(\"Are you sure you want to deactivate ".$member['uFName']." ".$member['uLName']."?\")'>
                     	 <button class=\"option\" name=\"accID\" value=\"".$memberID."\">Deactivate Account</button>
                       </form>
                     </div>";
@@ -81,13 +79,13 @@
       <!-- End of MODULE -->
       <?php
         echo "
-          <img class='pageLogo' src='../images/userImages/".$user['uID'].".'>
-          <p id=\"pageTitle\" <h1>".$user['uFName']." ".$user['uLName']."</h1>";
+          <img class='pageLogo' src='../images/userImages/".$member['uID'].".'>
+          <p id=\"pageTitle\" <h1>".$member['uFName']." ".$member['uLName']."</h1>";
       ?>
       <hr>
       <p class="pageLegend">
         <?php
-          echo $user['uOccupation'];
+          echo $member['uOccupation'];
         ?>
       </p>
     </div>
@@ -101,21 +99,21 @@
         <tr>
           <th>Full Name:</th>
           <?php
-            echo "<td>".$user['uFName']." ".$user['uLName']."</td>";
+            echo "<td>".$member['uFName']." ".$member['uLName']."</td>";
           ?>
           <th>Gender:</th>
           <?php
-            echo "<td>".$user['uGender']."</td>";
+            echo "<td>".$member['uGender']."</td>";
           ?>
         </tr>
         <tr>
           <th>Occupation:</th>
           <?php
-            echo "<td>".$user['uOccupation']."</td>";
+            echo "<td>".$member['uOccupation']."</td>";
           ?>
           <th>Affiliation:</th>
           <?php
-            echo "<td>".$user['uAffiliation']."</td>";
+            echo "<td>".$member['uAffiliation']."</td>";
           ?>
         </tr>
       </table>
@@ -123,47 +121,44 @@
 
     <div id="projects" class="tabContent">
       <?php
-          $sql = "SELECT * FROM tptable WHERE tpID IN (SELECT projectID FROM members WHERE userID = ".$user['uID'].")";
-          $result = mysqli_query($conn,$sql);
-          $queryResults = mysqli_num_rows($result);
+          $result = getMemberProjects($memberID);
+          $nResults = mysqli_num_rows($result);
 
-          if ($queryResults > 0){
-            while ($row = mysqli_fetch_assoc($result)){
-              $query = 'SELECT uFName, uLName FROM users WHERE uID = ' .$row['pHead'].'';
-              $queryResult = mysqli_query($conn,$query);
-              $pHeadResult = mysqli_fetch_assoc($queryResult);
+          if ($nResults > 0){
+            while ($project = mysqli_fetch_assoc($result)){
+              $pHead = mysqli_fetch_assoc(getProjectHead($project['pHead']));
 
               $iClass = "";
               $projStart = "";
               $projEnd = "";
 
-              if($row['tpEDate'] != null && $row['tpEDate'] == $row['tpSDate']){
+              if($project['tpEDate'] != null && $project['tpEDate'] == $project['tpSDate']){
                 $iClass = "projectStatus cancelled";
-                $date = date_create($row['tpSDate']);
+                $date = date_create($project['tpSDate']);
                 $projStart = date_format($date, 'jS F Y');
-                $date = date_create($row['tpEDate']);
+                $date = date_create($project['tpEDate']);
                 $projEnd = date_format($date, 'jS F Y');
               }
-              else if($row['tpEDate'] != null && $row['tpEDate'] != $row['tpSDate']){
+              else if($project['tpEDate'] != null && $project['tpEDate'] != $project['tpSDate']){
                 $iClass = "projectStatus done";
-                $date = date_create($row['tpSDate']);
+                $date = date_create($project['tpSDate']);
                 $projStart = date_format($date, 'jS F Y');
-                $date = date_create($row['tpEDate']);
+                $date = date_create($project['tpEDate']);
                 $projEnd = date_format($date, 'jS F Y');
               }
-              else if($row['tpEDate'] == null){
+              else if($project['tpEDate'] == null){
                 $iClass = "projectStatus ongoing";
-                $date = date_create($row['tpSDate']);
+                $date = date_create($project['tpSDate']);
                 $projStart = date_format($date, 'jS F Y');
               }
 
               echo "<div class=\"projectDisplay\">
               <i class=\"".$iClass."\"></i>
-              <a class=\"projectTitle\" href='project.php?pid=".$row['tpID']."'>".$row['tpTitle']."</a>
-              <p class=\"projectHead\">".$pHeadResult['uFName']." ".$pHeadResult['uLName']."
+              <a class=\"projectTitle\" href='project.php?pid=".$project['tpID']."'>".$project['tpTitle']."</a>
+              <p class=\"projectHead\">".$pHead['uFName']." ".$pHead['uLName']."
               <p class=\"projectStart\">".$projStart."
               <p class=\"projectEnd\">".$projEnd."
-              <p class=\"projectAbstract\">".$row['tpDesc']."
+              <p class=\"projectAbstract\">".$project['tpDesc']."
               <div class=\"cornerFold\">
               </div>
               </div></a>";
@@ -175,17 +170,16 @@
 
     <div id="colleagues" class="tabContent">
       <?php
-        $sql = 'SELECT u.uID, u.uFName, u.uLName, uOccupation FROM users AS u, members AS M WHERE u.uID = m.userID AND u.uID != ' .$user['uID']. ' AND projectID IN (SELECT projectID FROM members WHERE userID = ' .$user['uID']. ') GROUP BY u.uID';
-        $result = mysqli_query($conn,$sql);
-        $queryResults = mysqli_num_rows($result);
+        $result = getColleagues($memberID);
+        $nResults = mysqli_num_rows($result);
 
-        if ($queryResults > 0){
-          while ($row = mysqli_fetch_assoc($result)){
+        if ($nResults > 0){
+          while ($colleague = mysqli_fetch_assoc($result)){
             echo "
             <div class=\"member\">
-            <img class=\"memberImage\" src=\"../images/userImages/" .$row['uID']. "\">
-            <a class=\"memberName\" href='profile.php?mID=".$row['uID']."'>".$row['uFName']." ".$row['uLName']."</a>
-            <p class=\"memberTitle\">".$row['uOccupation']."
+            <img class=\"memberImage\" src=\"../images/userImages/" .$colleague['uID']. "\">
+            <a class=\"memberName\" href='profile.php?mID=".$colleague['uID']."'>".$colleague['uFName']." ".$colleague['uLName']."</a>
+            <p class=\"memberTitle\">".$colleague['uOccupation']."
             </div></a>";
           }
         }
@@ -211,10 +205,13 @@
   <div id="login">
     <img src="../images/loginavatar.png">
     <form action="../php/logIn.php" method="post">
+      <?php
+        if(isset($_SESSION['error']))
+         echo '<label class="incorrectLogin">Incorrect username/password!</label>';
+      ?>
       <input id="username" name="uname" type="text" placeholder="Email" required/>
       <input id="password" name="pword" type="password" placeholder="Password" required/>
       <button type="submit">Log In</button>
-      <a href="">Forgot Password?</a>
     </form>
   </div>
 
@@ -222,11 +219,11 @@
     <div class="modalPadding">
       <form action="../php/updateuser.php" method="post" enctype="multipart/form-data">
         <?php
-					echo "<input id='nuserID' name='nuserID' type='hidden' value='".$user['uID']."'>";
+					echo "<input id='nuserID' name='nuserID' type='hidden' value='".$memberID."'>";
 				?>
         <div id="imgcontainer">
         <?php
-          echo "<img id='previewImage' src='../images/userImages/".$user['uID'].".'>";
+          echo "<img id='previewImage' src='../images/userImages/".$memberID.".'>";
         ?>
         <input id="profimgfile" type="file" name="pic" accept="image/*" onchange="PreviewImage();">
         <label id="profimglbl" for="profimgfile"><i class="fa fa-pencil"></i></label>
@@ -267,7 +264,7 @@
 
   <?php
 		if($userLoggedIn > 0 && ($memberID == $userLoggedIn || $uType == 0)){
-			echo "<button class='contextButton' onclick='openEditUserModal(\"".$user['uName']."\", \"".$user['uPass']."\", \"".$user['uFName']."\", \"".$user['uLName']."\", \"".$user['uGender']."\", \"".$user['uOccupation']."\", \"".$user['uAffiliation']."\")'><i class='fa fa-pencil fa-2x'	></i></button>";
+			echo "<button class='contextButton' onclick='openEditUserModal(\"".$member['uName']."\", \"".$member['uPass']."\", \"".$member['uFName']."\", \"".$member['uLName']."\", \"".$member['uGender']."\", \"".$member['uOccupation']."\", \"".$member['uAffiliation']."\")'><i class='fa fa-pencil fa-2x'	></i></button>";
 		}
 	?>
 

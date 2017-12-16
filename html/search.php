@@ -1,6 +1,14 @@
 <?php
     include '../php/dbh.php';
 
+    session_start();
+
+    $userLoggedIn = 0;
+    $uType = 2;
+    if(isset($_SESSION['uID'])){
+      $userLoggedIn = $_SESSION['uID'];
+      $uType = $_SESSION['uType']; //0 Admin, 1 Member, 2 Guest
+    }
 ?>
 
 <!DOCTYPE html>
@@ -15,8 +23,6 @@
 <script src="../js/search.js" type="text/javascript"></script>
 
 <?php
-  $uli = '0';
-  $accType = '2'; //0 Admin, 1 Member, 2 Guest
   if(array_key_exists('search-field', $_POST) == FALSE){
     $term = $_POST['search-field-searchpage'];
   }
@@ -31,14 +37,6 @@
   $datCh = false;
   $funCh = false;
   $staCh = false;
-
-  if(isset($_COOKIE['loggedIn'])){
-		$uli = $_COOKIE['loggedIn'];
-		if($uli == 1){
-	    $accType = $_COOKIE['accType'];
-			$uliID = $_COOKIE['uID'];
-		}
-  }
 ?>
 
 </head>
@@ -58,11 +56,10 @@
         </button>
       </form>
     </div>
-
     <?php
-      if($uli == '1'){
+      if($userLoggedIn > 0){
         echo "<ul id=\"toolbarButtons\">
-                <li><button id=\"userName\" class=\"toolbarButton\" onclick=\"location.href='profile.php?mID=".$_COOKIE['uID']."&isUser=1';\">".$_COOKIE['uFName']." ".$_COOKIE['uLName']."</button></li>
+                <li><button id=\"userName\" class=\"toolbarButton\" onclick=\"location.href='profile.php?mID=".$userLoggedIn."';\">".$_SESSION['uFName']." ".$_SESSION['uLName']."</button></li>
                 <li><button class=\"toolbarButton\" onclick=\"location.href='../php/logOut.php'\">Logout</button></li>
               </ul>";
       }else{

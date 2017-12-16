@@ -11,22 +11,10 @@
   }
 
   $pID = $_GET['pid'];
-
-  //Get project details
-  $sql = "SELECT * FROM tptable WHERE tpID LIKE ".$pID;
-	$result = mysqli_query($conn,$sql);
-	$project = mysqli_fetch_assoc($result);
-
-  //Get project head details
-  $query = 'SELECT uID, uFName, uLName FROM users WHERE uID = ' .$project['pHead'].'';
-  $queryResult = mysqli_query($conn,$query);
-  $pHead = mysqli_fetch_assoc($queryResult);
-
-  //Check if logged in user is part of the project
+	$project = mysqli_fetch_assoc(getProject($pID));
+  $pHead = mysqli_fetch_assoc(getProjectHead($project['pHead']));
   if($userLoggedIn > 0){
-    $isMember = "SELECT count(*) AS 'memCount' FROM members WHERE projectID=".$pID." AND userID=".$userLoggedIn;
-    $result = mysqli_query($conn,$isMember);
-    $memCount = mysqli_fetch_assoc($result);
+    $memCount = mysqli_fetch_assoc(checkMember($pID, $userLoggedIn));
     if($memCount['memCount'] > 0){
       $isPart = 1;
     }
@@ -160,14 +148,11 @@
 			<?php
 				$sanitized = nl2br($project['tpDesc']);
 				$pText = explode("<br>", $sanitized);
-        //foreach($pText as $pGraph)
-         	//echo "<p>".$pGraph."</p>";
-      	//echo "<br>";
-			echo "<p>";
-			foreach($pText as $pGraph){
-				echo $pGraph."<br>";
-			}
-			echo "</p>";
+  			echo "<p>";
+  			foreach($pText as $pGraph){
+  				echo $pGraph."<br>";
+  			}
+  			echo "</p>";
       ?>
 		  </div>
       <div class="footbuttonContainer">
@@ -218,11 +203,10 @@
 
     <div id="files" class="tabContent">
 		<?php
-			$acquire_files = 'SELECT * FROM files f, tptable tp WHERE f.tpID = tp.tpID  AND tp.tpID ='.$pID;
-			$result = mysqli_query($conn,$acquire_files);
-			$num_of_files = mysqli_num_rows($result);
+			$result = getFiles($pID);
+			$nResults = mysqli_num_rows($result);
 
-			if ($num_of_files > 0){
+			if ($nResults > 0){
         echo
         "<table id='projectFiles'>
           <tr>
@@ -233,10 +217,10 @@
             <th></th>
             <th></th>
           </tr>";
-				while ($row = mysqli_fetch_assoc($result)){
-					$filename = $row['tpFileName'];
-					$file_size = round($row['tpSize'] / 1024);
-					$modified_date = $row['tpModified'];
+				while ($file = mysqli_fetch_assoc($result)){
+					$filename = $file['tpFileName'];
+					$file_size = round($file['tpSize'] / 1024);
+					$modified_date = $file['tpModified'];
 					$file_extension = explode(".", $filename);
 
 					echo "<tr>
@@ -253,7 +237,7 @@
                 <form action='../php/deleteFile.php' method='post' onsubmit='return confirm(\"Are you sure you want to delete ".$filename."?\")'>
                   <input name='pID' type='hidden' value='".$pID."'>
                   <input name='fileName' type='hidden' value='".$filename."'>
-                  <input name='fileID' type='hidden' value='".$row['fileID']."'>
+                  <input name='fileID' type='hidden' value='".$file['fileID']."'>
                   <button class='fileDelete' type='submit'><i class='fa fa-trash'></i></button>
                 </form>
                </td>
@@ -282,7 +266,6 @@
 
     <div id="contributors" class="tabContent">
       <?php
-      			$canEdit = 0;
 				echo "
 						<div class=\"member\">
 							<img class=\"memberImage\" src=\"../images/userImages/" .$pHead['uID']. "\">
@@ -291,16 +274,15 @@
 						</div>
 						</a>";
 
-				$getMembers = 'SELECT DISTINCT u.uID, u.uFName, u.uLName FROM users AS u, members AS m WHERE u.uID != '.$pHead['uID'].' AND u.uID = m.userID AND m.projectID = ' .$pID.'';
-				$result = mysqli_query($conn, $getMembers);
-				$queryResults = mysqli_num_rows($result);
+				$result = getProjectMembers($pID, $pHead['uID']);
+				$nResults = mysqli_num_rows($result);
 
-      	if($queryResults > 0){
-      		while($mem = mysqli_fetch_assoc($result)){
+      	if($nResults > 0){
+      		while($member = mysqli_fetch_assoc($result)){
   				echo "
   						<div class=\"member\">
-    						<img class=\"memberImage\" src=\"../images/userImages/" .$mem['uID']. "\">
-    						<a class=\"memberName\" href='profile.php?mID=".$mem['uID']."'>".$mem['uFName']." ".$mem['uLName']."</a>
+    						<img class=\"memberImage\" src=\"../images/userImages/" .$member['uID']. "\">
+    						<a class=\"memberName\" href='profile.php?mID=".$member['uID']."'>".$member['uFName']." ".$member['uLName']."</a>
     						<p class=\"memberTitle\">Member
   						</div>
   					  </a>";
@@ -326,10 +308,13 @@
   <div id="login">
     <img src="../images/loginavatar.png">
     <form action="../php/logIn.php" method="post">
+      <?php
+        if(isset($_SESSION['error']))
+         echo '<label class="incorrectLogin">Incorrect username/password!</label>';
+      ?>
       <input id="username" name="uname" type="text" placeholder="Email" required/>
       <input id="password" name="pword" type="password" placeholder="Password" required/>
       <button type="submit">Log In</button>
-      <a href="">Forgot Password?</a>
     </form>
   </div>
 
@@ -346,20 +331,18 @@
           <input id="nprojectCapital" class="p100" name="nprojectcapital" type="text" />
           <label class="p100" for="nprojectHead">Project Head</label>
 		  <select name='selectedprojectHead' class="p100">
-				<?php
-					$query = 'SELECT uID, uFName, uLName FROM users ORDER BY uFName';
-					$result = mysqli_query($conn,$query);
-					$queryResults = mysqli_num_rows($result);
-					if ($queryResults > 0){
-						while ($row = mysqli_fetch_assoc($result)){
-							if($row['uID'] == $project['pHead'])
-								echo "<option value=".$row['uID']." selected='selected'>".$row['uFName']. " ".$row['uLName']."</option>";
-							else
-								echo "<option value=".$row['uID'].">".$row['uFName']. " ".$row['uLName']."</option>";
-						}
-					}
-
-				?>
+        <?php
+  				$result = getAllMembers();
+  				$nResults = mysqli_num_rows($result);
+  				if ($nResults > 0){
+  					while ($member = mysqli_fetch_assoc($result)){
+              if($member['uID'] == $pHead['uID'])
+                echo "<option value=".$member['uID']." selected='selected'>".$member['uFName']. " ".$member['uLName']."</option>";
+              else
+                echo "<option value=".$member['uID'].">".$member['uFName']. " ".$member['uLName']."</option>";
+  					}
+  				}
+  			?>
 		  </select>
           <label class="p100" for="nprojectAbstract">Abstract</label>
           <textarea id="nprojectAbstract" name="nprojectAbstract" rows="17" required></textarea>
@@ -368,12 +351,11 @@
           <label for="nprojectMembers" class="p100">Members</label>
 					<select id="allMembers" class="select p50" size="5" multiple="multiple">
             <?php
-              $query = 'SELECT uID, uFName, uLName FROM users WHERE uID NOT IN (SELECT userID FROM members WHERE projectID = '.$pID.') AND uID != '.$project['pHead'].' ORDER BY users.uFName';
-              $result = mysqli_query($conn,$query);
-              $queryResults = mysqli_num_rows($result);
-              if ($queryResults > 0){
-                while ($row = mysqli_fetch_assoc($result)){
-                  echo "<option value='".$row['uID']."'>".$row['uFName']. " ".$row['uLName']."</option>";
+              $result = getNonProjectMembers($pID, $pHead['uID']);
+              $nResults = mysqli_num_rows($result);
+              if ($nResults > 0){
+                while ($member = mysqli_fetch_assoc($result)){
+                  echo "<option value='".$member['uID']."'>".$member['uFName']. " ".$member['uLName']."</option>";
                 }
               }
             ?>
@@ -381,12 +363,11 @@
 
           <select id="projectMembers" name="nprojectMembers[]" class="select p50" size="5" multiple="multiple">
 						<?php
-              $query = 'SELECT uID, uFName, uLName FROM users WHERE uID IN (SELECT userID FROM members WHERE projectID = '.$pID.') AND uID != '.$project['pHead'].' ORDER BY users.uFName';
-              $result = mysqli_query($conn,$query);
-              $queryResults = mysqli_num_rows($result);
-              if ($queryResults > 0){
-                while ($row = mysqli_fetch_assoc($result)){
-                  echo "<option value='".$row['uID']."'>".$row['uFName']. " ".$row['uLName']."</option>";
+              $result = getProjectMembers($pID, $pHead['uID']);
+              $nResults = mysqli_num_rows($result);
+              if ($nResults > 0){
+                while ($member = mysqli_fetch_assoc($result)){
+                  echo "<option value='".$member['uID']."'>".$member['uFName']. " ".$member['uLName']."</option>";
                 }
               }
             ?>

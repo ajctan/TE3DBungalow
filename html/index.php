@@ -12,14 +12,14 @@
 
 <!DOCTYPE html>
 <html>
-<title>TedBungalow</title>
-<!--Font Awesome Stylesheet for icons-->
-<link rel="shortcut icon" href="../images/logo_b.png">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<link rel="stylesheet" href="../css/style.css">
-<link rel="stylesheet" href="../css/index.css">
-<script src="../js/script.js" type="text/javascript"></script>
-<script src="../js/index.js" type="text/javascript"></script>
+  <title>TedBungalow</title>
+  <!--Font Awesome Stylesheet for icons-->
+  <link rel="shortcut icon" href="../images/logo_b.png">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/index.css">
+  <script src="../js/script.js" type="text/javascript"></script>
+  <script src="../js/index.js" type="text/javascript"></script>
 </head>
 <body>
   <!-- Start of Toolbar -->
@@ -64,46 +64,43 @@
       </p>
     </div>
       <?php
-          $sql = "SELECT * FROM tptable ORDER BY tpSDate DESC";
-          $result = mysqli_query($conn,$sql);
-          $queryResults = mysqli_num_rows($result);
+          $result = getAllProjectsByDate();
+          $nResults = mysqli_num_rows($result);
 
-          if ($queryResults > 0){
-            while ($row = mysqli_fetch_assoc($result)){
-                  $query = 'SELECT uFName, uLName FROM users WHERE uID = ' .$row['pHead'].'';
-                  $queryResult = mysqli_query($conn,$query);
-                  $pHeadResult = mysqli_fetch_assoc($queryResult);
+          if ($nResults > 0){
+            while ($project = mysqli_fetch_assoc($result)){
+                  $pHead = mysqli_fetch_assoc(getProjectHead($project['pHead']));
 
                   $iClass = "";
                   $projStart = "";
                   $projEnd = "";
-                  if($row['tpEDate'] != null && $row['tpEDate'] == $row['tpSDate']){
+                  if($project['tpEDate'] != null && $project['tpEDate'] == $project['tpSDate']){
                     $iClass = "projectStatus cancelled";
-                    $date = date_create($row['tpSDate']);
+                    $date = date_create($project['tpSDate']);
                     $projStart = date_format($date, 'jS F Y');
-                    $date = date_create($row['tpEDate']);
+                    $date = date_create($project['tpEDate']);
                     $projEnd = date_format($date, 'jS F Y');
                   }
-                  else if($row['tpEDate'] != null && $row['tpEDate'] != $row['tpSDate']){
+                  else if($project['tpEDate'] != null && $project['tpEDate'] != $project['tpSDate']){
                     $iClass = "projectStatus done";
-                    $date = date_create($row['tpSDate']);
+                    $date = date_create($project['tpSDate']);
                     $projStart = date_format($date, 'jS F Y');
-                    $date = date_create($row['tpEDate']);
+                    $date = date_create($project['tpEDate']);
                     $projEnd = date_format($date, 'jS F Y');
                   }
-                  else if($row['tpEDate'] == null){
+                  else if($project['tpEDate'] == null){
                     $iClass = "projectStatus ongoing";
-                    $date = date_create($row['tpSDate']);
+                    $date = date_create($project['tpSDate']);
                     $projStart = date_format($date, 'jS F Y');
                   }
 
                   echo "<div class=\"projectDisplay\">
                   <i class=\"".$iClass."\"></i>
-                  <a class=\"projectTitle\" href='project.php?pid=".$row['tpID']."'>".$row['tpTitle']."</a>
-                  <p class=\"projectHead\">".$pHeadResult['uFName']." ".$pHeadResult['uLName']."
+                  <a class=\"projectTitle\" href='project.php?pid=".$project['tpID']."'>".$project['tpTitle']."</a>
+                  <p class=\"projectHead\">".$pHead['uFName']." ".$pHead['uLName']."
                   <p class=\"projectStart\">".$projStart."
                   <p class=\"projectEnd\">".$projEnd."
-                  <p class=\"projectAbstract\">".$row['tpDesc']."
+                  <p class=\"projectAbstract\">".$project['tpDesc']."
                   <div class=\"cornerFold\">
                   </div>
                   </div></a>";
@@ -132,7 +129,10 @@
   <div id="login">
     <img src="../images/loginavatar.png">
     <form action="../php/logIn.php" method="post">
-      <label class="incorrectLogin">Incorrect username/password!</label>
+      <?php
+        if(isset($_SESSION['error']))
+         echo '<label class="incorrectLogin">Incorrect username/password!</label>';
+      ?>
       <input id="username" name="uname" type="text" placeholder="Email" required/>
       <input id="password" name="pword" type="password" placeholder="Password" required/>
       <button type="submit">Log In</button>
@@ -150,18 +150,16 @@
           <label class="p100" for="nprojectHead">Project Head</label>
 		  <select name='selectedprojectHead' class="p100">
 			<?php
-				$query = 'SELECT uID, uFName, uLName FROM users ORDER BY uFName';
-				$result = mysqli_query($conn,$query);
-				$queryResults = mysqli_num_rows($result);
-				if ($queryResults > 0){
-					while ($row = mysqli_fetch_assoc($result)){
-            if($row['uID'] == $userLoggedIn)
-              echo "<option value=".$row['uID']." selected='selected'>".$row['uFName']. " ".$row['uLName']."</option>";
+				$result = getAllMembers();
+				$nResults = mysqli_num_rows($result);
+				if ($nResults > 0){
+					while ($member = mysqli_fetch_assoc($result)){
+            if($member['uID'] == $userLoggedIn)
+              echo "<option value=".$member['uID']." selected='selected'>".$member['uFName']. " ".$member['uLName']."</option>";
             else
-              echo "<option value=".$row['uID'].">".$row['uFName']. " ".$row['uLName']."</option>";
+              echo "<option value=".$member['uID'].">".$member['uFName']. " ".$member['uLName']."</option>";
 					}
 				}
-
 			?>
 		  </select>
           <label class="p100" for="nprojectAbstract">Abstract</label>
@@ -172,12 +170,11 @@
           <label class="p50">Project Members</label>
           <select id="allMembers" class="select p50" size="5" multiple="multiple">
             <?php
-              $query = 'SELECT uID, uFName, uLName FROM users ORDER BY uFName';
-              $result = mysqli_query($conn,$query);
-              $queryResults = mysqli_num_rows($result);
-              if ($queryResults > 0){
-                while ($row = mysqli_fetch_assoc($result)){
-                  echo "<option value='".$row['uID']."'>".$row['uFName']. " ".$row['uLName']."</option>";
+              $result = getAllMembers();
+              $nResults = mysqli_num_rows($result);
+              if ($nResults > 0){
+                while ($member = mysqli_fetch_assoc($result)){
+                  echo "<option value='".$member['uID']."'>".$member['uFName']. " ".$member['uLName']."</option>";
                 }
               }
             ?>
