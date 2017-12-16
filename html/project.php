@@ -230,6 +230,7 @@ include '../php/dbh.php';
           <th class="extension">Extension</th>
           <th class="lastModified">Last Modified</th>
           <th></th>
+          <th></th>
         </tr>
 
 		<?php
@@ -249,8 +250,7 @@ include '../php/dbh.php';
 			if ($num_of_files > 0){
 				while ($row = mysqli_fetch_assoc($result)){
 					$filename = $row['tpFileName'];
-					//$file_size = round($row['tpSize'] / 1024);
-					$file_size = round(filesize("../projectFiles/".$pID."/".$filename)/1024);
+					$file_size = round($row['tpSize'] / 1024);
 					$modified_date = $row['tpModified'];
 					$file_extension = explode(".", $filename);
 
@@ -264,6 +264,14 @@ include '../php/dbh.php';
 							 		<button class='fileDownload' type='submit'><i class='fa fa-download'></i></button>
 								</form>
 							 </td>
+               <td>
+                <form action='../php/deleteFile.php' method='post'>
+                  <input name='pID' type='hidden' value='".$pID."'>
+                  <input name='fileName' type='hidden' value='".$filename."'>
+                  <input name='fileID' type='hidden' value='".$row['fileID']."'>
+                  <button class='fileDelete' type='submit'><i class='fa fa-trash'></i></button>
+                </form>
+               </td>
 						   </tr>";
 				}
 			}
