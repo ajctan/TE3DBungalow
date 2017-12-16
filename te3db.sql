@@ -126,14 +126,14 @@ LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
 INSERT INTO `users` VALUES 
 ('michael_noble@dlsu.edu.ph','bungalow',1,0,'Michael Neil','Noble','Male','Project Manager','Bictory',1),
-('rafael_tanchuan@dlsu.edu.ph','bungalow',2,1,'Rafael Louis','Tanchuan','Male','Business Analyst','Bictory',1),
-('edmund_cruz@dlsu.edu.ph','bungalow',3,1,'Edmund Gerald','Cruz','Male','Business Analyst','Bictory',1),
+('rafael_tanchuan@dlsu.edu.ph','bungalow',2,0,'Rafael Louis','Tanchuan','Male','Business Analyst','Bictory',1),
+('edmund_cruz@dlsu.edu.ph','bungalow',3,0,'Edmund Gerald','Cruz','Male','Business Analyst','Bictory',1),
 ('arlan_gomez@dlsu.edu.ph','bungalow',4,0,'Arlan Ross','Gomez','Male','Quality Assurance','Bictory',1),
 ('klaudia_borromeo@dlsu.edu.ph','bungalow',5,0,'Klaudia Gaia','Borromeo','Female','Quality Assurance','Bictory',1),
 ('joesei_castro@dlsu.edu.ph','bungalow',6,0,'Joesei Jesus','Castro','Male','Developer','Bictory',1),
-('aron_tan@dlsu.edu.ph','bungalow',7,1,'Aron Joshua','Tan','Male','Developer','Bictory',1),
-('sam_marquez@dlsu.edu.ph','bungalow',8,1,'Sam','Marquez','Male','Developer','Bictory',1),
-('jan_lagayan@dlsu.edu.ph','bungalow',9,1,'Jan Alysa','Lagayan','Female','Developer','Bictory',1);
+('aron_tan@dlsu.edu.ph','bungalow',7,0,'Aron Joshua','Tan','Male','Developer','Bictory',1),
+('sam_marquez@dlsu.edu.ph','bungalow',8,0,'Sam','Marquez','Male','Developer','Bictory',1),
+('jan_lagayan@dlsu.edu.ph','bungalow',9,0,'Jan Alysa','Lagayan','Female','Developer','Bictory',1);
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;

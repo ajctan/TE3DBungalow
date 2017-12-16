@@ -8,26 +8,15 @@
 	$result = mysqli_query($conn,$sql);
 	$queryResults = mysqli_num_rows($result);
 	if($queryResults > 0){
-		while ($row = mysqli_fetch_assoc($result)){
-			setcookie("uFName", $row['uFName'], 0, "/");
-			setcookie("uLName", $row['uLName'], 0, "/");
-			if(isset($_COOKIE['accType'])){
-				unset($_COOKIE['accType']);
-				setcookie("accType", $row['uType'], 0, "/");
-			}else{
-				setcookie("accType", $row['uType'], 0, "/");
-			}
-			setcookie("eMail", $row['uName'], 0, "/");
-			setcookie("loggedIn", "1", 0, "/");
-			setcookie("gender", $row['uGender'], 0, "/");
-			setcookie("occupation", $row['uOccupation'], 0, "/");
-			setcookie("affiliation", $row['uAffiliation'], 0, "/");
-			setcookie("uID", $row['uID'], 0, "/");
-		}
-	}else{
-		setcookie("loggedIn", "0", 0, "/");
+		session_start();
+		$user = mysqli_fetch_assoc($result);
+
+		$_SESSION['uID'] = $user['uID'];
+		$_SESSION['uType'] = $user['uType'];
+		$_SESSION['uFName'] = $user['uFName'];
+		$_SESSION['uLName'] = $user['uLName'];
 	}
-	//header("Location: {$_SERVER['HTTP_REFERER']}");
+
 	header("Location: ../html/index.php");
     exit;
 ?>

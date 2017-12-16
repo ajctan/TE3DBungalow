@@ -1,5 +1,18 @@
 <?php
     include '../php/dbh.php';
+    session_start();
+
+    $userLoggedIn = 0;
+    $uType = 2;
+    if(isset($_SESSION['uID'])){
+      $userLoggedIn = $_SESSION['uID'];
+      $uType = $_SESSION['uType']; //0 Admin, 1 Member, 2 Guest
+    }
+
+    $memberID = $_GET['mID'];
+    $query = 'SELECT * FROM users WHERE uID = ' .$memberID;
+    $result = mysqli_query($conn, $query);
+    $user = mysqli_fetch_assoc($result);
 ?>
 
 <!DOCTYPE html>
@@ -11,12 +24,6 @@
   <link rel="stylesheet" href="../css/style.css">
   <script src="../js/script.js" type="text/javascript"></script>
   <script src="../js/profile.js" type="text/javascript"></script>
-  <?php
-    $mID = $_GET['mID'];
-    $query = 'SELECT * FROM users WHERE uID = ' .$mID;
-    $result = mysqli_query($conn, $query);
-    $user = mysqli_fetch_assoc($result);
-  ?>
 </head>
 <body>
   <!-- Start of Toolbar -->
@@ -36,60 +43,36 @@
     </div>
 
     <?php
-      $uli = '0';
-      if(isset($_COOKIE['loggedIn'])){
-        $uli = $_COOKIE['loggedIn'];
-        $uID = $_COOKIE['uID'];
-        $uType = $_COOKIE['accType'];
-        if($uli == '1'){
-          echo "<ul id=\"toolbarButtons\">
-                  <li><button id=\"userName\" class=\"toolbarButton\" onclick=\"location.href='profile.php?mID=".$_COOKIE['uID']."&isUser=1';\">".$_COOKIE['uFName']." ".$_COOKIE['uLName']."</button></li>
-                  <li><button class=\"toolbarButton\" onclick=\"location.href='../php/logOut.php'\">Logout</button></li>
-                </ul>";
-        }else{
-          echo "<ul id=\"toolbarButtons\">
-                  <li><button class=\"toolbarButton\" name=\"li1\" onclick=\"openLogin();\">Login</button></li>
-                </ul>";
-        }
+      if($userLoggedIn > 0){
+        echo "<ul id=\"toolbarButtons\">
+                <li><button id=\"userName\" class=\"toolbarButton\" onclick=\"location.href='profile.php?mID=".$userLoggedIn."';\">".$_SESSION['uFName']." ".$_SESSION['uLName']."</button></li>
+                <li><button class=\"toolbarButton\" onclick=\"location.href='../php/logOut.php'\">Logout</button></li>
+              </ul>";
       }else{
-          echo "<ul id=\"toolbarButtons\">
-                  <li><button class=\"toolbarButton\" name=\"".$uli."\" onclick=\"openLogin();\">Login</button></li>
-                </ul>";
-          if(!isset($_COOKIE['accType']))
-            setcookie("accType", "2", 0, "/");
+        echo "<ul id=\"toolbarButtons\">
+                <li><button class=\"toolbarButton\" name=\"li1\" onclick=\"openLogin();\">Login</button></li>
+              </ul>";
       }
     ?>
   </div>
-  <!--<script>
-  	function confirmDelete(){
-  		var result = confirm("Are you sure you want to delete this account?");
-  		if(result){
-  			//window.location="../php/delAcc.php?accID=".document.getElementByID("accID");
-			//window.location.replace("http://localhost/TE3dBungalow/php/delAcc.php?accID=".document.getElementByID("accID"));
-			//window.location.href = "http://localhost/TE3dBungalow/php/delAcc.php?accID=".document.getElementByID("accID");
-			//header("Location: ../php/delAcc.php".document.getElementByID("accID"));
-			alert("../php/delAcc.php".document.getElementByID('accID').value);
-  		}
-  	}
-  </script>-->
   <!-- End of Toolbar; start of Content -->
   <div id="wrap">
     <div id="pageHead">
       <?php
-        if(isset($_COOKIE['loggedIn'])){
-          if($_COOKIE['accType'] == 0 && $user['uType'] != 0)
+        if(isset($_SESSION['uType'])){
+          if($uType == 0 && $user['uType'] != 0)
             if($user['uActive'] == 1)
               echo "<button id='optionsButton' onclick='openOptions()'><i class='fa fa-cog fa-2x'></i></button>
                     <div id='options'>
                   	  <form action='../php/delAcc.php' method='POST' onsubmit='return confirm(\"Are you sure you want to deactivate ".$user['uFName']." ".$user['uLName']."?\")'>
-                    	 <button class=\"option\" name=\"accID\" value=\"".$mID."\">Deactivate Account</button>
+                    	 <button class=\"option\" name=\"accID\" value=\"".$memberID."\">Deactivate Account</button>
                       </form>
                     </div>";
             else
               echo "<button id=\"optionsButton\" onclick=\"openOptions()\"><i class=\"fa fa-cog fa-2x\"></i></button>
                     <div id=\"options\">
                       <form action=\"../php/reacAcc.php\" method=\"POST\">
-                       <button class=\"option\" name=\"accID\" value=\"".$mID."\">Reactivate Account</button>
+                       <button class=\"option\" name=\"accID\" value=\"".$memberID."\">Reactivate Account</button>
                       </form>
                     </div>";
         }
@@ -201,7 +184,7 @@
             echo "
             <div class=\"member\">
             <img class=\"memberImage\" src=\"../images/userImages/" .$row['uID']. "\">
-            <a class=\"memberName\" href='profile.php?mID=".$row['uID']."&isUser=0'>".$row['uFName']." ".$row['uLName']."</a>
+            <a class=\"memberName\" href='profile.php?mID=".$row['uID']."'>".$row['uFName']." ".$row['uLName']."</a>
             <p class=\"memberTitle\">".$row['uOccupation']."
             </div></a>";
           }
@@ -283,7 +266,7 @@
   </div>
 
   <?php
-		if($uli == 1 && ($mID == $uID || $uType == 0)){
+		if($userLoggedIn > 0 && ($memberID == $userLoggedIn || $uType == 0)){
 			echo "<button class='contextButton' onclick='openEditUserModal(\"".$user['uName']."\", \"".$user['uPass']."\", \"".$user['uFName']."\", \"".$user['uLName']."\", \"".$user['uGender']."\", \"".$user['uOccupation']."\", \"".$user['uAffiliation']."\")'><i class='fa fa-pencil fa-2x'	></i></button>";
 		}
 	?>

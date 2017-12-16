@@ -1,5 +1,13 @@
 <?php
-    include '../php/dbh.php';
+  include '../php/dbh.php';
+  session_start();
+
+  $userLoggedIn = 0;
+  $uType = 2;
+  if(isset($_SESSION['uID'])){
+    $userLoggedIn = $_SESSION['uID'];
+    $uType = $_SESSION['uType']; //0 Admin, 1 Member, 2 Guest
+  }
 ?>
 
 <!DOCTYPE html>
@@ -12,20 +20,6 @@
 <link rel="stylesheet" href="../css/index.css">
 <script src="../js/script.js" type="text/javascript"></script>
 <script src="../js/index.js" type="text/javascript"></script>
-
-<?php
-  $uli = '0';
-  $accType = '2'; //0 Admin, 1 Member, 2 Guest
-
-  if(isset($_COOKIE['loggedIn'])){
-		$uli = $_COOKIE['loggedIn'];
-		if($uli == 1){
-	    $accType = $_COOKIE['accType'];
-			$uliID = $_COOKIE['uID'];
-		}
-  }
-?>
-
 </head>
 <body>
   <!-- Start of Toolbar -->
@@ -43,11 +37,10 @@
         </button>
       </form>
     </div>
-
     <?php
-      if($uli == '1'){
+      if($userLoggedIn > 0){
         echo "<ul id=\"toolbarButtons\">
-                <li><button id=\"userName\" class=\"toolbarButton\" onclick=\"location.href='profile.php?mID=".$_COOKIE['uID']."&isUser=1';\">".$_COOKIE['uFName']." ".$_COOKIE['uLName']."</button></li>
+                <li><button id=\"userName\" class=\"toolbarButton\" onclick=\"location.href='profile.php?mID=".$userLoggedIn."';\">".$_SESSION['uFName']." ".$_SESSION['uLName']."</button></li>
                 <li><button class=\"toolbarButton\" onclick=\"location.href='../php/logOut.php'\">Logout</button></li>
               </ul>";
       }else{
@@ -56,7 +49,6 @@
               </ul>";
       }
     ?>
-
   </div>
 
   <!-- End of Toolbar; start of Content -->
@@ -140,10 +132,10 @@
   <div id="login">
     <img src="../images/loginavatar.png">
     <form action="../php/logIn.php" method="post">
+      <label class="incorrectLogin">Incorrect username/password!</label>
       <input id="username" name="uname" type="text" placeholder="Email" required/>
       <input id="password" name="pword" type="password" placeholder="Password" required/>
       <button type="submit">Log In</button>
-      <a href="">Forgot Password?</a>
     </form>
   </div>
 
@@ -244,11 +236,11 @@
   </div>
 
   <?php
-    if($uli == '1'){
+    if($userLoggedIn > 0){
       echo "
       <div id=\"createSBContainer\" class=\"createSBContainer-hidden\">
         <button id=\"createProject\" class=\"createButtonContainer\" onclick=\"openCreateProjectModal(); showCreateButtons()\"><p>Create Project</p> <div class=\"createSpecificButton\"><i class=\"fa fa-folder-open\"></i></div></button>";
-        if($_COOKIE['accType'] == 0)
+        if($uType == 0)
           echo "<button id=\"createUser\" class=\"createButtonContainer\" onclick=\"openCreateUserModal(); showCreateButtons()\"><p>Create User</p> <div class=\"createSpecificButton\"><i class=\"fa fa-user-plus\"></i></div></button>";
       echo "
       </div>

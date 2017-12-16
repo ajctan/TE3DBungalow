@@ -178,7 +178,7 @@ h1{
   height: 250px;
   padding: 5px;
   position: absolute;
-  right: 25px;
+  right: 150px;
   text-align: right;
   top: 41px;
   width: 250px;
@@ -190,6 +190,13 @@ h1{
   height: 100px;
   margin: 0 auto 0 auto;
   padding: 10px;
+}
+
+#login label{
+  color: red;
+  display: block;
+  text-align: left;
+  width: 100%;
 }
 
 #login input{
