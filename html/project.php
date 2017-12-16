@@ -75,7 +75,7 @@ include '../php/dbh.php';
       		if($accType == 0 || $project['pHead'] == $uliID){
       			echo "<button id='optionsButton' onclick='openOptions()'><i class='fa fa-cog fa-2x'></i></button>
       				  <div id='options'>
-	                <form action='../php/deleteProject.php' method='POST'>
+	                <form action='../php/deleteProject.php' method='POST' onsubmit='return confirm(\"Are you sure you want to delete this project?\");'>
 										<input name='delete' type='number' value='".$pID."' hidden/>
 	        					<button class='option'>Delete Project</button>
 	                </form>
@@ -266,7 +266,7 @@ include '../php/dbh.php';
 								</form>
 							 </td>
                <td>
-                <form action='../php/deleteFile.php' method='post'>
+                <form action='../php/deleteFile.php' method='post' onsubmit='return confirm(\"Are you sure you want to delete ".$filename."?\")'>
                   <input name='pID' type='hidden' value='".$pID."'>
                   <input name='fileName' type='hidden' value='".$filename."'>
                   <input name='fileID' type='hidden' value='".$row['fileID']."'>
