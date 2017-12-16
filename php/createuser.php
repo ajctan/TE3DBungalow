@@ -10,10 +10,16 @@
 		$id = $row['uID'] + 1;
 
 		$info = pathinfo($_FILES['pic']['name']);
+		$size = $_FIES['pic']['size'];
 		$newname = $id;
-
 		$target = '../images/userImages/'.$newname;
-		move_uploaded_file( $_FILES['pic']['tmp_name'], $target);
+
+		if($size > 0){
+			move_uploaded_file( $_FILES['pic']['tmp_name'], $target);
+		} else {
+			$defaultUserImage = '../images/loginavatar.png';
+			copy($defaultUserImage, $target);
+		}
 
 		$uName = $_POST['email'];
 		$uPass = $_POST['pwd'];
