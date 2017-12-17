@@ -214,9 +214,11 @@
             <th class='size'>Size</th>
             <th class='extension'>Extension</th>
             <th class='lastModified'>Last Modified</th>
-            <th></th>
-            <th></th>
-          </tr>";
+            <th></th>";
+            if($isPart == 1){
+            echo "<th></th>";
+            }
+          echo "</tr>";
 				while ($file = mysqli_fetch_assoc($result)){
 					$filename = $file['tpFileName'];
 					$file_size = round($file['tpSize'] / 1024);
@@ -228,20 +230,23 @@
 							 <td>".$file_size." kb</td>
 							 <td>.".$file_extension[sizeof($file_extension)-1]."</td>
 							 <td>".$modified_date."</td>
-							 <td>
-							 	<form action='../projectFiles/".$pID."/".$filename."'>
-							 		<button class='fileDownload' type='submit'><i class='fa fa-download'></i></button>
-								</form>
-							 </td>
                <td>
-                <form action='../php/deleteFile.php' method='post' onsubmit='return confirm(\"Are you sure you want to delete ".$filename."?\")'>
-                  <input name='pID' type='hidden' value='".$pID."'>
-                  <input name='fileName' type='hidden' value='".$filename."'>
-                  <input name='fileID' type='hidden' value='".$file['fileID']."'>
-                  <button class='fileDelete' type='submit'><i class='fa fa-trash'></i></button>
+                <form action='../projectFiles/".$pID."/".$filename."'>
+                  <button class='fileDownload' type='submit'><i class='fa fa-download'></i></button>
                 </form>
-               </td>
-						   </tr>";
+               </td>";
+               if($isPart == 1){
+                 echo "
+                 <td>
+                  <form action='../php/deleteFile.php' method='post' onsubmit='return confirm(\"Are you sure you want to delete ".$filename."?\")'>
+                    <input name='pID' type='hidden' value='".$pID."'>
+                    <input name='fileName' type='hidden' value='".$filename."'>
+                    <input name='fileID' type='hidden' value='".$file['fileID']."'>
+                    <button class='fileDelete' type='submit'><i class='fa fa-trash'></i></button>
+                  </form>
+                 </td>";
+               }
+						   echo "</tr>";
 				}
 			} else {
         echo "<p class='noFiles'>This project doesn't have any files.";

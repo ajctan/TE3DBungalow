@@ -106,7 +106,10 @@
     </div>
     <div id="tabButtons">
       <button id="defaultOpen" class="tabButton half" onclick="openTab(event, 'projects')">Projects</button>
-      <button class="tabButton half" onclick="openTab(event, 'members')">Members</button>
+      <?php
+        if($userLoggedIn > 0)
+          echo '<button class="tabButton half" onclick="openTab(event, \'members\')">Members</button>';
+      ?>
     </div>
 
     <div id="projects" class="tabContent">
