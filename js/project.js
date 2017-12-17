@@ -22,22 +22,17 @@ function closeEditProjctModal(){
   document.getElementById('editProjectBackground').style.display="none";
 }
 
-function copyAbstractToClipboard(element) {
+function copyToClipboard(buttonID, element) {
   var $temp = $("<textarea>");
   $("body").append($temp);
   $temp.val($(element).text()).select();
   document.execCommand("copy");
   $temp.remove();
-  alert("The abstract has been copied to your clipboard!");
-}
-
-function copyCitationToClipboard(element) {
-  var $temp = $("<textarea>");
-  $("body").append($temp);
-  $temp.val($(element).text()).select();
-  document.execCommand("copy");
-  $temp.remove();
-  alert("The citation has been copied to your clipboard!");
+  if(buttonID == "getAbstract")
+    alert("The abstract has been copied to your clipboard!");
+  else {
+    alert("The citation has been copied to your clipboard!");
+  }
 }
 
 function cph(){
