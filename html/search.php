@@ -27,7 +27,7 @@
     $term = $_POST['search-field-searchpage'];
   }
   else{
-  $term = $_POST['search-field'];
+    $term = $_POST['search-field'];
   }
   $member = "";
   $date = "";
@@ -50,8 +50,8 @@
 
     <div id="searchBar">
       <form action="search.php" method="POST">
-        <input id="searchTerm" type="text" name="search-field-searchpage" placeholder="Search"/>
-        <button id="searchButton" type="submit" name ="search-button">
+        <input id="searchTerm" type="text" name="search-field" placeholder="Search"/>
+        <button id="searchButton" type="submit" name="search-button">
           <i class="fa fa-search"></i>
         </button>
       </form>
@@ -77,7 +77,7 @@
       <img class="pageLogo" src="../images/searchlogo.png">
       <?php
          if(array_key_exists('search-field', $_POST) == FALSE){
-         //echo "<h3>Search results for: '".$_POST['proj_q']." ".$_POST['mem_q']."'</h3>";
+         echo "<h3>Advanced Search Results</h3>";
          }
         else{
         echo "<h3>Search results for: '".$_POST['search-field']."'</h3>";
@@ -245,6 +245,10 @@
             }
           }
         }
+
+        unset($_POST['proj_q']);
+        unset($_POST['search-field-searchpage']);
+        unset($_POST['search-field']);
       ?>
     </div>
 
