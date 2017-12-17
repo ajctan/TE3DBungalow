@@ -172,8 +172,8 @@
 		    		echo "<div id=\"copy-text\" class=\"hidden\">".$head." ".$pCitation."</div>";
 		    	else
 		    		echo "<div id=\"copy-text\" class=\"hidden\">".$head.", et al. ".$pCitation."</div>";
-          echo "<button id=\"getAbstract\" onclick=\"copyToClipboard('#projectAbstract')\"><i class=\"fa fa-file-text-o\"></i> Copy Abstract</button>";
-        	echo "<button id=\"getCitation\" onclick=\"copyToClipboard('#copy-text')\"><i class=\"fa fa-file-text-o\"></i> Get Citation</button>";
+          echo "<button id=\"getAbstract\" onclick=\"copyAbstractToClipboard('#projectAbstract')\"><i class=\"fa fa-file-text-o\"></i> Copy Abstract</button>";
+        	echo "<button id=\"getCitation\" onclick=\"copyCitationToClipboard('#copy-text')\"><i class=\"fa fa-file-text-o\"></i> Get Citation</button>";
         	if(!isset($_SESSION['uID']))
         		echo "<button id=\"contactProjectHead\" onclick=\"openContactHead()\"><i class=\"fa fa-envelope-o\"></i> Contact Project Head</button>";
 
