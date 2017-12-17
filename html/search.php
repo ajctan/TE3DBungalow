@@ -86,16 +86,16 @@
       <hr>
       <div id="advSearch" onclick="openAdvSearch()">
         <p>Advanced Search <i class="right fa fa-caret-down"></i>
-        <div id="advSearch-content" class="close">
+        <div id="advSearch-content">
           <form action="search.php" method="POST" onsubmit="performAdvSearch()">
-            <input id="member" type="checkbox" onclick="toggleCheckBoxMember()"></input><label id="memberlbl" class="checkLabel" for="member">Member <input type="text" id="membervalue" placeholder="Member name"/></label>
-            <input id="datestart" type="checkbox" onclick="toggleCheckBoxDate()"></input><label id="datestartlbl" class="checkLabel" for="datestart">Date Start <input type="date" id="datevalue"/></label>
-            <input id="fundedby" type="checkbox" onclick="toggleCheckBoxFunded()"></input><label id="fundedbylbl" class="checkLabel" for="fundedby">Funded by <input type="text" id="fundedbyvalue" placeholder="Funded by"/></label>
-            <input id="status" type="checkbox" onclick="toggleCheckBoxStatus()"></input><label id="statuslbl" class="checkLabel" for="status">Status <select placeholder="Status" id="statusvalue">
+            <label class="p30">Member</label><input class="p70" type="text" id="membervalue" placeholder="Member name"/>
+            <label class="p30">Date Start</label><input class="p70" type="date" id="datevalue"/>
+            <label class="p30">Funded by</label><input class="p70" type="text" id="fundedbyvalue" placeholder="Funded by"/>
+            <label class="p30">Status</label><select class="p70" placeholder="Status" id="statusvalue">
                                                                                                                       <option>Ongoing</option>
                                                                                                                       <option>Finished</option>
                                                                                                                       <option>Cancelled</option>
-                                                                                                                    </select></label>
+                                                                                                                    </select>
             <button class="p100 modalBtn" type="submit">Advanced Search</button>
             <input type="hidden" id="memberQuery" name="mem_q" value="" />
             <input type="hidden" id="projectQuery" name="proj_q" value="" />
@@ -127,21 +127,21 @@
                     $iClass = "";
                     $projStart = "";
                     $projEnd = "";
-                    if($row['tpEDate'] != null && $row['tpEDate'] == $row['tpSDate']){
+                    if($row['tpStatus'] == 0){
                       $iClass = "projectStatus cancelled";
                       $date = date_create($row['tpSDate']);
                       $projStart = date_format($date, 'jS F Y');
                       $date = date_create($row['tpEDate']);
                       $projEnd = date_format($date, 'jS F Y');
                     }
-                    else if($row['tpEDate'] != null && $row['tpEDate'] != $row['tpSDate']){
+                    else if($row['tpStatus'] == 2){
                       $iClass = "projectStatus done";
                       $date = date_create($row['tpSDate']);
                       $projStart = date_format($date, 'jS F Y');
                       $date = date_create($row['tpEDate']);
                       $projEnd = date_format($date, 'jS F Y');
                     }
-                    else if($row['tpEDate'] == null){
+                    else if($row['tpStatus'] == 1){
                       $iClass = "projectStatus ongoing";
                       $date = date_create($row['tpSDate']);
                       $projStart = date_format($date, 'jS F Y');
@@ -174,21 +174,21 @@
                     $iClass = "";
                     $projStart = "";
                     $projEnd = "";
-                    if($row['tpEDate'] != null && $row['tpEDate'] == $row['tpSDate']){
+                    if($row['tpStatus'] == 0){
                       $iClass = "projectStatus cancelled";
                       $date = date_create($row['tpSDate']);
                       $projStart = date_format($date, 'jS F Y');
                       $date = date_create($row['tpEDate']);
                       $projEnd = date_format($date, 'jS F Y');
                     }
-                    else if($row['tpEDate'] != null && $row['tpEDate'] != $row['tpSDate']){
+                    else if($row['tpStatus'] == 2){
                       $iClass = "projectStatus done";
                       $date = date_create($row['tpSDate']);
                       $projStart = date_format($date, 'jS F Y');
                       $date = date_create($row['tpEDate']);
                       $projEnd = date_format($date, 'jS F Y');
                     }
-                    else if($row['tpEDate'] == null){
+                    else if($row['tpStatus'] == 1){
                       $iClass = "projectStatus ongoing";
                       $date = date_create($row['tpSDate']);
                       $projStart = date_format($date, 'jS F Y');
@@ -273,8 +273,8 @@
     </form>
   </div>
   <!-- These are transparent 100% x 100% box behind the module, that closes the module when clicked -->
-  <div id="notificationsBackground" onclick="closeNotifications()"></div>
-  <div id="optionsBackground" onclick="closeOptions()"></div>
-  <div id="loginbackground" onclick="closeLogin()"></div>
+  <div id="notificationsBackground" class="modalBackground" onclick="closeNotifications()"></div>
+  <div id="loginbackground" class="modalBackground" onclick="closeLogin()"></div>
+  <div id="advSearchbackground" class="modalBackground" onclick="closeAdvSearch()"></div>
 </body>
 </html>

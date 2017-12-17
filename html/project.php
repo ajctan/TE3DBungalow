@@ -14,11 +14,12 @@
 	$project = mysqli_fetch_assoc(getProject($pID));
   $pHead = mysqli_fetch_assoc(getProjectHead($project['pHead']));
   if($userLoggedIn > 0){
-    $memCount = mysqli_fetch_assoc(checkMember($pID, $userLoggedIn));
-    if($memCount['memCount'] > 0){
+    $isPart = mysqli_fetch_assoc(checkMember($pID, $userLoggedIn));
+    if($isPart['isPart'] > 0){
       $isPart = 1;
     }
   }
+  $memCount = getMemCount($pID);
 ?>
 <!DOCTYPE html>
 <html>
@@ -101,36 +102,49 @@
     </div>
   	<div id="abstract" class="tabContent">
 			<?php
-				if($project['tpEDate'] != null && $project['tpEDate'] == $project['tpSDate']){
-					$iClass = "cancelled";
-					$date = date_create($project['tpSDate']);
-					$projStart = date_format($date, 'jS F Y');
-					$date = date_create($project['tpEDate']);
-					$projEnd = date_format($date, 'jS F Y');
-				}
-				else if($project['tpEDate'] != null && $project['tpEDate'] != $project['tpSDate']){
-					$iClass = "done";
-					$date = date_create($project['tpSDate']);
-					$projStart = date_format($date, 'jS F Y');
-					$date = date_create($project['tpEDate']);
-					$projEnd = date_format($date, 'jS F Y');
-				}
-				else if($project['tpEDate'] == null){
-					$iClass = "ongoing";
-					$date = date_create($project['tpSDate']);
-					$projStart = date_format($date, 'jS F Y');
-					$projEnd = "";
-				}
+        $iClass = "";
+        $date = date_create($project['tpSDate']);
+        $projStart = date_format($date, 'jS F Y');
+        $projEnd = "";
+        if($project['tpStatus'] == 0){
+          $iClass = "cancelled";
+          $date = date_create($project['tpEDate']);
+          $projEnd = date_format($date, 'jS F Y');
+        }
+        else if($project['tpStatus'] == 2){
+          $iClass = "done";
+          $date = date_create($project['tpEDate']);
+          $projEnd = date_format($date, 'jS F Y');
+        }
+        else if($project['tpStatus'] == 1){
+          $iClass = "ongoing";
+        }
 			?>
-			<table class="p100">
+			<table class="pt100">
 				<tr>
-					<th class="p25">Start Date:</th>
+					<th class="p20">Start Date:</th>
 					<?php
-						echo "<td class='p25'> ".$projStart." </td>";
+						echo "<td> ".$projStart." </td>";
 					?>
-					<th class="p25">Status:</th>
+					<th class="p15">Status:</th>
 					<?php
-						echo "<td id='statusTD' class='p25'><i class='".$iClass."'></i></td>";
+						echo "
+                  <form action='../php/changeStatus.php' method='POST'>
+                    <td class='p30'>
+                      <i id='statusID' class='".$iClass."'></i>
+                      <select id='newStatus' name='newStatus'>
+                        <option value='1'>Ongoing</option>
+                        <option value='2'>Finished</option>
+                        <option value='0'>Cancelled</option>
+                      </select>
+                    </td>
+                    <td class='p50'>";
+                      if($isPart == 1)
+                        echo "<button id='changeBtn' onclick='changeStatus()' type='button'>Change Status</button>";
+                      echo"<button id='saveBtn'>Save Status</button>
+                    </td>
+                    <input name='pID' type='hidden' value='".$pID."' />
+                  </form>";
 					?>
 				</tr>
 				<tr>
@@ -142,38 +156,39 @@
 					<?php
 						echo "<td> ".$project['pVentureC']." </td>";
 					?>
+          <td></td>
 				</tr>
 			</table>
 			<div id="projectAbstract">
-			<?php
-				$sanitized = nl2br($project['tpDesc']);
-				$pText = explode("<br>", $sanitized);
-  			echo "<p>";
-  			foreach($pText as $pGraph){
-  				echo $pGraph."<br>";
-  			}
-  			echo "</p>";
-      ?>
+  			<?php
+  				$sanitized = nl2br($project['tpDesc']);
+  				$pText = explode("<br>", $sanitized);
+    			echo "<p>";
+    			foreach($pText as $pGraph){
+    				echo $pGraph."<br>";
+    			}
+    			echo "</p>";
+        ?>
 		  </div>
       <div class="footbuttonContainer">
         <?php
-        	$sql = "SELECT * FROM tptable, users WHERE tptable.pHead = users.uID AND tptable.tpID LIKE ".$project['tpID'];
-		    	$result = mysqli_query($conn,$sql);
-		    	$row = mysqli_fetch_assoc($result);
 		    	$myURL = 'http://'.$_SERVER['HTTP_HOST'].$_SERVER['PHP_SELF'];
-		    	$head = $row['uLName'].", ".substr($row['uFName'], 0, 1).".";
-	    		$pCitation = "(".$row['tpSDate']."). ".$row['tpTitle'].". Retrieved from: ".$myURL."?pid=".$pID;
+		    	$head = $pHead['uLName'].", ".substr($pHead['uFName'], 0, 1).".";
+	    		$pCitation = "(".$project['tpSDate']."). ".$project['tpTitle'].". Retrieved from: ".$myURL."?pid=".$pID;
 
-	    		$sql = "select projectID, count(projectID) from members where projectID = ".$project['tpID']." group by projectID";
-	    		$result = mysqli_query($conn,$sql);
-		    	$row = mysqli_fetch_assoc($result);
-
-		    	if($row['count(projectID)'] == 1)
-		    		echo "<div id=\"copy-text\" class=\"hidden\">".$head." ".$pCitation."</div>";
+		    	if($memCount == 1)
+		    		echo "<div id=\"projectCitation\" class=\"hidden\">".$head." ".$pCitation."</div>";
 		    	else
-		    		echo "<div id=\"copy-text\" class=\"hidden\">".$head.", et al. ".$pCitation."</div>";
-          echo "<button id=\"getAbstract\" onclick=\"copyToClipboard(this.id, '#projectAbstract')\"><i class=\"fa fa-file-text-o\"></i> Copy Abstract</button>";
-        	echo "<button id=\"getCitation\" onclick=\"copyToClipboard(this.id, '#copy-text')\"><i class=\"fa fa-file-text-o\"></i> Get Citation</button>";
+		    		echo "<div id=\"projectCitation\" class=\"hidden\">".$head.", et al. ".$pCitation."</div>";
+            ?>
+
+        <textarea id="textToCopy" class="hidden"></textarea>
+        <?php
+          echo "<button id=\"getAbstract\" onclick=\"copyAbstractToClipboard('".$project['tpDesc']."')\"><i class=\"fa fa-file-text-o\"></i> Copy Abstract</button>";
+        ?>
+    	  <button id="getCitation" onclick="copyCitationToClipboard()"><i class="fa fa-file-text-o"></i> Get Citation</button>
+
+          <?php
         	if(!isset($_SESSION['uID']))
         		echo "<button id=\"contactProjectHead\" onclick=\"openContactHead()\"><i class=\"fa fa-envelope-o\"></i> Contact Project Head</button>";
 

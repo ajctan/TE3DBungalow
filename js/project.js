@@ -1,3 +1,10 @@
+function changeStatus(){
+  document.getElementById('statusID').style.display = "none";
+  document.getElementById('changeBtn').style.display = "none";
+  document.getElementById('newStatus').style.display = "inline-block";
+  document.getElementById('saveBtn').style.display = "inline-block";
+}
+
 function openContactHead(){
   document.getElementById('contactHead').style.display="block";
   document.getElementById('contactHeadBackground').style.display="block";
@@ -22,17 +29,22 @@ function closeEditProjctModal(){
   document.getElementById('editProjectBackground').style.display="none";
 }
 
-function copyToClipboard(buttonID, element) {
-  var $temp = $("<textarea>");
-  $("body").append($temp);
-  $temp.val($(element).text()).select();
+function copyAbstractToClipboard(abstract){
+  document.getElementById('textToCopy').style.display = "inline-block";
+  document.getElementById('textToCopy').innerHTML = abstract;
+  textToCopy.select();
   document.execCommand("copy");
-  $temp.remove();
-  if(buttonID == "getAbstract")
-    alert("The abstract has been copied to your clipboard!");
-  else {
-    alert("The citation has been copied to your clipboard!");
-  }
+  document.getElementById('textToCopy').style.display = "none";
+  alert("The abstract has been copied to your clipboard!");
+}
+
+function copyCitationToClipboard(){
+  document.getElementById('textToCopy').style.display = "inline-block";
+  document.getElementById('textToCopy').innerHTML = document.getElementById('projectCitation').innerHTML;
+  textToCopy.select();
+  document.execCommand("copy");
+  document.getElementById('textToCopy').style.display = "none";
+  alert("The citation has been copied to your clipboard!");
 }
 
 function cph(){

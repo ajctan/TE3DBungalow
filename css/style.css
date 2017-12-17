@@ -818,19 +818,44 @@ button:disabled{
   width: 7%;
 }
 
+.p15{
+  margin: 5px;
+  width: 12%;
+}
+
+.p20{
+  margin: 5px;
+  width: 18%;
+}
+
 .p25{
+  display: inline-block;
   margin: 5px;
   width: 22%;
 }
 
+.p30{
+  display: inline-block;
+  margin: 5px;
+  width: 28%
+}
+
 .p45{
+  display: inline-block;
   margin: 5px;
   width: 43%;
 }
 
 .p50{
+  display: inline-block;
   margin: 5px;
   width: 47%;
+}
+
+.p70{
+  display: inline-block;
+  margin: 5px;
+  width: 65%
 }
 
 .p100{
@@ -838,6 +863,10 @@ button:disabled{
   margin: 5px;
   padding: 5px;
   width: 96%;
+}
+
+.pt100{
+  width: 100%;
 }
 
 .alignRightContainer{

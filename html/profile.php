@@ -129,27 +129,21 @@
               $pHead = mysqli_fetch_assoc(getProjectHead($project['pHead']));
 
               $iClass = "";
-              $projStart = "";
+              $date = date_create($project['tpSDate']);
+              $projStart = date_format($date, 'jS F Y');
               $projEnd = "";
-
-              if($project['tpEDate'] != null && $project['tpEDate'] == $project['tpSDate']){
+              if($project['tpStatus'] == 0){
                 $iClass = "projectStatus cancelled";
-                $date = date_create($project['tpSDate']);
-                $projStart = date_format($date, 'jS F Y');
                 $date = date_create($project['tpEDate']);
                 $projEnd = date_format($date, 'jS F Y');
               }
-              else if($project['tpEDate'] != null && $project['tpEDate'] != $project['tpSDate']){
+              else if($project['tpStatus'] == 2){
                 $iClass = "projectStatus done";
-                $date = date_create($project['tpSDate']);
-                $projStart = date_format($date, 'jS F Y');
                 $date = date_create($project['tpEDate']);
                 $projEnd = date_format($date, 'jS F Y');
               }
-              else if($project['tpEDate'] == null){
+              else if($project['tpStatus'] == 1){
                 $iClass = "projectStatus ongoing";
-                $date = date_create($project['tpSDate']);
-                $projStart = date_format($date, 'jS F Y');
               }
 
               echo "<div class=\"projectDisplay\">

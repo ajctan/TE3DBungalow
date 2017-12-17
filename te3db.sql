@@ -80,7 +80,7 @@ CREATE TABLE `tptable` (
   `tpDesc` varchar(10000) NOT NULL,
   `tpSDate` date NOT NULL,
   `tpEDate` date DEFAULT NULL,
-  `tpAccessLVL` int(11) NOT NULL,
+  `tpStatus` int(11) NOT NULL,
   `pHead` varchar(50) DEFAULT NULL,
   `pVentureC` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`tpID`)

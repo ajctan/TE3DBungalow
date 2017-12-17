@@ -9,6 +9,15 @@
   text-align: right;
 }
 
+#newStatus{
+  display: none;
+  padding: 5px;
+}
+
+#saveBtn{
+  display: none;
+}
+
 .footbuttonContainer{
   display: inline-block;
   height: 25px;

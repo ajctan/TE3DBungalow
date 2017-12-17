@@ -61,8 +61,14 @@
   	return mysqli_query($GLOBALS['conn'],$query);
   }
 
+  function getMemCount($projectID){
+    $query = 'SELECT COUNT(memberID) as mCount from members WHERE projectID = '.$projectID;
+    $count = mysqli_fetch_assoc(mysqli_query($GLOBALS['conn'],$query));
+    return $count['mCount'];
+  }
+
   function checkMember($projectID, $userLoggedIn){
-    $query = 'SELECT count(*) AS memCount
+    $query = 'SELECT count(*) AS isPart
               FROM members
               WHERE projectID='.$projectID.' AND userID='.$userLoggedIn;
     return mysqli_query($GLOBALS['conn'],$query);
@@ -72,7 +78,8 @@
     $query = 'SELECT *
               FROM files f, tptable tp
               WHERE f.tpID = tp.tpID
-              AND tp.tpID = '.$projectID;
+              AND tp.tpID = '.$projectID.'
+              ORDER BY fileID DESC';
     return mysqli_query($GLOBALS['conn'],$query);
   }
 
