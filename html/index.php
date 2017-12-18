@@ -140,7 +140,7 @@
         <div class="center">
           <label class="p100" for="nprojectTitle">Project Title</label>
           <input class="p100" name="nprojectTitle" type="text" />
-          <label class="p100" for="nprojectcapital">Project Venure Capital</label>
+          <label class="p100" for="nprojectcapital">Project Venture Capital</label>
           <input class="p100" name="nprojectcapital" type="text" />
           <label class="p100" for="nprojectHead">Project Head</label>
 		  <select name='selectedprojectHead' class="p100">

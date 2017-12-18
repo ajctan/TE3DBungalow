@@ -5,6 +5,7 @@
 		$title = $_POST['nprojectTitle'];
 		$abstract = $_POST['nprojectAbstract'];
 		$head = $_POST['selectedprojectHead'];
+		$pVenture = $_POST['nprojectcapital'];
 		$members = $_POST['nprojectMembers'];
 
 		print_r($members);
@@ -19,8 +20,8 @@
 
 		echo "<script type='text/javascript'>alert('".$id."');</script>";
 
-		$updateProject = "UPDATE tptable SET tpTitle = '".$title."', tpDesc = '".$abstract."', pHead = ".$head." WHERE tpID = ".$id;
-
+		$updateProject = "UPDATE tptable SET tpTitle = '".$title."', tpDesc = '".$abstract."', pHead = ".$head.", pVentureC = '".$pVenture."' WHERE tpID = ".$id;
+		print_r($updateProject);
 		$lastMemberID += 1;
 		$addMember = "INSERT INTO `members` (`memberID`, `projectID`, `userID`) VALUES('".$lastMemberID."','".$id."','".$head."');";
 		mysqli_query($conn, $addMember);

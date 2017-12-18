@@ -250,7 +250,7 @@
                   <button class='fileDownload' type='submit'><i class='fa fa-download'></i></button>
                 </form>
                </td>";
-               if($isPart == 1){
+               if($isPart == 1 && $project['tpStatus'] == 1){
                  echo "
                  <td>
                   <form action='../php/deleteFile.php' method='post' onsubmit='return confirm(\"Are you sure you want to delete ".$filename."?\")'>
@@ -271,7 +271,7 @@
 
 			<div class="footbuttonContainer">
 			<?php
-				if($isPart == 1){
+				if($isPart == 1 && $project['tpStatus'] == 1){
 					echo "<form action=\"../php/uploadFile.php\" method=\"post\" enctype=\"multipart/form-data\">";
 
 						echo "<input type='hidden' name='projToUpload' value='$pID'>";
@@ -347,7 +347,7 @@
         <div class="center">
           <label class="p100" for="nprojectTitle">Project Title</label>
           <input id="nprojectTitle" class="p100" name="nprojectTitle" type="text" />
-					<label class="p100" for="nprojectcapital">Project Venure Capital</label>
+					<label class="p100" for="nprojectcapital">Project Venture Capital</label>
           <input id="nprojectCapital" class="p100" name="nprojectcapital" type="text" />
           <label class="p100" for="nprojectHead">Project Head</label>
 		  <select name='selectedprojectHead' class="p100">

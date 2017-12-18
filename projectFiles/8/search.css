@@ -1,0 +1,42 @@
+#advSearch{
+  background: #eee;
+  cursor: pointer;
+  display: inline-block;
+  float: right;
+  line-height: 100%;
+  margin: 0 auto 0 auto;
+  padding: 0px;
+  position: relative;
+  width: 55%;
+  z-index: 2;
+}
+
+#advSearch p{
+  box-sizing: border-box;
+  margin: 0;
+  padding: 5px;
+}
+
+#advSearch:hover, #advSearch:active{
+  background: #ddd;
+}
+
+#advSearch-content{
+  background: #eee;
+  box-sizing: border-box;
+  cursor: default;
+  display: none;
+  left: 0;
+  margin: 0;
+  position: absolute;
+  top: 25px;
+  width: 100%;
+}
+
+.right{
+  float: right;
+  height: 100%;
+  line-height: 100%;
+  position: absolute;
+  right: 10px;
+}

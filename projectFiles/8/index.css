@@ -1,0 +1,94 @@
+#createButton{
+  background: #1d9b72;
+  border: none;
+  border-radius: 100px;
+  bottom:5%;
+  color: #b0ddce;
+  cursor: pointer;
+  height: 75px;
+  outline: none;
+  position: absolute;
+  right: 5%;
+  width: 75px;
+  z-index: 2;
+}
+
+#createButton:hover{
+  color: #fff;
+}
+
+.createSBContainer-hidden{
+  bottom: 5%;
+  position: absolute;
+  visibility: hidden;
+  right: 5%;
+  transition: all 0.5s ease;
+}
+
+.createSBContainer{
+  bottom:18%;
+  position: absolute;
+  visibility: visible;
+  right: 5%;
+  z-index: 2;
+}
+
+.createButtonContainer{
+  background: none;
+  border: none;
+  clear: both;
+  color: #000;
+  cursor: pointer;
+  float: right;
+  margin: -50px 0 0 0;
+  opacity: 0;
+  outline: none;
+  height: 50px;
+  transition: all 1s ease;
+  width: 160px;
+}
+
+.createButtonContainer-active{
+  margin: 20px 0 0 0;
+  opacity: 1;
+}
+
+.createButtonContainer p{
+  float: left;
+  line-height: 50px;
+  height: 50px;
+  margin: 0;
+  padding: 0;
+  text-align: right;
+  width: 60%;
+}
+
+.createSpecificButton{
+  background: #1d9b72;
+  border: none;
+  border-radius: 100px;
+  color: #b0ddce;
+  cursor: pointer;
+  float: right;
+  line-height: 50px;
+  height: 50px;
+  outline: none;
+  text-align: center;
+  width: 50px;
+}
+
+.createButtonContainer:hover .createSpecificButton{
+  color: #fff;
+}
+
+.createButtonContainer:hover p{
+  text-decoration: underline;
+}
+
+.createButtonbackground{
+  display: none;
+}
+
+.createButtonbackground-visible{
+  display: block;
+}

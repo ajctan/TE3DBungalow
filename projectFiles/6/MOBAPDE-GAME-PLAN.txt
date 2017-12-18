@@ -1,0 +1,33 @@
+Falling Cookies: Clicks = Points
+	Plain cookie(1)
+	Choco chip(2)
+	Double choco chip(4)
+	Butter Swirls(8)
+	Coated(16)
+	Sandwich cookie(32)
+	Macarons(64)
+	Ferrrrrerro (128)
+
+Falling Veggies: Heals CM HP
+	Carrots
+	Brocolli
+	Okra
+	Ampalaya
+	Brussel Sprouts
+
+Falling Upgrades
+	(x2 clicks)		
+	(x4 clicks)		
+	(Splash clicks)		
+	(Slow)			
+	(Stun)			
+	(CM HP increase)	
+	(Cookie to veggie)	
+	
+
+
+Fat Cookie Monster(10 Health)
+
+Game play:
+tap cookie get points
+

@@ -1,0 +1,217 @@
+#abstract{
+  position: relative;
+}
+
+#projectHead{
+  color: #aaa;
+  float: right;
+  margin: 0;
+  text-align: right;
+}
+
+#newStatus{
+  display: none;
+  padding: 5px;
+}
+
+#saveBtn{
+  display: none;
+}
+
+.footbuttonContainer{
+  display: inline-block;
+  height: 25px;
+  position: relative;
+  width: 100%;
+}
+
+#getAbstract, #getCitation{
+  margin: 20px 5px 0 0;
+  padding: 10px;
+  position: relative;
+  width: 200px;
+}
+
+#contactProjectHead{
+  background: #1d9b72;
+  border: none;
+  color: #b0ddce;
+  cursor: pointer;
+  margin: 20px 0 0 0;
+  outline: none;
+  padding: 10px;
+  position: absolute;
+  right: 0;
+  width: 180px;
+}
+
+#uploadFiles{
+  display: none;
+}
+
+#uploadFilesLbl{
+  background: #1d9b72;
+  border: none;
+  color: #b0ddce;
+  cursor: pointer;
+  display: inline-block;
+  font-size: 13px;
+  margin: 20px 0 0 0;
+  min-width: 180px;
+  outline: none;
+  padding: 10px;
+  position: relative;
+  text-align: center;
+}
+
+#uploadFilesLbl:hover{
+  color: #fff;
+}
+
+#downloadAbstract:hover, #getCitation:hover, #contactProjectHead:hover{
+  color: #fff;
+}
+
+#contactHead{
+  background: #eee;
+  bottom: 2%;
+  display: none;
+  height: 400px;
+  position: absolute;
+  text-align: center;
+  right: 15%;
+  width: 400px;
+  z-index: 2;
+}
+
+.contactHeadHeader{
+  background: #1d9b72;
+  display: block;
+  height: 25px;
+  position: relative;
+  width: 100%;
+}
+
+#contactHead input{
+  box-sizing: border-box;
+  margin: 5px;
+  outline: none;
+  padding: 5px;
+  width: 95%;
+}
+
+#contactHead textarea{
+  box-sizing: border-box;
+  display: inline-block;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 1.0em;
+  height: 82%;
+  outline: none;
+  padding: 5px;
+  resize: none;
+  width: 95%;
+}
+
+#contactHead textarea::-webkit-scrollbar{
+  background: none;
+  width: 10px;
+}
+
+#contactHead textarea::-webkit-scrollbar-thumb{
+  background: none;
+  border-radius: 10px;
+}
+
+#contactHead textarea:hover::-webkit-scrollbar-thumb{
+  background: #1d9b72;
+}
+
+#sendMessage{
+  background: #1d9b72;
+  border: none;
+  border-radius: 500px;
+  bottom: 15px;
+  color: #b0ddce;
+  cursor: pointer;
+  height: 50px;
+  outline: none;
+  padding: 5px;
+  position: absolute;
+  right: 25px;
+  text-align: center;
+  width: 50px;
+}
+
+#sendMessage:hover{
+  color: #fff;
+}
+
+#files{
+  text-align: right;
+}
+
+#projectFiles{
+  border-collapse: collapse;
+  margin: 0;
+  padding: 0;
+  text-align: left;
+  width: 100%;
+}
+
+#projectFiles tr:nth-child(even){
+  background: #56e39f;
+}
+
+#projectFiles th, td{
+  border: 2px solid #fff;
+  padding: 10px;
+}
+
+#projectFiles th.name{
+  text-align: center;
+  width: 45%;
+}
+
+#projectFiles th.size, th.extension{
+  text-align: center;
+  width: 15%;
+}
+
+#projectFiles th.lastModified{
+  text-align: center;
+}
+
+#projectFiles td:not(:first-child){
+  text-align: center;
+}
+
+#downloadAll:hover{
+  color: #fff;
+}
+
+.fileDownload, .fileDelete{
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.fileDownload:hover{
+  color: green;
+}
+
+.fileDelete:hover{
+  color: red;
+}
+
+.noFiles{
+  text-align: center;
+  width: 100%;
+}
+
+.hidden{
+  display: none;
+}
+
+#editProjectModal{
+  display: none;
+}

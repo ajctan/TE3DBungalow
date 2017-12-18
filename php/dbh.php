@@ -10,7 +10,7 @@
   function getAllProjectsByDate(){
     $query = 'SELECT *
               FROM tptable
-              ORDER BY tpSDate DESC';
+              ORDER BY tpID DESC';
     return mysqli_query($GLOBALS['conn'],$query);
   }
 
